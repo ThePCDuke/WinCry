@@ -1,0 +1,69 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+
+    <Style TargetType="{x:Type ContextMenu}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Grid.IsSharedSizeScope" Value="true"/>
+        <Setter Property="HasDropShadow" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContextMenu">
+                    <Border BorderThickness="2" BorderBrush="Gray" CornerRadius="2">
+                        <StackPanel IsItemsHost="True"
+                                    KeyboardNavigation.DirectionalNavigation="Cycle"/>
+
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="5"/>
+                        </Border.Effect>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type MenuItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Grid Height="auto" Width="{TemplateBinding Width}" Background="#FF323232">
+                        <Border x:Name="_border" Style="{DynamicResource AnimatedBorder}">
+                            <TextBlock Foreground="White" Margin="5 5 30 5" VerticalAlignment="Center" x:Name="_txt" Text="{Binding Header,RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Border>
+                        <Path Visibility="Collapsed" x:Name="_path" HorizontalAlignment="Right" Margin="5 13 5 0"  Data="M0,4 4,0 0,-4 z" Fill="White"/>
+                        <Popup Placement="Right" x:Name="SubMenuPopup" AllowsTransparency="True" Focusable="False" IsOpen="{TemplateBinding IsSubmenuOpen}" >
+                            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <Border SnapsToDevicePixels="True" BorderBrush="Gray" BorderThickness="1">
+                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                                </Border>
+                            </ScrollViewer>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasItems" Value="true">
+                            <Setter TargetName="_path" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="{x:Type Separator}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Separator}">
+                    <Border 
+                    BorderBrush="#FF323232" 
+                    BorderThickness="{TemplateBinding BorderThickness}" 
+                    Background="{TemplateBinding Background}" 
+                    Height="1" 
+                    SnapsToDevicePixels="true"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

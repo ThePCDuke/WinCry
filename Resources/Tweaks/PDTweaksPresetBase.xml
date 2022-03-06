@@ -1,0 +1,777 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTweak xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Время последнего доступа к файлу</Name>
+    <Key>NtfsDisableLastAccessUpdate</Key>
+    <Description>Отключает запись времени последнего доступа к файлу или папке.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <DefaultValue>80000002</DefaultValue>
+    <RequiredWinBuild>16999-</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Время последнего доступа к файлу</Name>
+    <Key>NtfsDisableLastAccessUpdate</Key>
+    <Description>Отключает запись времени последнего доступа к файлу или папке.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>80000001</Value>
+    <DefaultValue>80000002</DefaultValue>
+    <RequiredWinBuild>16999+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Троттлинг</Name>
+    <Key>PowerThrottlingOff</Key>
+    <Description>Убирает энергосбережение Windows.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Фрагментация виртуальной памяти</Name>
+    <Key>HeapDeCommitFreeBlockThreshold</Key>
+    <Description>Задает уменьшеную фрагментацию виртуальной памяти, позволяя увеличиваеть пропускную способность.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>40000</Value>
+    <DefaultValue>0</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Ядро системы</Name>
+    <Key>DisablePagingExecutive</Key>
+    <Description>При включении хранит ядро ОС в оперативной памяти, а не в файле подкачки.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <DefaultValue>0</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Выделенная память для ввода/вывода</Name>
+    <Key>IoPageLockLimit</Key>
+    <Description>Включает резервирование памяти для операций ввода/вывода.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>80000000</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Драйвер мониторинга сетевой активности</Name>
+    <Key>Start</Key>
+    <Description>Часто является причиной утечки памяти в невыгружаемый пул.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Ndu</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>4</Value>
+    <DefaultValue>2</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Своевременная выгрузка dll</Name>
+    <Key>AlwaysUnloadDLL</Key>
+    <Description>После выключения приложения, подруженные для него dll-библиотеки будут принудительно выгружаться из оперативной памяти.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Резервация ресурсов ЦП</Name>
+    <Key>SystemResponsiveness</Key>
+    <Description>Отключает резервы центрального процессора для фоновых задач системы.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <DefaultValue>14</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Местоположение</Name>
+    <Key>Value</Key>
+    <Description>Отключает определение местоположения компьютера.</Description>
+    <KeyLocation>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>Deny</Value>
+    <DefaultValue>Allow</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Автоматическое обслуживание системы</Name>
+    <Key>MaintenanceDisabled</Key>
+    <Description>Отключает автоматическую дефрагментацию, обновление приложений, сканирование системы.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Приоритет</Category>
+    <CategoryDescription>\Задает повышенный приоритет.</CategoryDescription>
+    <Name>Приложение</Name>
+    <Key>Win32PrioritySeparation</Key>
+    <Description>Выставляет повышенный приоритет активным приложениям.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>26</Value>
+    <DefaultValue>2</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Заплатки безопастности</Category>
+    <CategoryDescription>\Отключает патчи уязвимости.</CategoryDescription>
+    <Name>Spectre</Name>
+    <Key>FeatureSettingsOverride</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>3</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Заплатки безопастности</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Meltdown</Name>
+    <Key>FeatureSettingsOverrideMask</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>3</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Superfetch</Category>
+    <CategoryDescription>\Отключает отслеживание пользовательской активности, уменьшая кэширование памяти.</CategoryDescription>
+    <Name>Параметр 1</Name>
+    <Key>EnablePrefetcher</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <DefaultValue>3</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Superfetch</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 2</Name>
+    <Key>EnableSuperfetch</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+    <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Приоритет\Игра</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>ГПУ</Name>
+    <Key>GPU Priority</Key>
+    <Description>Повышает приоритет графическому процессору.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>12</Value>
+    <DefaultValue>8</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Приоритет\Игра</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Приоритет игры</Name>
+    <Key>Priority</Key>
+    <Description>Повышает основной приоритет.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>6</Value>
+    <DefaultValue>2</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Приоритет\Игра</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Ввод-вывод</Name>
+    <Key>SFIO Priority</Key>
+    <Description>Повышает приоритет операций ввода-вывода.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>High</Value>
+    <DefaultValue>Normal</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Фоновые операции</Category>
+    <CategoryDescription>\Отключает приложения и процессы работающие в фоне.</CategoryDescription>
+    <Name>Процессы</Name>
+    <Key>GlobalUserDisabled</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\DVR</Category>
+    <CategoryDescription>\Отключает функции Xbox DVR.</CategoryDescription>
+    <Name>Параметр 1</Name>
+    <Key>GameDVR_Enabled</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\System\GameConfigStore</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <DefaultValue>1</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Полноэкранная оптимизация</Category>
+    <CategoryDescription>\Отключает режим полноэкранной оптимизации Windows.</CategoryDescription>
+    <Name>Параметр 1</Name>
+    <Key>GameDVR_FSEBehaviorMode</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\System\GameConfigStore</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>2</Value>
+    <DefaultValue>0</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Полноэкранная оптимизация</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 2</Name>
+    <Key>GameDVR_FSEBehavior</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\System\GameConfigStore</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>2</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Полноэкранная оптимизация</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 3</Name>
+    <Key>GameDVR_DXGIHonorFSEWindowsCompatible</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\System\GameConfigStore</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <DefaultValue>0</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Полноэкранная оптимизация</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 4</Name>
+    <Key>GameDVR_HonorUserFSEBehaviorMode</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\System\GameConfigStore</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <DefaultValue>0</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\DVR</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 2</Name>
+    <Key>value</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <DefaultValue>1</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+    <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Телеметрия</Category>
+    <CategoryDescription>\Отключает обработку и передачу информации на сервера Microsoft.</CategoryDescription>
+    <Name>Параметр 1</Name>
+    <Key>AllowTelemetry</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Телеметрия</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 2</Name>
+    <Key>PublishUserActivities</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Телеметрия</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 3</Name>
+    <Key>UploadUserActivities</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Телеметрия</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 4</Name>
+    <Key>TailoredExperiencesWithDiagnosticDataEnabled</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Privacy</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <DefaultValue>1</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Телеметрия</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 5</Name>
+    <Key>NumberOfSIUFInPeriod</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Siuf\Rules</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Телеметрия</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 6</Name>
+    <Key>PeriodInNanoSeconds</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Siuf\Rules</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+    <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Телеметрия</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 7</Name>
+    <Key>Enabled</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <DefaultValue>1</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Телеметрия</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 8</Name>
+    <Key>ShowedToastAtLevel</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <DefaultValue>3</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Фоновые операции</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Приложения</Name>
+    <Key>BackgroundAppGlobalToggle</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Приложения Магазина</Category>
+    <CategoryDescription>\Отключает автоматическую установку и обновление приложений из Магазина Windows.</CategoryDescription>
+    <Name>Параметр 1</Name>
+    <Key>AutoDownload</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>2</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Производительность\Приложения Магазина</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 2</Name>
+    <Key>ContentDeliveryAllowed</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+    <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Задержка</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Автозапуск приложений</Name>
+    <Key>Startupdelayinmsec</Key>
+    <Description>Убирает время ожидания старта приложения после запуска системы.</Description>
+    <KeyLocation>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Задержка</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Фильтрация ввода</Name>
+    <Key>Flags</Key>
+    <Description>Убирает интервал повторного ввода знаков при зажатой клавише.</Description>
+    <KeyLocation>HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>0</Value>
+    <DefaultValue>126</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+    <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Задержка</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Окно пуска</Name>
+    <Key>MenuShowDelay</Key>
+    <Description>Убирает задержку при открытии меню пуска.</Description>
+    <KeyLocation>HKEY_CURRENT_USER\Control Panel\Desktop</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>0</Value>
+    <DefaultValue>400</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Задержка</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Время зависшей программы</Name>
+    <Key>HungAppTimeout</Key>
+    <Description>Уменьшает интервал определение зависания программы после её завершения.</Description>
+    <KeyLocation>HKEY_CURRENT_USER\Control Panel\Desktop</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>1000</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Задержка</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Время зависшей службы</Name>
+    <Key>LowLevelHooksTimeout</Key>
+    <Description>Уменьшает время до завершения работы зависшей службы.</Description>
+    <KeyLocation>HKEY_CURRENT_USER\Control Panel\Desktop</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>1000</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Задержка</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Появление всплывающего окна</Name>
+    <Key>MouseHoverTime</Key>
+    <Description>Убирает задержку окна при наведении курсора на открытое приложения.</Description>
+    <KeyLocation>HKEY_CURRENT_USER\Control Panel\Mouse</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>0</Value>
+    <DefaultValue>400</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+    <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Задержка</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Окно принудительного выключения</Name>
+    <Key>AutoEndTasks</Key>
+    <Description>Убирает запрос на выключение открытых приложений при нажатии завершения работы или перезагрузки.</Description>
+    <KeyLocation>HKEY_CURRENT_USER\Control Panel\Desktop</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>1</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Задержка</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Время отключения служб</Name>
+    <Key>WaitToKillAppTimeout</Key>
+    <Description>Параметр, отвечающий за задержку отключения служб при выключении компьютера.</Description>
+    <KeyLocation>HKEY_CURRENT_USER\Control Panel\Desktop</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>0</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Задержка\Проверка объекта по ярлыку</Category>
+    <CategoryDescription>\Отключает проверку путей у ярлыков и все, что с ними связано.</CategoryDescription>
+    <Name>Корректный путь</Name>
+    <Key>LinkResolveIgnoreLinkInfo</Key>
+    <Description>Убирает при каждом старте системы проверку заданного пути у различных ярлыков.</Description>
+    <KeyLocation>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Задержка\Проверка объекта по ярлыку</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Целевое устройство</Name>
+    <Key>NoResolveSearch</Key>
+    <Description>Запрещает системе осуществлять поиск "целевого устройства" по его ярлыку.</Description>
+    <KeyLocation>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Задержка\Проверка объекта по ярлыку</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Целевой файл</Name>
+    <Key>NoResolveTrack</Key>
+    <Description>Блокирует функциональные возможности системы по слежке NTFS, когда осуществляется поиск целевых файлов ярлыков.</Description>
+    <KeyLocation>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+    <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Задержка\Ввод мыши</Category>
+    <CategoryDescription>\Откючает повышенную точность курсора.</CategoryDescription>
+    <Name>Параметр 1</Name>
+    <Key>MouseSpeed</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\Control Panel\Mouse</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>0</Value>
+    <DefaultValue>1</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Задержка\Ввод мыши</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 2</Name>
+    <Key>MouseThreshold1</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\Control Panel\Mouse</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>0</Value>
+    <DefaultValue>6</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Задержка\Ввод мыши</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Параметр 3</Name>
+    <Key>MouseThreshold2</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\Control Panel\Mouse</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>0</Value>
+    <DefaultValue>10</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Интернет</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Резервация соединения</Name>
+    <Key>NonBestEffortLimit</Key>
+    <Description>Убирает выделенный резерв пропускной способности интернета для "QoS".</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Psched</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Интернет</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Ограничение трафика</Name>
+    <Key>NetworkThrottlingIndex</Key>
+    <Description>Отключает ограничения для немультимедийного трафика.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>ffffffff</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Интернет\Стэк TCP/IP</Category>
+    <CategoryDescription>\Уменьшает сетевую задержку.</CategoryDescription>
+    <Name>Отключение алгоритма Нейгла</Name>
+    <Key>TCPNoDelay</Key>
+    <Description>Отключает алгоритм Нейгла, который уменьшает количество сетевых пакетов путём объединения нескольких небольших пакетов в один крупный для более эффективной передачи, но увеличивает сетевую задержку.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\*</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Интернет\Стэк TCP/IP</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Количество подтверждений TCP (ACK)</Name>
+    <Key>TcpAckFrequency</Key>
+    <Description>Определяет количество подтверждений TCP (ACK), чтобы уменьшить количество пакетов.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\*</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Интернет\Стэк TCP/IP</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Тайм-аут TCP (ACK)</Name>
+    <Key>TcpDelAckTicks</Key>
+    <Description>Определяет, в течение какого промежутка времени будет подтверждено отсутствие получения пакета.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\*</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Прочее</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Поиск неизвестного расширения</Name>
+    <Key>NoInternetOpenWith</Key>
+    <Description>Отключает поиск в сети Интернет при открытии файла с неизвестным расширением.</Description>
+    <KeyLocation>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>1</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Прочее</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Гибернация</Name>
+    <Key>HibernateEnabled</Key>
+    <Description>Выключает гибернацию Windows.</Description>
+    <KeyLocation>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <DefaultValue>1</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Прочее\Центр специальных возможностей</Category>
+    <CategoryDescription>\Отключает функции центра специальных возможностей Windows.</CategoryDescription>
+    <Name>Управление мышью через клавиатуру</Name>
+    <Key>Flags</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\Control Panel\Accessibility\MouseKeys</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>0</Value>
+    <DefaultValue>62</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Прочее\Центр специальных возможностей</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Залипание клавиш</Name>
+    <Key>Flags</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>0</Value>
+    <DefaultValue>510</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Прочее\Центр специальных возможностей</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Звук при нажатии "Caps Lock"</Name>
+    <Key>Flags</Key>
+    <Description></Description>
+    <KeyLocation>HKEY_CURRENT_USER\Control Panel\Accessibility\ToggleKeys</KeyLocation>
+    <ValueType>String</ValueType>
+    <Value>0</Value>
+    <DefaultValue>62</DefaultValue>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+  <Tweak>
+    <IsChecked>true</IsChecked>
+    <Category>Прочее</Category>
+    <CategoryDescription></CategoryDescription>
+    <Name>Реклама в проводнике</Name>
+    <Key>ShowSyncProviderNotifications</Key>
+    <Description>Отключает рекламу в проводнике Windows.</Description>
+    <KeyLocation>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced</KeyLocation>
+    <ValueType>DWord</ValueType>
+    <Value>0</Value>
+    <RequiredWinBuild>0+</RequiredWinBuild>
+  </Tweak>
+</ArrayOfTweak>

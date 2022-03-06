@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+
+    <ControlTemplate TargetType="{x:Type Label}" x:Key="ApplicationTabHeader">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" 
+                       TextWrapping="Wrap" 
+                       Text="{TemplateBinding Content}" 
+                       Foreground="White" 
+                       FontSize="16" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Left" 
+                       Width="auto"/>
+            
+            <Rectangle Fill="White" 
+                       Margin="8, 5, 0, 0" 
+                       Height=".1" 
+                       Width="auto" 
+                       Grid.Column="1"/>
+        </Grid>
+    </ControlTemplate>
+
+</ResourceDictionary>

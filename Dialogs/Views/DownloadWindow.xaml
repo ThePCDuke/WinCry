@@ -1,0 +1,105 @@
+﻿<Window x:Class="WinCry.Dialogs.Views.DownloadWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        SizeToContent="Height"
+        Title="Скачивание"
+        Width="400"
+        WindowStyle="None"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        FontFamily="/WinCry;component/Resources/Fonts/#Segoe UI Variable Static Display">
+
+    <Window.InputBindings>
+        <KeyBinding Key="Esc"
+                    Command="{Binding Cancel}" />
+    </Window.InputBindings>
+
+    <Border>
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="10" ShadowDepth="2"/>
+        </Border.Effect>
+
+        <Border Margin="9" 
+                BorderThickness=".5" 
+                BorderBrush="White" 
+                CornerRadius="6">
+
+            <Border.Background>
+                <SolidColorBrush Color="#FF1B1B1B" Opacity=".6"/>
+            </Border.Background>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Grid Background="Transparent">
+                    
+                    <TextBlock Height="auto" 
+                               Grid.Row="0" 
+                               Foreground="White" 
+                               Margin="10,7,0,5" 
+                               FontSize="14" 
+                               TextWrapping="Wrap" 
+                               Text="{Binding DialogCaption}" 
+                               TextAlignment="Left" 
+                               HorizontalAlignment="Left" 
+                               Width="auto"/>
+                </Grid>
+                
+                <Rectangle Fill="White" 
+                           Grid.Row="1" 
+                           Height=".1" 
+                           VerticalAlignment="Top" 
+                           Grid.ColumnSpan="2"/>
+
+                <ProgressBar Grid.Row="1" 
+                             Value="{Binding DownloadPercent}"
+                             Height="25" 
+                             Margin="10,10,10,0" 
+                             BorderThickness=".1" 
+                             BorderBrush="White" 
+                             Grid.ColumnSpan="2" 
+                             VerticalAlignment="Top">
+                    
+                    <ProgressBar.Background>
+                        <SolidColorBrush Color="Black" Opacity=".1"/>
+                    </ProgressBar.Background>
+                    <ProgressBar.Foreground>
+                        <SolidColorBrush Color="Gray" Opacity=".2"/>
+                    </ProgressBar.Foreground>
+                </ProgressBar>
+
+                <TextBlock Grid.Row="1" 
+                           Text="{Binding DownloadedInfo}"
+                           TextAlignment="Left" 
+                           Margin="10,40,10,0"
+                           Foreground="White"/>
+                
+                <TextBlock Grid.Row="1"
+                           Text="{Binding DownloadSpeed}" 
+                           TextAlignment="Right" 
+                           Margin="10,40,10,0" 
+                           Foreground="White"
+                           Grid.Column="1"/>
+
+                <Button Content="Отменить" 
+                        Grid.Row="2" 
+                        FontSize="16" 
+                        Command="{Binding Cancel}" 
+                        Margin="0,10,10,10" 
+                        HorizontalAlignment="Right" 
+                        Height="35" 
+                        Width="108" 
+                        Grid.Column="1"/>
+            </Grid>
+        </Border>
+    </Border>
+</Window>
