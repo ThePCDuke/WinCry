@@ -864,7 +864,7 @@
                             </Button.ContextMenu>
                             <TextBlock Text="Установить / удалить Microsoft Store" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center"/>
                         </Button>
-                        <Button Content="Активировать Windows" Command="{Binding ActivateWindows}" Margin="5,0,10,76" Height="56" VerticalAlignment="Bottom" IsEnabled="False" Grid.Column="1"/>
+                        <Button Content="Активировать Windows" Command="{Binding ActivateWindows}" Margin="5,0,10,76" Height="56" VerticalAlignment="Bottom" IsEnabled="False" Foreground="Gray" Grid.Column="1"/>
                         <Button Content="Установить MS VC++" Command="{Binding InstallVC}" Margin="10,0,5,76" Height="56" VerticalAlignment="Bottom"/>
                         <Button models:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True" Margin="5,0,10,10" Height="56" VerticalAlignment="Bottom" Grid.Column="1">
                             <TextBlock Text="Запустить программу с макс. привелегиями" TextWrapping="Wrap" TextAlignment="Center"/>
