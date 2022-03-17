@@ -1,6 +1,6 @@
 # WinCry
 [![Current Version](https://img.shields.io/badge/version-1.0-green.svg)](https://github.com/ThePCDuke/WinCry) [![YouTube](https://img.shields.io/youtube/channel/subscribers/UCNSRCRVgZhLjq6KYIYDb-VA?style=social)](https://www.youtube.com/c/ThePeaceDuke)  
-Данное приложение позволит тебе максимально быстро и эффективно оптимизировать Windows в пару кликов.
+Данное приложение позволит тебе максимально быстро и эффективно оптимизировать Windows.
 ## Содержание
 * [Функционал](#функционал)
 * [Установка и запуск](#установка-и-запуск)
