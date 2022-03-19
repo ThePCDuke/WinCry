@@ -9,6 +9,7 @@ using WinCry.Dialogs;
 using WinCry.Dialogs.ViewModels;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.IO;
 
 namespace WinCry.ViewModels
 {
@@ -27,6 +28,8 @@ namespace WinCry.ViewModels
             System.Windows.Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
 
             _dialogService = dialogService;
+
+
 
             SettingsVM = new SettingsViewModel(_dialogService);
 
@@ -617,6 +620,7 @@ namespace WinCry.ViewModels
 
         private void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
+            File.WriteAllText("log.txt", e.Exception.ToString());
             System.Windows.MessageBox.Show(e.Exception.ToString(), DialogConsts.Error);
             //DialogHelper.ShowMessageDialog(_dialogService, DialogConsts.Error, e.Exception.ToString());
         }

@@ -1,4 +1,5 @@
-﻿using PСSLC.Core;
+﻿using Microsoft.Win32;
+using PСSLC.Core;
 using System.Collections.ObjectModel;
 using WinCry.Dialogs;
 using WinCry.Memory;
@@ -127,6 +128,16 @@ namespace WinCry.Settings
 
             if (MemoryModel.IsServiceInstalled)
             {
+                RegistryKey localMachineKey = Registry.LocalMachine;
+                RegistryKey softwareKey = localMachineKey.OpenSubKey(RegulationDataConsts.RegSoftwareKey, true);
+                RegistryKey peaceDukeKey = softwareKey.OpenSubKey(RegulationDataConsts.RegISLCPeaceDukeKey, true);
+
+                if (peaceDukeKey == null)
+                {
+                    RegulationsDataWritter writter = new RegulationsDataWritter();
+                    writter.Write(RegulationsData.Default);
+                }
+
                 RegulationsData regulationsData = new RegulationsDataReader().Read();
                 MemoryVM.Data = new MemoryData() { CachedRAMGreaterThan = regulationsData.StandbyMemory, FreeRAMLessThan = regulationsData.FreeMemory, ServiceThreadSleepSeconds = regulationsData.ServiceThreadSleepMilliseconds / 1000 };
             }
