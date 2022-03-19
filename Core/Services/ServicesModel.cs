@@ -80,7 +80,12 @@ namespace WinCry.Services
         /// <param name="service">Service to backup</param>
         private static string Backup(Service service)
         {
-            return RunAsProcess .CMD($@"regedit /e ""{Path.Combine(StringConsts.ServicesBackupFolder, service.ShortName + ".reg")}"" ""HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\{service.ShortName}""", true);
+            if (!Directory.Exists(StringConsts.ServicesBackupFolder))
+            {
+                Directory.CreateDirectory(StringConsts.ServicesBackupFolder);
+            }
+
+            return RunAsProcess.CMD($@"regedit /e ""{Path.Combine(StringConsts.ServicesBackupFolder, service.ShortName + ".reg")}"" ""HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\{service.ShortName}""", true);
         }
 
         /// <summary>
