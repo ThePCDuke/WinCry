@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using WinCry.Memory;
 using WinCry.Models;
@@ -89,7 +90,11 @@ namespace WinCry.Settings
         /// <param name="name">Preset name</param>
         public void Save()
         {
-            var options = new JsonSerializerOptions { WriteIndented = true };
+            var options = new JsonSerializerOptions()
+            {
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                WriteIndented = true
+            };
 
             if (!Directory.Exists(StringConsts.SettingsPresetsFolder))
                 Directory.CreateDirectory(StringConsts.SettingsPresetsFolder);

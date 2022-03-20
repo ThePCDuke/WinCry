@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 using WinCry.Models;
 
@@ -7,6 +8,26 @@ namespace WinCry.Services
 {
     public class Service : ISelectable, INotifyPropertyChanged
     {
+        public Service() { }
+
+        public Service(Service service)
+        {
+            FullName = service.FullName;
+            ShortName = service.ShortName;
+            Description = service.Description;
+            Category = service.Category;
+            Status = service.Status;
+            IsForcedToApply = service.IsForcedToApply;
+            Start = service.Start;
+            RequiredWinBuild = service.RequiredWinBuild;
+            IsChecked = service.IsChecked;
+            CanDisable = service.CanDisable;
+            CanRemove = service.CanRemove;
+            CanRecover = service.CanRecover;
+            RequiredGPU = service.RequiredGPU;
+            RemovingMethod = service.RemovingMethod;
+        }
+
         public enum ServiceRemovingMethod
         {
             CMD,
@@ -55,7 +76,7 @@ namespace WinCry.Services
         }
 
         private string _status;
-        [XmlIgnore]
+        [JsonIgnore]
         public string Status
         {
             get { return _status; }
@@ -66,7 +87,7 @@ namespace WinCry.Services
             }
         }
 
-        [XmlIgnore]
+        [JsonIgnore]
         public bool IsForcedToApply { get; set; }
 
         private string _start;

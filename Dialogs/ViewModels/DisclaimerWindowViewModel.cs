@@ -19,6 +19,17 @@ namespace WinCry.Dialogs.ViewModels
             }
         }
 
+        private bool _doBackup;
+        public bool DoBackup
+        {
+            get { return _doBackup; }
+            set
+            {
+                _doBackup = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -31,6 +42,20 @@ namespace WinCry.Dialogs.ViewModels
                 return _close ??
                    (_close = new RelayCommand(obj =>
                    {
+                       CloseRequested?.Invoke(this, new DialogCloseRequestedEventArgs(false));
+                   }));
+            }
+        }
+
+        private RelayCommand _closeAndBackup;
+        public RelayCommand CloseAndBackup
+        {
+            get
+            {
+                return _closeAndBackup ??
+                   (_closeAndBackup = new RelayCommand(obj =>
+                   {
+                       DoBackup = true;
                        CloseRequested?.Invoke(this, new DialogCloseRequestedEventArgs(false));
                    }));
             }

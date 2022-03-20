@@ -19,7 +19,7 @@ namespace WinCry.Models
         /// </summary>
         public static void GotoChannel()
         {
-            System.Diagnostics.Process.Start(StringConsts.URLChannel);
+            Process.Start(StringConsts.URLChannel);
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace WinCry.Models
         /// </summary>
         public static void GotoCommunity()
         {
-            System.Diagnostics.Process.Start(StringConsts.URLCommunity);
+            Process.Start(StringConsts.URLCommunity);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace WinCry.Models
         /// </summary>
         public static void GotoCommunityDiscussion()
         {
-            System.Diagnostics.Process.Start(StringConsts.URLCommunityDiscussion);
+            Process.Start(StringConsts.URLCommunityDiscussion);
         }
 
         /// <summary>
@@ -43,52 +43,7 @@ namespace WinCry.Models
         /// </summary>
         public static void GotoDonation()
         {
-            System.Diagnostics.Process.Start(StringConsts.URLDonation);
-        }
-
-        /// <summary>
-        /// Executed when MainWindow is done loading
-        /// </summary>
-        public static void Loaded(IDialogService dialogService)
-        {
-            using (RegistryKey _registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\", true))
-            {
-                bool _doNotShowDisclaimer = false;
-
-                RegistryKey _wincryKey = _registryKey.OpenSubKey("WinCry", true);
-
-                if (_wincryKey != null)
-                {
-                    if (_wincryKey.GetValue("DoNotShowDisclaimer") != null)
-                        _doNotShowDisclaimer = Byte.Parse((string)_wincryKey.GetValue("DoNotShowDisclaimer")) == 1 ? true : false;
-                }
-
-                if (!_doNotShowDisclaimer)
-                {
-                    if (DialogHelper.ShowDisclaimer(dialogService))
-                    {
-                        _registryKey.CreateSubKey("WinCry");
-                        _wincryKey = _registryKey.OpenSubKey("WinCry", true);
-                        _wincryKey.SetValue("DoNotShowDisclaimer", "1", RegistryValueKind.String);
-                    }
-                }
-            }
-
-            try
-            {
-                RunAsProcess.StartTrustedInstallerService();
-            }
-            catch (InvalidOperationException)
-            {
-                if (DialogHelper.ShowDialog(dialogService, DialogConsts.ServiceStartingError, DialogConsts.TrustedInstallerStartingError))
-                {
-                    ServicesModel.RestoreTrustedInstallerService();
-                }
-                else
-                {
-                    Environment.Exit(0);
-                }
-            }
+            Process.Start(StringConsts.URLDonation);
         }
 
         /// <summary>

@@ -10,6 +10,7 @@ using WinCry.Dialogs.ViewModels;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.IO;
+using Microsoft.Win32;
 
 namespace WinCry.ViewModels
 {
@@ -26,16 +27,15 @@ namespace WinCry.ViewModels
         public MainWindowViewModel(IDialogService dialogService)
         {
             System.Windows.Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
+            //SettingsPreset settingsPreset = new SettingsPreset("SettingsMax");
+            //settingsPreset.Save();
+            //Debug.Print(settingsPreset.ServicesPreset.Services.Count.ToString());
 
             _dialogService = dialogService;
 
-
-
             SettingsVM = new SettingsViewModel(_dialogService);
 
-            //ObservableCollection<string> _detectedGPUs = new ObservableCollection<string>{ "NVIDIA", "AMD" };
             ObservableCollection<string> _detectedGPUs = Helpers.GetInstalledGPUManufacturers();
-            //ObservableCollection<string> _detectedGPUs = new ObservableCollection<string>();
 
             if (_detectedGPUs.Count > 0)
             {
@@ -52,7 +52,6 @@ namespace WinCry.ViewModels
             }
 
             Version _version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            //ApplicationVersion = $"{_version.Major}.{_version.Minor}.{_version.Build}";
             ApplicationVersion = $"{_version.Major}.{_version.Minor}";
         }
 
@@ -557,7 +556,69 @@ namespace WinCry.ViewModels
                 return _windowLoaded ??
                    (_windowLoaded = new RelayCommand(obj =>
                    {
-                       MainModel.Loaded(_dialogService);
+                       using (RegistryKey _registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\", true))
+                       {
+                           bool _doNotShowDisclaimer = false;
+
+                           RegistryKey _wincryKey = _registryKey.OpenSubKey("WinCry", true);
+
+                           if (_wincryKey != null)
+                           {
+                               if (_wincryKey.GetValue("DoNotShowDisclaimer") != null)
+                                   _doNotShowDisclaimer = Byte.Parse((string)_wincryKey.GetValue("DoNotShowDisclaimer")) == 1 ? true : false;
+                           }
+
+                           if (!_doNotShowDisclaimer)
+                           {
+                               (bool doNotShow, bool doBackup) tuple = DialogHelper.ShowDisclaimer(_dialogService);
+
+                               if (tuple.doNotShow)
+                               {
+                                   _registryKey.CreateSubKey("WinCry");
+                                   _wincryKey = _registryKey.OpenSubKey("WinCry", true);
+                                   _wincryKey.SetValue("DoNotShowDisclaimer", "1", RegistryValueKind.String);
+                               }
+
+                               if (tuple.doBackup)
+                               {
+                                   ProgressWindowViewModel _vm = new ProgressWindowViewModel() { DialogCaption = DialogConsts.ApplyingCaption };
+                                   TaskViewModel _servicesTask = new TaskViewModel();
+
+                                   ObservableCollection<Service> services = new ObservableCollection<Service>();
+
+                                   foreach (Service service in SettingsVM.ServicesVM.Services)
+                                   {
+                                       services.Add(new Service(service));
+                                   }
+
+                                   foreach (Service service in services)
+                                   {
+                                       service.IsChecked = true;
+                                   }
+
+                                   _vm.AddTask(ServicesModel.ApplyTask(services, ServicesOption.Backup, _servicesTask), _servicesTask);
+                                   _vm.StartTasks();
+
+                                   _dialogService.ShowDialog(_vm);
+                               }
+                           }
+                       }
+
+                       try
+                       {
+                           RunAsProcess.StartTrustedInstallerService();
+                       }
+                       catch (InvalidOperationException)
+                       {
+                           if (DialogHelper.ShowDialog(_dialogService, DialogConsts.ServiceStartingError, DialogConsts.TrustedInstallerStartingError))
+                           {
+                               ServicesModel.RestoreTrustedInstallerService();
+                           }
+                           else
+                           {
+                               Environment.Exit(0);
+                           }
+                       }
                    }));
             }
         }

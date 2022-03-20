@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using WinCry.Models;
 
@@ -73,7 +74,11 @@ namespace WinCry.Services
 
         public void Save()
         {
-            var options = new JsonSerializerOptions { WriteIndented = true };
+            var options = new JsonSerializerOptions()
+            {
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                WriteIndented = true
+            };
 
             if (!Directory.Exists(StringConsts.ServicesPresetsFolder))
                 Directory.CreateDirectory(StringConsts.ServicesPresetsFolder);

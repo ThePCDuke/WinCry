@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Management;
+using System.Windows;
 using System.Xml.Serialization;
 
 namespace WinCry.Models
@@ -149,6 +150,9 @@ namespace WinCry.Models
             {
                 foreach (ManagementObject obj in searcher.Get())
                 {
+                    if (obj["VideoProcessor"] == null)
+                        return false;
+
                     if (obj["VideoProcessor"].ToString().ToUpper().Contains(value.ToUpper()))
                         return true;
                 }

@@ -191,22 +191,6 @@ namespace WinCry.Services
                 return _savePreset ??
                    (_savePreset = new RelayCommand(obj =>
                    {
-                       //string _fileName = DialogHelper.ShowSavePresetDialog(_dialogService, DialogConsts.MessageDialogSavingServicesPresetCaption);
-
-                       //if (_fileName != null)
-                       //{
-                       //    ServicesModel.SavePreset(Services, _fileName);
-                       //    Presets.Add(_fileName);
-                       //}
-
-                       //string _fileName = DialogHelper.ShowSavePresetDialog(_dialogService, DialogConsts.MessageDialogSavingServicesPresetCaption);
-
-                       //if (_fileName != null)
-                       //{
-                       //    ServicesModel.SavePreset(Services, _fileName);
-                       //    Presets.Add(_fileName);
-                       //}
-
                        string _fileName = DialogHelper.ShowSavePresetDialog(_dialogService, DialogConsts.MessageDialogSavingServicesPresetCaption);
 
                        if (_fileName != null)
@@ -307,7 +291,7 @@ namespace WinCry.Services
             {
                 if (preset != null)
                 {
-                    Services = preset.Services;
+                    Services = ServicesModel.SeekForRelevant(preset.Services);
                     _allServices = Services;
                     Option = preset.Option;
                 }

@@ -16,13 +16,13 @@ namespace WinCry.Models
             return (bool)dialogService.ShowDialog(_vm);
         }
 
-        public static bool ShowDisclaimer(IDialogService dialogService)
+        public static (bool doNotShow, bool doBackup) ShowDisclaimer(IDialogService dialogService)
         {
             DisclaimerWindowViewModel _vm = new DisclaimerWindowViewModel();
 
             dialogService.ShowDialog(_vm);
 
-            return _vm.DoNotShow;
+            return (_vm.DoNotShow, _vm.DoBackup);
         }
 
         public static void ShowMessageDialog(IDialogService dialogService, string dialogCaption, string dialogText)

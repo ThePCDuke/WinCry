@@ -151,9 +151,6 @@
   <data name="PСSLC_Service" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\memory\pсslc_service.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ServicesBasic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\services\servicesbasic.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="ServicesRestore" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\services\servicesrestore.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -171,9 +168,6 @@
   </data>
   <data name="TrustedInstaller" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\services\trustedinstaller.reg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TweaksBasic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\tweaks\tweaksbasic.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="vcredist2010_x86" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\tweaks\vcredist2010_x86.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

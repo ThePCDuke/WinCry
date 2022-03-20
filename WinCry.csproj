@@ -244,6 +244,11 @@
     <Compile Include="Core\Services\ServicesViewModel.cs" />
     <Compile Include="Core\Settings\SettingsViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ProgressWindowViewModel.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="ViewModels\TreeBranchViewModelExtension.cs" />
     <Compile Include="ViewModels\TreeBranchViewModel.cs" />
@@ -252,11 +257,6 @@
     <Compile Include="Core\Tweaks\TweaksModel.cs" />
     <Compile Include="Core\Tweaks\TweaksOption.cs" />
     <Compile Include="Models\WindowBlur.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\DownloadWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -318,16 +318,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\Services\ServicesBasic.json" />
+    <None Include="Resources\Settings\SettingsBasic.json" />
     <None Include="Resources\Settings\SettingsMax.json" />
-    <None Include="Resources\Tweaks\TweaksBasic.json" />
+    <None Include="Resources\Settings\SettingsMax_old.json" />
     <Resource Include="Resources\Fonts\Segoe-UI-Variable-Static-Display.ttf" />
     <None Include="Resources\GPU\nvidiaConfigured.pr" />
     <None Include="Resources\GPU\nvidiaDefault.pr" />
     <None Include="Resources\Icons\BlankIco" />
     <None Include="Resources\Services\ServicesRestore.zip" />
     <None Include="Resources\Services\TrustedInstaller.reg" />
-    <None Include="Resources\Settings\SettingsBasic.json" />
+    <None Include="Resources\Settings\SettingsBasic_old.json" />
     <None Include="Resources\Tweaks\DecreaseBootSpeed.bat" />
     <None Include="Resources\Tweaks\HWID.cmd" />
     <None Include="Resources\Tweaks\IncreaseBootSpeed.bat" />
@@ -350,8 +350,6 @@
     <Resource Include="Resources\Icons\icon_tweaks.png" />
     <Resource Include="Resources\Icons\icon_youtube.png" />
     <Resource Include="Resources\Icons\WinCry.ico" />
-    <Resource Include="Resources\Services\PDServicesPresetBase.xml" />
-    <Resource Include="Resources\Tweaks\PDTweaksPresetBase.xml" />
     <Resource Include="FodyWeavers.xml" />
     <Resource Include="Resources\Icons\icon_pcslc.png" />
     <Resource Include="Resources\Icons\icon_rmb.png" />
