@@ -27,9 +27,6 @@ namespace WinCry.ViewModels
         public MainWindowViewModel(IDialogService dialogService)
         {
             System.Windows.Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
-            //SettingsPreset settingsPreset = new SettingsPreset("SettingsMax");
-            //settingsPreset.Save();
-            //Debug.Print(settingsPreset.ServicesPreset.Services.Count.ToString());
 
             _dialogService = dialogService;
 
