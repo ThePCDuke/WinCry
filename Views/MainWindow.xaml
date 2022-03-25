@@ -831,7 +831,7 @@
                             </CheckBox.ToolTip>
                         </CheckBox>
 
-                        <CheckBox Content="Убрать иконку уведомлений с панели задач" IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.RemoveNotificationIcon}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="auto" Margin="30,120,0,0" Grid.ColumnSpan="2">
+                        <CheckBox Content="Убрать иконку уведомлений с панели задач" IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.RemoveNotificationIcon}" IsEnabled="{Binding IsNotificationIconTweakEnabled}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="auto" Margin="30,120,0,0" Grid.ColumnSpan="2">
 
                             <CheckBox.ToolTip>
                                 <TextBlock Text="Убирает отображение значка уведомлений с панели задач." 

@@ -4,7 +4,7 @@ using WinCry.ViewModels;
 
 namespace WinCry.Dialogs.ViewModels
 {
-    class MessageWindowViewModel: BaseViewModel, IDialogRequestClose
+    class MessageWindowViewModel : BaseViewModel, IDialogRequestClose
     {
         #region Public Properties
 

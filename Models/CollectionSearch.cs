@@ -16,7 +16,7 @@ namespace WinCry.Models
 
             foreach (Service _service in initialCollection)
             {
-                string _shortName = _service.ShortName== null? "" : _service.ShortName.ToLower();
+                string _shortName = _service.ShortName == null ? "" : _service.ShortName.ToLower();
                 string _fullName = _service.FullName == null ? "" : _service.FullName.ToLower();
                 string _description = _service.Description == null ? "" : _service.Description.ToLower();
 

@@ -4,7 +4,7 @@ using WinCry.ViewModels;
 
 namespace WinCry.Dialogs.ViewModels
 {
-    class SavePresetWindowViewModel: BaseViewModel, IDialogRequestClose
+    class SavePresetWindowViewModel : BaseViewModel, IDialogRequestClose
     {
         #region Public Properties
 

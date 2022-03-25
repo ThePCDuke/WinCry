@@ -22,7 +22,7 @@ namespace WinCry.Services
         /// <param name="service">Service to disable</param>
         private static string Disable(Service service)
         {
-            return RunAsProcess.CMD($"sc config \"{service.ShortName}\" start= disabled", true);
+            return RunAsProcess.CMD($"sc config \"{service.ShortName}\" start= disabled");
         }
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace WinCry.Services
                         else
                         {
                             return null;
-                        }   
+                        }
                     }
                 case ServicesOption.Backup:
                     {
@@ -283,8 +283,9 @@ namespace WinCry.Services
                     }
                     catch (Exception ex)
                     {
-                        taskViewModel.CatchException(ex);
-                        return;
+                        //taskViewModel.CatchException(ex);
+                        taskViewModel.CreateMessage(ex.Message, false, false);
+                        continue;
                     }
                 }
 

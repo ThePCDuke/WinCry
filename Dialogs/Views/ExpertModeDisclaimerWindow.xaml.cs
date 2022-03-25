@@ -2,9 +2,9 @@
 
 namespace WinCry.Dialogs.Views
 {
-    public partial class SavePresetWindow : Window, IDialog
+    public partial class ExpertModeDisclaimerWindow : Window, IDialog
     {
-        public SavePresetWindow()
+        public ExpertModeDisclaimerWindow()
         {
             InitializeComponent();
         }

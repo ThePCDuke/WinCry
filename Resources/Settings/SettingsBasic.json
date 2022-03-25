@@ -1531,7 +1531,7 @@
         "Status": "Остановлена",
         "IsForcedToApply": false,
         "Start": "Отключена",
-        "RequiredWinBuild": "0+",
+        "RequiredWinBuild": "22000-",
         "IsChecked": true,
         "CanDisable": true,
         "CanRemove": true,
@@ -2598,7 +2598,7 @@
       {
         "FullName": "Служба управления радио",
         "ShortName": "RmSvc",
-        "Description": "Отвечает за включение и отключение режима В самолете.",
+        "Description": "Отвечает за включение и отключение режима В самолете. В Windows 11, после отключения, пропадает значек сетевого соединения.",
         "Category": "Основные",
         "Status": "Остановлена",
         "IsForcedToApply": false,
@@ -3110,7 +3110,7 @@
       {
         "FullName": "NVIDIA Display Container LS",
         "ShortName": "NVDisplay.ContainerLocalSystem",
-        "Description": "Телеметрия Nvidia, которая позволяет работать приложению Shadowplay.",
+        "Description": "Телеметрия Nvidia, которая позволяет работать приложению Shadowplay. При отключении пропадает Панель Управления Nvidia.",
         "Category": "Опциональные",
         "Status": "Удалена",
         "IsForcedToApply": false,
@@ -3238,7 +3238,7 @@
       {
         "FullName": "Журнал событий Windows",
         "ShortName": "eventlog",
-        "Description": "Отвечает за Магазин Windows, Wi-Fi, за подключение к некоторым сетевым играм, но является самой прожорливой службой.",
+        "Description": "Отвечает за Магазин Windows, Wi-Fi, за подключение к некоторым сетевым играм, но является самой прожорливой службой. После отключения пропадает значек сетового подключения в трее.",
         "Category": "Опциональные",
         "Status": "Запущена",
         "IsForcedToApply": false,
@@ -3310,7 +3310,23 @@
         "RequiredWinBuild": "0-",
         "IsChecked": false,
         "CanDisable": true,
-        "CanRemove": true,
+        "CanRemove": false,
+        "CanRecover": true,
+        "RequiredGPU": null,
+        "RemovingMethod": 0
+      },
+      {
+        "FullName": "Connected Devices Platform Service",
+        "ShortName": "CDPSvc",
+        "Description": "Отвечает за Хронологию, Виртуальные рабочие столы, приложение Ваш телефон и Ночной свет. В Windows 11 отвечает за некоторые всплывающие окна.",
+        "Category": "Опциональные",
+        "Status": "Остановлена",
+        "IsForcedToApply": false,
+        "Start": "Отключена",
+        "RequiredWinBuild": "22000+",
+        "IsChecked": false,
+        "CanDisable": true,
+        "CanRemove": false,
         "CanRecover": true,
         "RequiredGPU": null,
         "RemovingMethod": 0
@@ -3985,7 +4001,7 @@
         "RequiredWinBuild": "0+"
       },
       {
-        "IsChecked": true,
+        "IsChecked": false,
         "Category": "Интернет",
         "Name": "Резервация соединения",
         "Key": "NonBestEffortLimit",
@@ -3998,7 +4014,7 @@
         "RequiredWinBuild": "0+"
       },
       {
-        "IsChecked": true,
+        "IsChecked": false,
         "Category": "Интернет",
         "Name": "Ограничение трафика",
         "Key": "NetworkThrottlingIndex",
@@ -4011,7 +4027,7 @@
         "RequiredWinBuild": "0+"
       },
       {
-        "IsChecked": true,
+        "IsChecked": false,
         "Category": "Интернет\\Стэк TCP/IP",
         "Name": "Отключение алгоритма Нейгла",
         "Key": "TCPNoDelay",
@@ -4024,7 +4040,7 @@
         "RequiredWinBuild": "0+"
       },
       {
-        "IsChecked": true,
+        "IsChecked": false,
         "Category": "Интернет\\Стэк TCP/IP",
         "Name": "Количество подтверждений TCP (ACK)",
         "Key": "TcpAckFrequency",
@@ -4037,7 +4053,7 @@
         "RequiredWinBuild": "0+"
       },
       {
-        "IsChecked": true,
+        "IsChecked": false,
         "Category": "Интернет\\Стэк TCP/IP",
         "Name": "Тайм-аут TCP (ACK)",
         "Key": "TcpDelAckTicks",

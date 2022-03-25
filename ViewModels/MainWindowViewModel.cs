@@ -1,16 +1,16 @@
-﻿using WinCry.Models;
+﻿using Microsoft.Win32;
 using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
-using WinCry.Tweaks;
-using WinCry.Services;
-using WinCry.Settings;
-using WinCry.Memory;
+using System.IO;
+using System.Linq;
 using WinCry.Dialogs;
 using WinCry.Dialogs.ViewModels;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.IO;
-using Microsoft.Win32;
+using WinCry.Memory;
+using WinCry.Models;
+using WinCry.Services;
+using WinCry.Settings;
+using WinCry.Tweaks;
 
 namespace WinCry.ViewModels
 {
@@ -32,12 +32,21 @@ namespace WinCry.ViewModels
 
             SettingsVM = new SettingsViewModel(_dialogService);
 
+            if (Helpers.GetWinBuild() >= 22000)
+            {
+                IsNotificationIconTweakEnabled = false;
+            }
+            else
+            {
+                IsNotificationIconTweakEnabled = true;
+            }
+
             ObservableCollection<string> _detectedGPUs = Helpers.GetInstalledGPUManufacturers();
 
             if (_detectedGPUs.Count > 0)
             {
                 PrimaryGPUManufacturer = _detectedGPUs[0];
-            } 
+            }
             if (_detectedGPUs.Count >= 2)
             {
                 SecondaryGPUManufacturer = _detectedGPUs[1];
@@ -62,6 +71,7 @@ namespace WinCry.ViewModels
 
         public string Username { get; set; } = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Split('\\')[1];
 
+        public bool IsNotificationIconTweakEnabled { get; set; }
         public bool IsPrimaryGPUDetected { get; set; }
         public bool IsSecondaryGPUDetected { get; set; }
 
@@ -137,7 +147,7 @@ namespace WinCry.ViewModels
                        // Scheme Tweak
                        if (SettingsVM.Settings.DoSchemeTweak) { var _taskVM = new TaskViewModel(); _vm.AddTask(MainModel.InstallPowerScheme(_taskVM, true), _taskVM); }
                        // GPU Tweak
-                       if (SettingsVM.Settings.DoPrimaryGPUTweak || SettingsVM.Settings.DoSecondaryGPUTweak) 
+                       if (SettingsVM.Settings.DoPrimaryGPUTweak || SettingsVM.Settings.DoSecondaryGPUTweak)
                        { var _taskVM = new TaskViewModel(); _vm.AddTask(MainModel.SetGPUSettings(_taskVM, true, SettingsVM.Settings.DoPrimaryGPUTweak, SettingsVM.Settings.DoSecondaryGPUTweak), _taskVM); }
                        // Pagefile Tweak
                        if (SettingsVM.Settings.DoPagefileTweak) { var _taskVM = new TaskViewModel(); _vm.AddTask(MainModel.SetPagefile(_taskVM, SettingsVM.Settings.PagefileOption), _taskVM); }
@@ -190,11 +200,6 @@ namespace WinCry.ViewModels
                    (_applyTweaks = new RelayCommand(obj =>
                    {
                        SettingsVM.TweaksVM.Apply.Execute(null);
-
-                       if (DialogHelper.ShowDialog(_dialogService, DialogConsts.BaseDialogRebootCaption, DialogConsts.BaseDialogRebootMessage))
-                       {
-                           Helpers.RunByCMD("shutdown /r /t 0");
-                       }
                    }));
             }
         }
@@ -208,11 +213,6 @@ namespace WinCry.ViewModels
                    (_applyServices = new RelayCommand(obj =>
                    {
                        SettingsVM.ServicesVM.Apply.Execute(null);
-
-                       if (DialogHelper.ShowDialog(_dialogService, DialogConsts.BaseDialogRebootCaption, DialogConsts.BaseDialogRebootMessage))
-                       {
-                           Helpers.RunByCMD("shutdown /r /t 0");
-                       }
                    }));
             }
         }

@@ -1,12 +1,10 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using WinCry.Dialogs;
 using WinCry.Models;
-using WinCry.Settings;
 using WinCry.ViewModels;
 
 namespace WinCry.Tweaks
@@ -66,7 +64,7 @@ namespace WinCry.Tweaks
                             if (_subRegistryKey.GetValue(tweak.Key) != null)
                                 _subRegistryKey.DeleteValue(tweak.Key);
                         }
-                        
+
                         else _subRegistryKey.SetValue(tweak.Key, tweak.DefaultValue, tweak.ValueType);
                     }
                 }
@@ -320,7 +318,7 @@ namespace WinCry.Tweaks
                 {
                     _types.Add(_tweak.Category);
                     _descriptions.Add(_tweak.CategoryDescription);
-                }    
+                }
             }
 
             return _descriptions;

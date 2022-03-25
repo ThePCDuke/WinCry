@@ -5,7 +5,7 @@ using WinCry.Dialogs.Views;
 using WinCry.ViewModels;
 
 namespace WinCry.Views
-{ 
+{
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -18,6 +18,7 @@ namespace WinCry.Views
             _dialogService.Register<ProgressWindowViewModel, ProgressWindow>();
             _dialogService.Register<MessageWindowViewModel, MessageWindow>();
             _dialogService.Register<DisclaimerWindowViewModel, DisclaimerWindow>();
+            _dialogService.Register<ExpertModeDisclaimerWindowViewModel, ExpertModeDisclaimerWindow>();
 
             DataContext = new MainWindowViewModel(_dialogService);
 

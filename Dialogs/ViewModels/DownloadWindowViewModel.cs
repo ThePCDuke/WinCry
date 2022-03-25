@@ -152,7 +152,7 @@ namespace WinCry.Dialogs.ViewModels
                 await Wait(1000);
                 CloseRequested?.Invoke(this, new DialogCloseRequestedEventArgs(false));
             }
-                
+
             if (e.Cancelled == true)
             {
                 CloseRequested?.Invoke(this, new DialogCloseRequestedEventArgs(false));

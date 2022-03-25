@@ -5,7 +5,6 @@ using System.Windows.Controls;
 using WinCry.Dialogs;
 using WinCry.Dialogs.ViewModels;
 using WinCry.Models;
-using WinCry.Settings;
 using WinCry.ViewModels;
 
 namespace WinCry.Services

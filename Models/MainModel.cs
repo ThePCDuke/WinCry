@@ -236,7 +236,7 @@ namespace WinCry.Models
                         {
                             taskViewModel.CreateMessage(DialogConsts.DoesntExist, false, false);
                         }
-                        
+
                         taskViewModel.Progress += 34;
                     }
                 }
@@ -526,7 +526,7 @@ namespace WinCry.Models
                         taskViewModel.ShortMessage = DialogConsts.RemoveShortcutIconTweakRemovingFromDisk;
                         taskViewModel.CreateMessage($"{DialogConsts.RemoveShortcutIconTweakRemovingFromDisk} ");
 
-                        if(File.Exists(_filePath))
+                        if (File.Exists(_filePath))
                         {
                             taskViewModel.CreateMessage(RunAsProcess.CMD($@"del /s ""{_filePath}""", true), false, false);
                         }
@@ -534,7 +534,7 @@ namespace WinCry.Models
                         {
                             taskViewModel.CreateMessage(DialogConsts.DoesntExist, false, false);
                         }
-                        
+
                         taskViewModel.Progress += 50;
                     }
                 }
@@ -646,7 +646,7 @@ namespace WinCry.Models
             return new Task(() =>
             {
                 taskViewModel.Name = DialogConsts.InstallMSVC;
-                
+
                 if (!_isDownloaded)
                 {
                     taskViewModel.CreateFailureMessage(DialogConsts.InstallMSVCCanceled);
@@ -744,11 +744,20 @@ namespace WinCry.Models
 
                         using (RegistryKey _registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy\", true))
                         {
-                            _registryKey.SetValue("01", 0, RegistryValueKind.DWord);
-                            _registryKey.SetValue("04", 0, RegistryValueKind.DWord);
+                            if (_registryKey != null)
+                            {
+                                _registryKey.SetValue("01", 0, RegistryValueKind.DWord);
+                                _registryKey.SetValue("04", 0, RegistryValueKind.DWord);
+
+                                taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
+                            }
+                            else
+                            {
+                                taskViewModel.CreateMessage(DialogConsts.DoesntExist, false, false);
+                            }
                         }
 
-                        taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
+                        taskViewModel.CreateSuccessMessage(DialogConsts.ApplyingDoneMessage);
 
                         taskViewModel.Progress += 34;
                     }

@@ -64,6 +64,14 @@ namespace WinCry.Settings
             {
                 if (value == null) return;
 
+                if (value.Name == StringConsts.ExpertPreset)
+                {
+                    if (!DialogHelper.ShowExpertModeDisclaimer(_dialogService))
+                    {
+                        return;
+                    }
+                }
+
                 ObservableCollection<string> _detectedGPUs = Helpers.GetInstalledGPUManufacturers();
 
                 if (_detectedGPUs.Count == 0)
@@ -74,6 +82,11 @@ namespace WinCry.Settings
                 if (_detectedGPUs.Count != 2)
                 {
                     value.Settings.DoSecondaryGPUTweak = false;
+                }
+
+                if (Helpers.GetWinBuild() >= 22000)
+                {
+                    value.Settings.RemoveNotificationIcon = false;
                 }
 
                 _selectedSettingsPreset = value;
@@ -93,6 +106,14 @@ namespace WinCry.Settings
             get { return _selectedServicesPreset; }
             set
             {
+                if (SelectedSettingsPreset.Name != StringConsts.ExpertPreset && value.Name == StringConsts.ExpertPreset)
+                {
+                    if (!DialogHelper.ShowExpertModeDisclaimer(_dialogService))
+                    {
+                        return;
+                    }
+                }
+
                 _selectedServicesPreset = value;
                 OnPropertyChanged();
 
@@ -106,6 +127,14 @@ namespace WinCry.Settings
             get { return _selectedTweaksPreset; }
             set
             {
+                if (SelectedSettingsPreset.Name != StringConsts.ExpertPreset && value.Name == StringConsts.ExpertPreset)
+                {
+                    if (!DialogHelper.ShowExpertModeDisclaimer(_dialogService))
+                    {
+                        return;
+                    }
+                }
+
                 _selectedTweaksPreset = value;
                 OnPropertyChanged();
 

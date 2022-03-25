@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using WinCry.Services;
-using WinCry.Tweaks;
 
 namespace WinCry.Settings
 {

@@ -92,7 +92,7 @@ namespace WinCry.Dialogs
             bool? _result = _dialog.ShowDialog();
 
             Models.WindowBlur.RemoveBlur(_owner);
-            
+
 
             return _result;
         }

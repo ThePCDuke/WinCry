@@ -63,12 +63,12 @@ namespace WinCry.Dialogs.ViewModels
         /// </summary>
         public void StartTasks()
         {
-            foreach(TaskViewModel _taskVM in TaskViewModels)
+            foreach (TaskViewModel _taskVM in TaskViewModels)
             {
                 _taskVM.NotifyIsDone += NotifyOnDone;
             }
 
-            foreach(Task _task in _tasks)
+            foreach (Task _task in _tasks)
             {
                 _task.Start();
             }

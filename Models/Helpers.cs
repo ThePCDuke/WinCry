@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Management;
-using System.Windows;
 using System.Xml.Serialization;
 
 namespace WinCry.Models
@@ -53,7 +52,7 @@ namespace WinCry.Models
             {
                 int _versionBuild = Convert.ToInt32(_registryKey.GetValue("CurrentBuild").ToString());
                 return _versionBuild;
-            }  
+            }
         }
 
         /// <summary>
@@ -101,7 +100,7 @@ namespace WinCry.Models
             {
                 foreach (ZipArchiveEntry _entry in _archive.Entries)
                 {
-                     _entry.ExtractToFile(Path.Combine(extractionDirectory, _entry.FullName), true);
+                    _entry.ExtractToFile(Path.Combine(extractionDirectory, _entry.FullName), true);
                 }
             }
         }

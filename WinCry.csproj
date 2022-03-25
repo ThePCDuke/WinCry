@@ -224,7 +224,11 @@
     <Compile Include="Core\Tweaks\TweaksPreset.cs" />
     <Compile Include="Dialogs\DialogConsts.cs" />
     <Compile Include="Dialogs\IDialog.cs" />
+    <Compile Include="Dialogs\ViewModels\ExpertModeDisclaimerWindowViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\DisclaimerWindowViewModel.cs" />
+    <Compile Include="Dialogs\Views\ExpertModeDisclaimerWindow.xaml.cs">
+      <DependentUpon>ExpertModeDisclaimerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Views\DisclaimerWindow.xaml.cs">
       <DependentUpon>DisclaimerWindow.xaml</DependentUpon>
     </Compile>
@@ -364,6 +368,10 @@
     <Content Include="Resources\Tweaks\vcredist2010_x86.exe" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Dialogs\Views\ExpertModeDisclaimerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialogs\Views\DisclaimerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -25,6 +25,15 @@ namespace WinCry.Models
             return (_vm.DoNotShow, _vm.DoBackup);
         }
 
+        public static bool ShowExpertModeDisclaimer(IDialogService dialogService)
+        {
+            ExpertModeDisclaimerWindowViewModel _vm = new ExpertModeDisclaimerWindowViewModel();
+
+            dialogService.ShowDialog(_vm);
+
+            return (_vm.GotIt);
+        }
+
         public static void ShowMessageDialog(IDialogService dialogService, string dialogCaption, string dialogText)
         {
             MessageWindowViewModel _vm = new MessageWindowViewModel()

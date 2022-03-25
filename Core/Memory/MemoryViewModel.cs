@@ -199,7 +199,7 @@ namespace WinCry.Memory
                        ProgressWindowViewModel _vm = new ProgressWindowViewModel();
 
                        var _taskVM = new TaskViewModel();
-                       
+
 
                        // Starting all tasks
                        _vm.StartTasks();

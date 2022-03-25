@@ -1,8 +1,5 @@
 ﻿using System.Threading;
 using System.Windows;
-using WinCry.Dialogs;
-using WinCry.ViewModels;
-using WinCry.Views;
 
 namespace WinCry
 {

@@ -1,9 +1,5 @@
 ﻿using Microsoft.Win32;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
-using System.Xml.Serialization;
-using WinCry.Models;
 
 namespace WinCry.Tweaks
 {
@@ -26,7 +22,7 @@ namespace WinCry.Tweaks
         public string CurrentValue { get; set; }
 
         public string RequiredWinBuild { get; set; }
-        
+
         [JsonIgnore]
         public bool IsApplied { get; set; }
     }
