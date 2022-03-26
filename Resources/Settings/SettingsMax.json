@@ -1531,7 +1531,7 @@
         "Status": "Остановлена",
         "IsForcedToApply": false,
         "Start": "Отключена",
-        "RequiredWinBuild": "22000-",
+        "RequiredWinBuild": "21000-",
         "IsChecked": true,
         "CanDisable": true,
         "CanRemove": true,
