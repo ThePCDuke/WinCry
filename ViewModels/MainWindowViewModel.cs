@@ -58,7 +58,7 @@ namespace WinCry.ViewModels
             }
 
             Version _version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            ApplicationVersion = $"{_version.Major}.{_version.Minor}";
+            ApplicationVersion = $"{_version.Major}.{_version.Minor}.{_version.Build}";
         }
 
         #endregion

@@ -1947,7 +1947,7 @@
         "Status": "Удалена",
         "IsForcedToApply": false,
         "Start": "Удалена",
-        "RequiredWinBuild": "0+",
+        "RequiredWinBuild": "21000-",
         "IsChecked": true,
         "CanDisable": true,
         "CanRemove": true,
@@ -2644,6 +2644,22 @@
         "RemovingMethod": 0
       },
       {
+        "FullName": "Udk User Service",
+        "ShortName": "UdkUserSvc",
+        "Description": "На данный момент не играет никакой роли в системе.",
+        "Category": "Основные",
+        "Status": "Удалена",
+        "IsForcedToApply": false,
+        "Start": "Удалена",
+        "RequiredWinBuild": "21000-",
+        "IsChecked": true,
+        "CanDisable": true,
+        "CanRemove": true,
+        "CanRecover": true,
+        "RequiredGPU": null,
+        "RemovingMethod": 0
+      },
+      {
         "FullName": "Windows Update",
         "ShortName": "wuauserv",
         "Description": "Загружает и устанавливает обновления Windows и приложения из Магазина Windows. Требуется для установки Магазина Windows.",
@@ -3300,22 +3316,6 @@
         "RemovingMethod": 0
       },
       {
-        "FullName": "Udk User Service",
-        "ShortName": "UdkUserSvc",
-        "Description": "На данный момент не играет никакой роли в системе.",
-        "Category": "Опциональные",
-        "Status": "Удалена",
-        "IsForcedToApply": false,
-        "Start": "Удалена",
-        "RequiredWinBuild": "0-",
-        "IsChecked": false,
-        "CanDisable": true,
-        "CanRemove": false,
-        "CanRecover": true,
-        "RequiredGPU": null,
-        "RemovingMethod": 0
-      },
-      {
         "FullName": "Connected Devices Platform Service",
         "ShortName": "CDPSvc",
         "Description": "Отвечает за Хронологию, Виртуальные рабочие столы, приложение Ваш телефон и Ночной свет. В Windows 11 отвечает за некоторые всплывающие окна.",
@@ -3323,6 +3323,22 @@
         "Status": "Остановлена",
         "IsForcedToApply": false,
         "Start": "Отключена",
+        "RequiredWinBuild": "22000+",
+        "IsChecked": false,
+        "CanDisable": true,
+        "CanRemove": false,
+        "CanRecover": true,
+        "RequiredGPU": null,
+        "RemovingMethod": 0
+      }
+      {
+        "FullName": "Connected Devices Platform User Service",
+        "ShortName": "CDPUserSvc",
+        "Description": "Отвечает за Хронологию, Виртуальные рабочие столы, приложение Ваш телефон и Ночной свет. В Windows 11 отвечает за некоторые всплывающие окна.",
+        "Category": "Опциональные",
+        "Status": "Удалена",
+        "IsForcedToApply": false,
+        "Start": "Удалена",
         "RequiredWinBuild": "22000+",
         "IsChecked": false,
         "CanDisable": true,
@@ -3381,7 +3397,7 @@
         "Category": "Производительность",
         "Name": "Фрагментация виртуальной памяти",
         "Key": "HeapDeCommitFreeBlockThreshold",
-        "Description": "Задает уменьшеную фрагментацию виртуальной памяти, позволяя увеличиваеть пропускную способность.",
+        "Description": "Задает уменьшенную фрагментацию виртуальной памяти, позволяя увеличивать пропускную способность.",
         "CategoryDescription": "",
         "KeyLocation": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager",
         "ValueType": 4,
@@ -4148,6 +4164,6 @@
   "MemoryData": {
     "CachedRAMGreaterThan": 1024,
     "FreeRAMLessThan": 512,
-    "ServiceThreadSleepSeconds": 10
+    "ServiceThreadSleepSeconds": 300
   }
 }
