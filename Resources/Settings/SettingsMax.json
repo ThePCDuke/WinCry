@@ -3330,7 +3330,7 @@
         "CanRecover": true,
         "RequiredGPU": null,
         "RemovingMethod": 0
-      }
+      },
       {
         "FullName": "Connected Devices Platform User Service",
         "ShortName": "CDPUserSvc",

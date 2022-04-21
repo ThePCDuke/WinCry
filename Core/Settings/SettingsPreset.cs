@@ -76,10 +76,10 @@ namespace WinCry.Settings
             }
             catch
             {
-                Name = "Preset";
+                Name = "Кривой пресет";
                 Settings = new Setting();
-                ServicesPreset = new ServicesPreset();
-                TweaksPreset = new TweaksPreset();
+                ServicesPreset = new ServicesPreset() { Name = "Кривой пресет" };
+                TweaksPreset = new TweaksPreset { Name = "Кривой пресет" };
                 MemoryData = new MemoryData();
             }
         }
