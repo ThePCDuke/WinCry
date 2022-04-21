@@ -22,7 +22,7 @@ namespace WinCry.Services
         /// <param name="service">Service to disable</param>
         private static string Disable(Service service)
         {
-            return RunAsProcess.CMD($"sc config \"{service.ShortName}\" start= disabled");
+            return RunAsProcess.CMD($"sc config \"{service.ShortName}\" start= disabled", true);
         }
 
         /// <summary>

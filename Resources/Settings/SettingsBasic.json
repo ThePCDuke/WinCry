@@ -2758,7 +2758,7 @@
       {
         "FullName": "Network Connection Broker",
         "ShortName": "NcbService",
-        "Description": "Отвечает за поиск Bluetooth устройств.",
+        "Description": "Отвечает за поиск Bluetooth устройств. В Windows 11 отвечает за некоторые всплывающие окна.",
         "Category": "Опциональные",
         "Status": "Запущена",
         "IsForcedToApply": false,
