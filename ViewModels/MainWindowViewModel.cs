@@ -483,6 +483,7 @@ namespace WinCry.ViewModels
                        SettingsVM.LoadPresetsList();
                        SettingsVM.TweaksVM.LoadPresetsList();
                        SettingsVM.ServicesVM.LoadPresetsList();
+                       SettingsVM.LoadDefaultPreset();
                    }));
             }
         }
@@ -612,7 +613,6 @@ namespace WinCry.ViewModels
 
                        try
                        {
-                           //RunAsProcess.StartTrustedInstallerService();
                            ServicesModel.EnableTrustedInstallerService();
                            ServicesModel.EnableWMIService();
                        }
@@ -630,7 +630,6 @@ namespace WinCry.ViewModels
                        }
 
                        RunAsProcess.CMD("net stop \"wuauserv\"", true, false, "lsass");
-                       RunAsProcess.CMD("sc config \"wuauserv\" start= disabled", true, false, "lsass");
                    }));
             }
         }

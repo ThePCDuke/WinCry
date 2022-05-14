@@ -402,6 +402,8 @@ namespace WinCry.Models
                     throw new Exception("Could not create process!");
                 }
 
+                int tryCount = 0;
+
                 if (!captureOutput && waitForExit)
                 {
                     do
@@ -409,6 +411,13 @@ namespace WinCry.Models
                         if (WaitForSingleObject(pInfo.hProcess, 100) == 0)
                         {
                             return "Done";
+                        }
+
+                        tryCount++;
+
+                        if (tryCount >= 5)
+                        {
+                            return "Timeout";
                         }
                     }
                     while (true);
@@ -469,6 +478,14 @@ namespace WinCry.Models
                             }
 
                             result += _string;
+                        }
+
+                        tryCount++;
+
+                        if (tryCount >= 5)
+                        {
+                            result = "Timeout";
+                            break;
                         }
 
                     } while (true);
