@@ -8,11 +8,9 @@ namespace WinCry.Models
         public const string URLCommunity = @"https://vk.com/thepeaceduke";
         public const string URLCommunityDiscussion = @"https://vk.com/topic-206972023_48260256";
         public const string URLVC = @"https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/EkhxSJWgkcvovg/WinCry/VC.zip";
-        public const string URLMSStore = @"https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/EkhxSJWgkcvovg/WinCry/WindowsStore.zip";
-        public const string URLMSStoreLTSB = @"https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/EkhxSJWgkcvovg/WinCry/WindowsStoreLTSB.zip";
+        public const string URLMSStore = @"https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/EkhxSJWgkcvovg/WinCry/AIOWindowsStore.zip";
 
-        public const string MD5MSStore = "3c94bbd1a8e474106492c7273b0b16a2";
-        public const string MD5MSStoreLSTB = "cabbb2d42735a87551fa2ac996078e74";
+        public const string MD5MSStore = "7c8dfa520bb12bffc771f1455e6e169e";
         public const string MD5VC = "bf5b30dddf9f65bc7442a38069dc8730";
 
         public const string All = "Все";
@@ -26,6 +24,7 @@ namespace WinCry.Models
         public static string ServicesBackupFolder { get; } = Path.Combine(System.Environment.CurrentDirectory, "Backup", "Services");
         public static string ServicesRestorationPatchFolder { get; } = Path.Combine(Path.GetTempPath(), @"ServicesRestore\");
         public static string WindowsStoreZipFilePath { get; } = Path.GetTempPath() + "WindowsStore.zip";
+        public static string WindowsStoreFilePath { get; } = Path.GetTempPath() + @"WindowsStore\Microsoft.WindowsStore_11811.1001.2713.0_neutral___8wekyb3d8bbwe.AppxBundle";
         public static string VCZipFilePath { get; } = Path.GetTempPath() + "VC.zip";
     }
 }

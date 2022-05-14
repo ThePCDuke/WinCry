@@ -59,10 +59,14 @@
 
         public const string InstallMSStore = "Установить Microsoft Store";
         public const string InstallMSStoreInstalling = "Установка Microsoft Store...";
+        public const string InstallMSStoreInstallingReqs = "Установка необходимых пакетов...";
+        public const string InstallMSStoreInstallingScripts = "Выполнение необходимых скриптов...";
+        public const string InstallMSStoreInstallingInstaller = "Установка приложения для установки...";
+        public const string InstallMSStoreInstallingAssociations = "Настройка файловых ассоциаций...";
+        public const string InstallMSStoreInstallingStarting = "Запуск установки Microsoft Store...";
 
         public const string UninstallMSStore = "Удалить Microsoft Store";
         public const string UninstallMSStoreRemovingPackages = "Удаление пакетов...";
-        public const string UninstallMSStoreRemovingFiles = "Удаление остаточных файлов...";
 
         public const string Done = "ЗАВЕРШЕНО";
         public const string Error = "ОШИБКА";
@@ -84,11 +88,15 @@
         public const string ApplyingServicesProcessing = "Применение параметров служб...";
         public const string ApplyingServiceProcessing = "Применение параметров службы";
         public const string ApplyingServicesProcessingDone = "Применение параметров служб завершено";
+        public const string RestoringServicesAppliedDefaultStart = "Выставлено значение по умолчанию для запуска.";
+        public const string RestoringServicesAppliedUser = "Бэкап юзера -";
+        public const string RestoringServicesAppliedEmbeded = "Бэкап WinCry -";
+        public const string RestoringServicesError = "Служба не была восстановлена.";
 
         public const string Memory = "Память";
         public const string MemoryTweakExtracting = "Распаковка службы...";
-        public const string MemoryTweakInstalling = "Установка службы...";
-        public const string MemoryTweakUninstalling = "Удаление службы...";
+        public const string MemoryTweakInstalling = "Создание процесса для установки службы...";
+        public const string MemoryTweakUninstalling = "Создание процесса для удаления службы...";
         public const string MemoryTweakChecking = "Проверка службы...";
         public const string MemoryTweakStarting = "Запуск службы...";
         public const string MemoryTweakStopping = "Остановка службы...";
@@ -115,8 +123,8 @@
             "\nВы действительно хотите её удалить?";
 
         public const string ServiceStartingError = "Ошибка запуска службы";
-        public const string TrustedInstallerStartingError = "Похоже, что у Вас проблемы со службой \"Установщик модулей Windows\"," +
-            "которая необходима для функционала программы WinCry. Желаете ли вы восстановить её и перезагрузить ПК? В ином случае осуществится выход из программы.";
+        public const string TrustedInstallerStartingError = "Похоже, что у Вас есть проблемы со службами, " +
+            "необходимыми для функционала программы WinCry. Желаете ли Вы их восстановить и перезагрузить ПК? В ином случае осуществится выход из программы.";
 
         public const string BaseDialogRebootCaption = "Перезагрузка";
         public const string BaseDialogRebootMessage = "Хотите ли Вы перезагрузить ПК?";
@@ -145,16 +153,19 @@
         public const string BaseDialogResetMessage = "Вы действительно хотите откатить все выделенные настройки, применяемые данной программой?\nТвики, службы, память НЕ откатываются.";
 
         public const string BaseDialogActivateWindowsCaption = "Активация Windows";
-        public const string BaseDialogActivateWindowsMessage = "Вы действительно хотите активировать Windows?";
+        public const string BaseDialogActivateWindowsMessage = "В программе есть два способа активации Windows. Альтернативный способ применяется в случае, если не сработал основной.";
+        public const string BaseDialogInstallActivateWindowsDependingServicesMessage = "Для правильной активации Windows требуется восстановить состояние некоторых служб. Желаете ли вы их восстановить? " +
+            "После восстановления требуется перезагрузка.\n\nСлужбы для восстановления: ";
 
         public const string BaseDialogInstallMSStoreCaption = "Установка Магазина Windows";
-        public const string BaseDialogInstallMSStoreMessage = "Вы действительно хотите установить Магазин Windows?";
+        public const string BaseDialogInstallMSStoreMessage = "В программе есть два способа установки Microsoft Store. Альтернативный способ применяется в случае, если не сработал основной.";
         public const string BaseDialogInstallMSStoreOverwriteMessage = "Похоже, что у Вас уже скачаны необходимые файлы для установки Магазина Windows. Желаете ли вы их скачать заново?";
         public const string BaseDialogInstallMSStoreDependingServicesMessage = "Для правильной установки Магазина Windows требуется восстановить состояние некоторых служб. Желаете ли вы их восстановить? " +
             "После восстановления требуется перезагрузка.\n\nСлужбы для восстановления: ";
-        public const string BaseDialogInstallMSStoreRebootMessage = "Необходимые службы были восстановлены. Желаете ли вы перезагрузить ОС сейчас?";
         public const string BaseDialogUninstallMSStoreCaption = "Удаление Магазина Windows";
         public const string BaseDialogUninstallMSStoreMessage = "Вы действительно хотите удалить Магазин Windows?";
+
+        public const string BaseDialogServicesRestoreRebootMessage = "Необходимые службы были восстановлены. Желаете ли вы перезагрузить ОС сейчас?";
 
         public const string BaseDialogInstallVCCaption = "Установка VC++";
         public const string BaseDialogInstallVCMessage = "Вы действительно хотите скачать и установить Microsoft VC++?";

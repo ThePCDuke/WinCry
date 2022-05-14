@@ -41,8 +41,8 @@ namespace WinCry.Memory
                     taskViewModel.ShortMessage = DialogConsts.MemoryTweakExtracting;
                     taskViewModel.CreateMessage($"{DialogConsts.MemoryTweakExtracting} ");
 
-                    Helpers.ExtractEmbedFile(Properties.Resources.PСSLC_Core, "PСSLC.Core.dll", MemoryConsts.ServiceFolderPath);
-                    Helpers.ExtractEmbedFile(Properties.Resources.PСSLC_Service, "PСSLC_Service.exe", MemoryConsts.ServiceFolderPath);
+                    Helpers.ExtractEmbedFile(Properties.Resources.PСSLC_Core, "PСSLC.Core.dll", MemoryStrings.ServiceFolderPath);
+                    Helpers.ExtractEmbedFile(Properties.Resources.PСSLC_Service, "PСSLC_Service.exe", MemoryStrings.ServiceFolderPath);
 
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                     taskViewModel.Progress += 25;
@@ -61,11 +61,18 @@ namespace WinCry.Memory
                     RegulationsDataWritter writter = new RegulationsDataWritter();
                     writter.Write(RegulationsData.Default);
 
-                    string arguments = $"{MemoryConsts.StartArguments} {MemoryConsts.ServicePath}";
+                    var wd = MemoryStrings.WorkingDirectory;
+
+                    string args = MemoryStrings.StartArguments64;
+
+                    if (!Environment.Is64BitOperatingSystem)
+                        args = MemoryStrings.StartArguments32;
+
+                    var arguments = $"{args} {MemoryStrings.ServicePath}";
                     using (Process installProcess = new Process())
                     {
-                        installProcess.StartInfo.WorkingDirectory = MemoryConsts.WorkingDirectory;
-                        installProcess.StartInfo.FileName = MemoryConsts.FileName;
+                        installProcess.StartInfo.WorkingDirectory = MemoryStrings.WorkingDirectory;
+                        installProcess.StartInfo.FileName = MemoryStrings.FileName;
                         installProcess.StartInfo.Arguments = arguments;
                         installProcess.StartInfo.CreateNoWindow = true;
                         installProcess.StartInfo.UseShellExecute = false;
@@ -95,7 +102,7 @@ namespace WinCry.Memory
                     }
                     if (retryCount == 10)
                     {
-                        throw new InvalidOperationException(MemoryConsts.ServiceIsNotSuccessfulyInstalled);
+                        throw new InvalidOperationException(MemoryStrings.ServiceIsNotSuccessfulyInstalled);
                     }
 
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
@@ -146,11 +153,16 @@ namespace WinCry.Memory
                     taskViewModel.ShortMessage = DialogConsts.MemoryTweakUninstalling;
                     taskViewModel.CreateMessage($"{DialogConsts.MemoryTweakUninstalling} ");
 
-                    var arguments = $"{MemoryConsts.StartArguments} {MemoryConsts.ServicePath} {MemoryConsts.DeleteArgument}";
+                    string args = MemoryStrings.StartArguments64;
+
+                    if (!Environment.Is64BitOperatingSystem)
+                        args = MemoryStrings.StartArguments32;
+
+                    var arguments = $"{args} {MemoryStrings.ServicePath} {MemoryStrings.DeleteArgument}";
                     using (Process deleteProcess = new Process())
                     {
-                        deleteProcess.StartInfo.WorkingDirectory = MemoryConsts.WorkingDirectory;
-                        deleteProcess.StartInfo.FileName = MemoryConsts.FileName;
+                        deleteProcess.StartInfo.WorkingDirectory = MemoryStrings.WorkingDirectory;
+                        deleteProcess.StartInfo.FileName = MemoryStrings.FileName;
                         deleteProcess.StartInfo.Arguments = arguments;
                         deleteProcess.StartInfo.CreateNoWindow = true;
                         deleteProcess.StartInfo.UseShellExecute = false;
@@ -180,21 +192,21 @@ namespace WinCry.Memory
                     }
                     if (retryCount == 10)
                     {
-                        throw new InvalidOperationException(MemoryConsts.ServiceIsNotSuccessfulyRemoved);
+                        throw new InvalidOperationException(MemoryStrings.ServiceIsNotSuccessfulyRemoved);
                     }
                     else
                     {
                         RegulationsDataWritter writter = new RegulationsDataWritter();
                         writter.RemoveAll();
 
-                        if (File.Exists(MemoryConsts.ServicePath))
-                            File.Delete(MemoryConsts.ServicePath);
+                        if (File.Exists(MemoryStrings.ServicePath))
+                            File.Delete(MemoryStrings.ServicePath);
 
-                        if (File.Exists(MemoryConsts.ServiceLibraryPath))
-                            File.Delete(MemoryConsts.ServiceLibraryPath);
+                        if (File.Exists(MemoryStrings.ServiceLibraryPath))
+                            File.Delete(MemoryStrings.ServiceLibraryPath);
 
-                        if (File.Exists(MemoryConsts.ServiceLogPath))
-                            File.Delete(MemoryConsts.ServiceLogPath);
+                        if (File.Exists(MemoryStrings.ServiceLogPath))
+                            File.Delete(MemoryStrings.ServiceLogPath);
                     }
 
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
@@ -237,7 +249,7 @@ namespace WinCry.Memory
 
                     if (!IsServiceInstalled)
                     {
-                        taskViewModel.CreateFailureMessage(MemoryConsts.ServiceIsNotInstalled);
+                        taskViewModel.CreateFailureMessage(MemoryStrings.ServiceIsNotInstalled);
                         taskViewModel.CreateMessage(DialogConsts.ApplyingDoneMessage);
                         return;
                     }
@@ -258,7 +270,7 @@ namespace WinCry.Memory
 
                     if (GetService().Status != ServiceControllerStatus.Running)
                     {
-                        taskViewModel.CreateFailureMessage(MemoryConsts.ServiceIsNotSuccessfulyStarted);
+                        taskViewModel.CreateFailureMessage(MemoryStrings.ServiceIsNotSuccessfulyStarted);
                         taskViewModel.CreateMessage(DialogConsts.ApplyingDoneMessage);
                         return;
                     }
@@ -297,7 +309,7 @@ namespace WinCry.Memory
 
                     if (!IsServiceInstalled)
                     {
-                        taskViewModel.CreateFailureMessage(MemoryConsts.ServiceIsNotInstalled);
+                        taskViewModel.CreateFailureMessage(MemoryStrings.ServiceIsNotInstalled);
                         taskViewModel.CreateMessage(DialogConsts.ApplyingDoneMessage);
                         return;
                     }
@@ -318,7 +330,7 @@ namespace WinCry.Memory
 
                     if (GetService().Status != ServiceControllerStatus.Stopped)
                     {
-                        taskViewModel.CreateFailureMessage(MemoryConsts.ServiceIsNotSuccessfulyStarted);
+                        taskViewModel.CreateFailureMessage(MemoryStrings.ServiceIsNotSuccessfulyStarted);
                         taskViewModel.CreateMessage(DialogConsts.ApplyingDoneMessage);
                     }
 
@@ -394,7 +406,7 @@ namespace WinCry.Memory
             {
                 throw;
             }
-            var service = services.FirstOrDefault(s => s.ServiceName == MemoryConsts.ServiceName);
+            var service = services.FirstOrDefault(s => s.ServiceName == MemoryStrings.ServiceName);
             return service;
         }
     }

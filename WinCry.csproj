@@ -214,18 +214,24 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Core\Memory\MemoryConsts.cs" />
+    <Compile Include="Core\Memory\MemoryStrings.cs" />
     <Compile Include="Core\Memory\MemoryData.cs" />
     <Compile Include="Core\Memory\MemoryModel.cs" />
     <Compile Include="Core\Memory\MemoryViewModel.cs" />
     <Compile Include="Core\Memory\RegulationDataConsts.cs" />
+    <Compile Include="Core\Services\ServiceReqs.cs" />
     <Compile Include="Core\Services\ServicesPreset.cs" />
+    <Compile Include="Core\Services\ServiceWinCondition.cs" />
     <Compile Include="Core\Settings\SettingsPreset.cs" />
     <Compile Include="Core\Tweaks\TweaksPreset.cs" />
     <Compile Include="Dialogs\DialogConsts.cs" />
     <Compile Include="Dialogs\IDialog.cs" />
+    <Compile Include="Dialogs\ViewModels\MethodsWindowViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ExpertModeDisclaimerWindowViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\DisclaimerWindowViewModel.cs" />
+    <Compile Include="Dialogs\Views\MethodsWindow.xaml.cs">
+      <DependentUpon>MethodsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Views\ExpertModeDisclaimerWindow.xaml.cs">
       <DependentUpon>ExpertModeDisclaimerWindow.xaml</DependentUpon>
     </Compile>
@@ -248,6 +254,7 @@
     <Compile Include="Core\Services\ServicesViewModel.cs" />
     <Compile Include="Core\Settings\SettingsViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ProgressWindowViewModel.cs" />
+    <Compile Include="Models\SetFTA.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -288,7 +295,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\TweaksCollection.cs" />
     <Compile Include="Models\CollectionSearch.cs" />
     <Compile Include="Models\ContextMenuLeftClickBehavior.cs" />
     <Compile Include="Models\DialogHelper.cs" />
@@ -322,6 +328,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Services\Winmgmt.reg" />
     <None Include="Resources\Settings\SettingsBasic.json" />
     <None Include="Resources\Settings\SettingsMax.json" />
     <Resource Include="Resources\Fonts\Segoe-UI-Variable-Static-Display.ttf" />
@@ -330,10 +337,9 @@
     <None Include="Resources\Icons\BlankIco" />
     <None Include="Resources\Services\ServicesRestore.zip" />
     <None Include="Resources\Services\TrustedInstaller.reg" />
+    <None Include="Resources\Tweaks\Activation.zip" />
     <None Include="Resources\Tweaks\DecreaseBootSpeed.bat" />
-    <None Include="Resources\Tweaks\HWID.cmd" />
     <None Include="Resources\Tweaks\IncreaseBootSpeed.bat" />
-    <None Include="Resources\Tweaks\KMS38.cmd" />
     <None Include="Resources\Tweaks\PCDuke_Scheme.pow" />
   </ItemGroup>
   <ItemGroup>
@@ -361,11 +367,17 @@
     <Resource Include="Resources\Icons\icon_donate.png" />
     <Content Include="Resources\Memory\PСSLC.Core.dll" />
     <Content Include="Resources\Memory\PСSLC_Service.exe" />
+    <Resource Include="Resources\Services\KMS38DependingServices.xml" />
+    <Resource Include="Resources\Services\HWIDDependingServices.xml" />
     <Content Include="Resources\Tweaks\SetTimerResolutionService.exe" />
     <Content Include="Resources\Tweaks\TempCleaner.exe" />
     <Content Include="Resources\Tweaks\vcredist2010_x86.exe" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Dialogs\Views\MethodsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialogs\Views\ExpertModeDisclaimerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

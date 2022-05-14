@@ -56,22 +56,46 @@ namespace WinCry.Services
         /// <param name="service">Service to restore</param>
         public static string Restore(Service service)
         {
-            string _zipExtractionDirectory = StringConsts.ServicesRestorationPatchFolder;
-            string _userCreatedDirectory = StringConsts.ServicesBackupFolder;
+            string zipExtractionDirectory = StringConsts.ServicesRestorationPatchFolder;
+            string userCreatedDirectory = StringConsts.ServicesBackupFolder;
 
-            if (File.Exists($"{_userCreatedDirectory}\\{service.ShortName}.reg"))
+            string servicesPath = $@"System\CurrentControlSet\Services";
+            string fullPath = $@"System\CurrentControlSet\Services\{service.ShortName}";
+
+            RegistryKey fullKey = Registry.LocalMachine.OpenSubKey(fullPath, true);
+            
+            if (IsExists(service) == false)
             {
-                return RunAsProcess.CMD($@"reg import ""{_userCreatedDirectory}\{service.ShortName}.reg""", true);
+                if (fullKey != null)
+                {
+                    RegistryKey servicesKey = Registry.LocalMachine.OpenSubKey(servicesPath, true);
+                    servicesKey.DeleteSubKeyTree(service.ShortName);
+
+                    servicesKey.Close();
+                }
+
+                if (File.Exists($"{userCreatedDirectory}\\{service.ShortName}.reg"))
+                {
+                    return $"{DialogConsts.RestoringServicesAppliedUser} {RunAsProcess.CMD($@"reg import ""{userCreatedDirectory}\{service.ShortName}.reg""", true)}";
+                }
+                else
+                {
+                    ExtractRestorationFiles();
+
+                    if (File.Exists($"{zipExtractionDirectory}\\{service.ShortName}.reg"))
+                        return $"{DialogConsts.RestoringServicesAppliedEmbeded} {RunAsProcess.CMD($@"reg import ""{zipExtractionDirectory}\\{service.ShortName}.reg""", true)}";
+                }
             }
             else
             {
-                if (!Directory.Exists(_zipExtractionDirectory))
-                    ExtractRestorationFiles();
-
-                if (File.Exists($"{_zipExtractionDirectory}\\{service.ShortName}.reg"))
-                    return RunAsProcess.CMD($@"reg import ""{_zipExtractionDirectory}\\{service.ShortName}.reg""", true);
+                fullKey.SetValue("Start", service.DefaultStart, RegistryValueKind.DWord);
+                
+                return DialogConsts.RestoringServicesAppliedDefaultStart;
             }
-            return null;
+
+            if (fullKey != null) fullKey.Close();
+
+            return DialogConsts.RestoringServicesError;
         }
 
         /// <summary>
@@ -85,7 +109,9 @@ namespace WinCry.Services
                 Directory.CreateDirectory(StringConsts.ServicesBackupFolder);
             }
 
-            return RunAsProcess.CMD($@"regedit /e ""{Path.Combine(StringConsts.ServicesBackupFolder, service.ShortName + ".reg")}"" ""HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\{service.ShortName}""", true);
+            RunAsProcess.CMD($@"regedit /e ""{Path.Combine(StringConsts.ServicesBackupFolder, service.ShortName + ".reg")}"" ""HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\{service.ShortName}""", true);
+
+            return DialogConsts.Done;
         }
 
         /// <summary>
@@ -112,11 +138,18 @@ namespace WinCry.Services
         /// <param name="service">Service to update</param>
         private static string Update(Service service)
         {
-            if (!IsExists(service))
+            bool? _isExists = IsExists(service);
+
+            if (_isExists == false)
             {
                 service.Status = Service.StatusDeleted;
                 service.Start = Service.StatusDeleted;
                 return Service.StatusDeleted;
+            }
+            else if (_isExists == null)
+            {
+                service.Status = service.Status = Service.StatusNotDetected;
+                return Service.StatusNotDetected;
             }
 
             using (ServiceController _controller = new ServiceController(service.ShortName))
@@ -184,15 +217,18 @@ namespace WinCry.Services
         /// </summary>
         /// <param name="service">Service to apply</param>
         /// <param name="option">Option to apply</param>
-        private static string Apply(Service service, ServicesOption option)
+        public static string Apply(Service service, ServicesOption option)
         {
             switch (option)
             {
                 case ServicesOption.Disable:
                     {
-                        if (service.CanDisable || service.IsForcedToApply)
+                        if (service.CanDisable)
                         {
-                            return $"{Disable(service)} {Stop(service)}";
+                            string disable = Disable(service);
+                            Stop(service);
+
+                            return disable;
                         }
                         else
                         {
@@ -201,22 +237,35 @@ namespace WinCry.Services
                     }
                 case ServicesOption.Enable:
                     {
-                        return $"{Enable(service)} {Start(service)}";
-                    }
-                case ServicesOption.Delete:
-                    {
-                        if (service.CanRemove || service.IsForcedToApply)
+                        if (service.CanEnable)
                         {
-                            return Delete(service);
+                            string enable = Enable(service);
+                            Start(service);
+
+                            return enable;
                         }
                         else
                         {
-                            return $"{Disable(service)} {Stop(service)}";
+                            return null;
+                        }
+                    }
+                case ServicesOption.Delete:
+                    {
+                        if (service.CanRemove == Service.ServiceRemovingCondition.No)
+                        {
+                            string disable = Disable(service);
+                            Stop(service);
+
+                            return disable;
+                        }
+                        else
+                        {
+                            return Delete(service);
                         }
                     }
                 case ServicesOption.Restore:
                     {
-                        if (service.CanRecover || service.IsForcedToApply)
+                        if (service.CanRestore)
                         {
                             return Restore(service);
                         }
@@ -227,7 +276,14 @@ namespace WinCry.Services
                     }
                 case ServicesOption.Backup:
                     {
-                        return Backup(service);
+                        if (service.CanBackup)
+                        {
+                            return Backup(service);
+                        }
+                        else
+                        {
+                            return null;
+                        }
                     }
                 case ServicesOption.Start:
                     {
@@ -283,7 +339,6 @@ namespace WinCry.Services
                     }
                     catch (Exception ex)
                     {
-                        //taskViewModel.CatchException(ex);
                         taskViewModel.CreateMessage(ex.Message, false, false);
                         continue;
                     }
@@ -306,18 +361,53 @@ namespace WinCry.Services
         /// </summary>
         /// <param name="service">Service to check</param>
         /// <returns></returns>
-        private static bool IsExists(Service service)
+        private static bool? IsExists(Service service)
         {
-            string _fullPath = $@"System\CurrentControlSet\Services\{service.ShortName}";
-            RegistryKey _key = Registry.LocalMachine.OpenSubKey($"{_fullPath}");
+            string fullPath = $@"System\CurrentControlSet\Services\{service.ShortName}";
+            RegistryKey key = Registry.LocalMachine.OpenSubKey(fullPath);
 
-            if (_key == null)
+            if (key == null)
                 return false;
 
-            ServiceController[] _services = ServiceController.GetServices();
+            ServiceController[] services = ServiceController.GetServices();
 
-            var _service = _services.FirstOrDefault(s => s.ServiceName.ToLower() == service.ShortName.ToLower());
-            return _service != null;
+            var _service = services.FirstOrDefault(s => s.ServiceName.ToLower() == service.ShortName.ToLower());
+
+            if (_service == null)
+            {
+                var start = key.GetValue("Start");
+                var type = key.GetValue("Type");
+                var error = key.GetValue("ErrorControl");
+
+                if (start == null || type == null || error == null)
+                    return false;
+
+                byte startResult;
+                Byte.TryParse(start.ToString(), out startResult);
+
+                switch (startResult)
+                {
+                    case (byte)ServiceStartMode.Manual:
+                        service.Start = Service.StartManual;
+                        break;
+                    case (byte)ServiceStartMode.Automatic:
+                        service.Start = Service.StartAutomatic;
+                        break;
+                    case (byte)ServiceStartMode.Disabled:
+                        service.Start = Service.StartDisabled;
+                        break;
+                    case (byte)ServiceStartMode.Boot:
+                        break;
+                    case (byte)ServiceStartMode.System:
+                        break;
+                }
+
+                return null;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         /// <summary>
@@ -329,44 +419,178 @@ namespace WinCry.Services
         {
             int _windowsBuild = Helpers.GetWinBuild();
 
-            if (service.RequiredGPU == "AMD")
+            //service.Requirements = new ServiceReqs
+            //{
+            //    VisibleOn = new string[] { service.RequiredWinBuild },
+            //    CanDisableOn = new string[] { service.RequiredWinBuild },
+            //    CanEnableOn = new string[] { service.RequiredWinBuild },
+            //    CanDeleteOn = new ServiceWinCondition[] { new ServiceWinCondition { Version = service.RequiredWinBuild, Condition = Service.ServiceRemovingCondition.Yes} },
+            //    CanRestoreOn = new string[] { service.RequiredWinBuild },
+            //    CanBackupOn = new string[] { service.RequiredWinBuild }
+            //};
+            //if (service.Category == "Опциональные")
+            //{
+            //    service.Requirements.CanDeleteOn = new ServiceWinCondition[] { new ServiceWinCondition { Version = service.Requirements.VisibleOn[0], Condition = Service.ServiceRemovingCondition.Yes } };
+            //}
+
+            //var array = File.ReadAllLines($@"Services\{service.ShortName}.reg");
+
+            //foreach (string line in array)
+            //{
+            //    if (line.Contains(@"""Start"""))
+            //    {
+            //        string linex = line.Substring(line.Length - 1, 1);
+            //        service.DefaultStart = int.Parse(linex);
+            //    }
+            //}
+
+            //return true;
+
+
+            CheckService(service, _windowsBuild);
+
+            if (service.RequiredGPU != null)
             {
-                if (!_isAMD)
-                    return false;
+                switch (service.RequiredGPU)
+                {
+                    case "AMD":
+                        {
+                            if (!_isAMD)
+                                return false;
+
+                            break;
+                        }
+                    case "NVIDIA":
+                        {
+                            if (!_isNVIDIA)
+                                return false;
+
+                            break;
+                        }
+                    default:
+                        break;
+                }
             }
 
-            if (service.RequiredGPU == "NVIDIA")
+            return service.IsVisible;
+        }
+
+        public static void CheckService(Service service, int requiredVersion)
+        {
+            foreach (string version in service.Requirements.VisibleOn)
             {
-                if (!_isNVIDIA)
-                    return false;
+                if (IsVersionRelevant(requiredVersion, version) == null)
+                {
+                    service.IsVisible = true;
+                    break;
+                }
+                else if (IsVersionRelevant(requiredVersion, version) == true)
+                {
+                    service.IsVisible = true;
+                }
+                else
+                {
+                    return;
+                }
             }
 
-            switch (service.RequiredWinBuild[service.RequiredWinBuild.Length - 1])
+            foreach (string version in service.Requirements.CanBackupOn)
+            {
+                if (IsVersionRelevant(requiredVersion, version) == null)
+                {
+                    service.CanBackup = true;
+                    break;
+                }
+                else if (IsVersionRelevant(requiredVersion, version) == true)
+                {
+                    service.CanBackup = true;
+                }
+            }
+
+            foreach (ServiceWinCondition version in service.Requirements.CanDeleteOn)
+            {
+                if (IsVersionRelevant(requiredVersion, version.Version) == null)
+                {
+                    service.CanRemove = version.Condition;
+                    break;
+                }
+                else if (IsVersionRelevant(requiredVersion, version.Version) == true)
+                {
+                    service.CanRemove = version.Condition;
+                }
+            }
+
+            foreach (string version in service.Requirements.CanDisableOn)
+            {
+                if (IsVersionRelevant(requiredVersion, version) == null)
+                {
+                    service.CanDisable = true;
+                    break;
+                }
+                else if (IsVersionRelevant(requiredVersion, version) == true)
+                {
+                    service.CanDisable = true;
+                }
+            }
+
+            foreach (string version in service.Requirements.CanEnableOn)
+            {
+                if (IsVersionRelevant(requiredVersion, version) == null)
+                {
+                    service.CanEnable = true;
+                    break;
+                }
+                else if (IsVersionRelevant(requiredVersion, version) == true)
+                {
+                    service.CanEnable = true;
+                }
+            }
+
+            foreach (string version in service.Requirements.CanRestoreOn)
+            {
+                if (IsVersionRelevant(requiredVersion, version) == null)
+                {
+                    service.CanRestore = true;
+                    break;
+                }
+                else if (IsVersionRelevant(requiredVersion, version) == true)
+                {
+                    service.CanRestore = true;
+                }
+            }
+        }
+
+        private static bool? IsVersionRelevant(int currentVersion, string requiredVersion)
+        {
+            if (requiredVersion == "0+")
+                return true;
+
+            switch (requiredVersion[requiredVersion.Length - 1])
             {
                 case '+':
                     {
-                        if (!int.TryParse(service.RequiredWinBuild.Substring(0, service.RequiredWinBuild.Length - 1), out int _result))
+                        if (!int.TryParse(requiredVersion.Substring(0, requiredVersion.Length - 1), out int result))
                             return false;
-                        if (_windowsBuild >= _result)
+                        if (currentVersion >= result)
                             return true;
                         else
                             return false;
                     }
                 case '-':
                     {
-                        if (!int.TryParse(service.RequiredWinBuild.Substring(0, service.RequiredWinBuild.Length - 1), out int _result))
+                        if (!int.TryParse(requiredVersion.Substring(0, requiredVersion.Length - 1), out int result))
                             return false;
-                        if (_windowsBuild <= _result)
+                        if (currentVersion <= result)
                             return true;
                         else
                             return false;
                     }
                 default:
                     {
-                        if (!int.TryParse(service.RequiredWinBuild, out int _result))
+                        if (!int.TryParse(requiredVersion, out int result))
                             return false;
-                        if (_result == _windowsBuild)
-                            return true;
+                        if (currentVersion == result)
+                            return null;
                         else
                             return false;
                     }
@@ -421,76 +645,73 @@ namespace WinCry.Services
             int _tryingCounts = 0;
             do
             {
-                System.Diagnostics.Debug.Print($"Обновляю {service.ShortName}, {service.Status}");
                 Update(service);
 
                 if (service.Status == Service.StatusDeleted)
                     break;
 
                 await Task.Delay(interval);
-                System.Diagnostics.Debug.Print($"Статус {service.ShortName} - {service.Status}");
                 _tryingCounts += 1;
             }
             while ((service.Status != status) && (_tryingCounts != retryCounts));
         }
 
         /// <summary>
-        /// Gather corrupted (removed, disabled, stopped) services that MS Store depends on.
+        /// Gather corrupted (removed, disabled, stopped) services.
         /// Tries to enable them and update.
         /// </summary>
         /// <param name="interval">Interval between each try</param>
         /// <param name="retryCounts">Retry counts</param>
         /// <returns></returns>
-        public static async Task UpdateMSStoreDependingServicesAsync(int interval = 1000, int retryCounts = 10)
+        public static async Task UpdateDependingServicesAsync(byte[] resource, int interval = 1000, int retryCounts = 10)
         {
-            ObservableCollection<Task> _tasks = new ObservableCollection<Task>();
-            Helpers.DeserializeCollectionAsXML(Properties.Resources.MSStoreDependingServices,
-                                               out ObservableCollection<Service> _dependingServices);
+            ObservableCollection<Task> tasks = new ObservableCollection<Task>();
+            Helpers.DeserializeCollectionAsXML(resource, out ObservableCollection<Service> dependingServices);
 
-            foreach (Service _service in _dependingServices)
+            foreach (Service service in dependingServices)
             {
-                Update(_service);
+                Update(service);
 
-                if (_service.Start == Service.StartDisabled)
-                    Enable(_service);
+                if (service.Start == Service.StartDisabled)
+                    Enable(service);
 
-                if (_service.Status != Service.StatusRunning)
+                if (service.Status != Service.StatusRunning)
                 {
-                    _tasks.Add(UpdateServiceTillStatusEquals(_service, Service.StatusRunning, interval, retryCounts));
-                    Start(_service);
+                    tasks.Add(UpdateServiceTillStatusEquals(service, Service.StatusRunning, interval, retryCounts));
+                    Start(service);
                 }
             }
 
-            Task[] _tasksArray = _tasks.ToArray();
+            Task[] tasksArray = tasks.ToArray();
 
-            await Task.WhenAll(_tasksArray);
+            await Task.WhenAll(tasksArray);
         }
 
         /// <summary>
-        /// Gets collection of MS Store depending services that needs to restore
+        /// Gets collection of services that needs to restore
         /// </summary>
-        /// <returns>Collection of services that aren't exist on current system and that MS Store depends on</returns>
-        public static ObservableCollection<Service> MSStoreDependingServicesToRestore()
+        /// <returns>Collection of services that aren't exist on current system</returns>
+        public static ObservableCollection<Service> GetServicesFromXMLAndCheck(byte[] resource)
         {
-            ObservableCollection<Service> _servicesToRestore = new ObservableCollection<Service>();
-            Helpers.DeserializeCollectionAsXML(Properties.Resources.MSStoreDependingServices, out ObservableCollection<Service> _dependingServices);
+            ObservableCollection<Service> servicesToRestore = new ObservableCollection<Service>();
+            Helpers.DeserializeCollectionAsXML(resource, out ObservableCollection<Service> dependingServices);
 
-            foreach (Service _service in _dependingServices)
+            foreach (Service service in dependingServices)
             {
-                if (!IsExists(_service))
+                if (IsExists(service) == false)
                 {
-                    _servicesToRestore.Add(_service);
+                    servicesToRestore.Add(service);
                     continue;
                 }
 
-                using (ServiceController _controller = new ServiceController(_service.ShortName))
+                using (ServiceController _controller = new ServiceController(service.ShortName))
                 {
                     if (_controller.Status != ServiceControllerStatus.Running)
-                        _servicesToRestore.Add(_service);
+                        servicesToRestore.Add(service);
                 }
             }
 
-            return _servicesToRestore;
+            return servicesToRestore;
         }
 
         /// <summary>
@@ -500,6 +721,15 @@ namespace WinCry.Services
         {
             Helpers.ExtractEmbedFile(Properties.Resources.TrustedInstaller, "TrustedInstaller.reg");
             RunAsProcess.CMD($"reg import {Path.GetTempPath()}TrustedInstaller.reg", true, true, "lsass");
+        }
+
+        /// <summary>
+        /// Restores Winmgmt service
+        /// </summary>
+        public static void RestoreWMIService()
+        {
+            Helpers.ExtractEmbedFile(Properties.Resources.Winmgmt, "Winmgmt.reg");
+            RunAsProcess.CMD($"reg import {Path.GetTempPath()}Winmgmt.reg", true, true, "lsass");
         }
 
         /// <summary>
@@ -513,7 +743,7 @@ namespace WinCry.Services
             {
                 if (_service.IsChecked)
                 {
-                    if (!_service.CanRemove)
+                    if (_service.CanRemove == Service.ServiceRemovingCondition.WithCaution)
                     {
                         bool _result = DialogHelper.ShowDialog(dialogService,
                             $@"{DialogConsts.DialogNonRemovableServiceCaption} ""{_service.FullName}""",
@@ -522,14 +752,33 @@ namespace WinCry.Services
                         if (!_result)
                         {
                             _service.IsChecked = false;
-                            _service.IsForcedToApply = false;
-                        }
-                        else
-                        {
-                            _service.IsForcedToApply = true;
                         }
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Tries to enable 'Winmgmt' service
+        /// </summary>
+        public static void EnableWMIService()
+        {
+            using (ServiceController controller = new ServiceController("Winmgmt"))
+            {
+                if (controller.StartType == ServiceStartMode.Disabled)
+                    Helpers.RunByCMD($"sc config Winmgmt start= demand");
+            }
+        }
+
+        /// <summary>
+        /// Tries to enable 'TrustedInstaller' service
+        /// </summary>
+        public static void EnableTrustedInstallerService()
+        {
+            using (ServiceController controller = new ServiceController("TrustedInstaller"))
+            {
+                if (controller.StartType == ServiceStartMode.Disabled)
+                    Helpers.RunByCMD($"sc config TrustedInstaller start= demand");
             }
         }
     }

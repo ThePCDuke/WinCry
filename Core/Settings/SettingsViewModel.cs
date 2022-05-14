@@ -62,7 +62,8 @@ namespace WinCry.Settings
             get { return _selectedSettingsPreset; }
             set
             {
-                if (value == null) return;
+                if (value == null) 
+                    return;
 
                 if (value.Name == StringConsts.ExpertPreset)
                 {
@@ -106,6 +107,9 @@ namespace WinCry.Settings
             get { return _selectedServicesPreset; }
             set
             {
+                if (value == null)
+                    return;
+
                 if (SelectedSettingsPreset.Name != StringConsts.ExpertPreset && value.Name == StringConsts.ExpertPreset)
                 {
                     if (!DialogHelper.ShowExpertModeDisclaimer(_dialogService))
@@ -114,10 +118,10 @@ namespace WinCry.Settings
                     }
                 }
 
+                ServicesVM.LoadPreset(value);
+
                 _selectedServicesPreset = value;
                 OnPropertyChanged();
-
-                ServicesVM.LoadPreset(value);
             }
         }
 
@@ -127,6 +131,9 @@ namespace WinCry.Settings
             get { return _selectedTweaksPreset; }
             set
             {
+                if (value == null)
+                    return;
+
                 if (SelectedSettingsPreset.Name != StringConsts.ExpertPreset && value.Name == StringConsts.ExpertPreset)
                 {
                     if (!DialogHelper.ShowExpertModeDisclaimer(_dialogService))
@@ -135,10 +142,10 @@ namespace WinCry.Settings
                     }
                 }
 
+                TweaksVM.LoadPreset(value);
+
                 _selectedTweaksPreset = value;
                 OnPropertyChanged();
-
-                TweaksVM.LoadPreset(value);
             }
         }
 
@@ -154,6 +161,7 @@ namespace WinCry.Settings
             MemoryVM = new MemoryViewModel(dialogService);
 
             LoadPresetsList();
+            LoadDefaultPreset();
 
             if (MemoryModel.IsServiceInstalled)
             {
@@ -208,11 +216,13 @@ namespace WinCry.Settings
 
                            preset.Save();
 
-                           Presets.Add(preset);
-                           TweaksVM.Presets.Add(preset.TweaksPreset);
-                           ServicesVM.Presets.Add(preset.ServicesPreset);
+                           //Presets.Add(preset);
+                           //TweaksVM.Presets.Add(preset.TweaksPreset);
+                           //ServicesVM.Presets.Add(preset.ServicesPreset);
+
+                           LoadPresetsList();
+                           SelectedSettingsPreset = new SettingsPreset(fileName);
                        }
-                       LoadPresetsList();
                    }));
             }
         }
@@ -225,6 +235,12 @@ namespace WinCry.Settings
         {
             Presets = PresetController.LoadSettingsPresetsList();
 
+            TweaksVM.LoadPresetsList();
+            ServicesVM.LoadPresetsList();
+        }
+
+        public void LoadDefaultPreset()
+        {
             SettingsPreset preset = Presets[0];
 
             SelectedSettingsPreset = preset;

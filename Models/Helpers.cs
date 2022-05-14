@@ -145,16 +145,23 @@ namespace WinCry.Models
         /// <returns></returns>
         private static bool FindValueInDisplayConfiguration(string value)
         {
-            using (var searcher = new ManagementObjectSearcher("select * from Win32_VideoController"))
+            try
             {
-                foreach (ManagementObject obj in searcher.Get())
+                using (var searcher = new ManagementObjectSearcher("select * from Win32_VideoController"))
                 {
-                    if (obj["VideoProcessor"] == null)
-                        return false;
+                    foreach (ManagementObject obj in searcher.Get())
+                    {
+                        if (obj["VideoProcessor"] == null)
+                            return false;
 
-                    if (obj["VideoProcessor"].ToString().ToUpper().Contains(value.ToUpper()))
-                        return true;
+                        if (obj["VideoProcessor"].ToString().ToUpper().Contains(value.ToUpper()) || obj["Name"].ToString().ToUpper().Contains(value.ToUpper()))
+                            return true;
+                    }
+                    return false;
                 }
+            }
+            catch
+            {
                 return false;
             }
         }

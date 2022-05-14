@@ -2,11 +2,25 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using WinCry.Models;
+using WinCry.ViewModels;
 
 namespace WinCry.Services
 {
-    public class Service : ISelectable, INotifyPropertyChanged
+    public class Service : BaseViewModel, ISelectable
     {
+        public enum ServiceRemovingMethod
+        {
+            CMD,
+            Regedit
+        }
+
+        public enum ServiceRemovingCondition
+        {
+            No,
+            WithCaution,
+            Yes
+        }
+
         public Service() { }
 
         public Service(Service service)
@@ -16,23 +30,19 @@ namespace WinCry.Services
             Description = service.Description;
             Category = service.Category;
             Status = service.Status;
-            IsForcedToApply = service.IsForcedToApply;
             Start = service.Start;
-            RequiredWinBuild = service.RequiredWinBuild;
             IsChecked = service.IsChecked;
             CanDisable = service.CanDisable;
+            CanEnable = service.CanEnable;
+            CanBackup = service.CanBackup;
             CanRemove = service.CanRemove;
-            CanRecover = service.CanRecover;
+            CanRestore = service.CanRestore;
+            Requirements = service.Requirements;
             RequiredGPU = service.RequiredGPU;
             RemovingMethod = service.RemovingMethod;
         }
 
-        public enum ServiceRemovingMethod
-        {
-            CMD,
-            Regedit
-        }
-
+        public const string StatusNotDetected = "Не обнаружена";
         public const string StatusRunning = "Запущена";
         public const string StatusPaused = "Пауза";
         public const string StatusPending = "Ожидание";
@@ -86,10 +96,8 @@ namespace WinCry.Services
             }
         }
 
-        [JsonIgnore]
-        public bool IsForcedToApply { get; set; }
-
         private string _start;
+        [JsonIgnore]
         public string Start
         {
             get { return _start; }
@@ -99,8 +107,6 @@ namespace WinCry.Services
                 OnPropertyChanged();
             }
         }
-
-        public string RequiredWinBuild { get; set; }
 
         private bool _isChecked;
         public bool IsChecked
@@ -113,22 +119,30 @@ namespace WinCry.Services
             }
         }
 
+        [JsonIgnore]
+        public bool IsVisible { get; set; }
+
+        [JsonIgnore]
         public bool CanDisable { get; set; }
 
-        public bool CanRemove { get; set; }
+        [JsonIgnore]
+        public bool CanEnable { get; set; }
 
-        public bool CanRecover { get; set; }
+        [JsonIgnore]
+        public bool CanRestore { get; set; }
+
+        [JsonIgnore]
+        public bool CanBackup { get; set; }
+
+        [JsonIgnore]
+        public ServiceRemovingCondition CanRemove { get; set; }
 
         public string RequiredGPU { get; set; }
 
         public ServiceRemovingMethod RemovingMethod { get; set; }
 
-        #region OnProperty Changed
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
-        #endregion
+        public ServiceReqs Requirements { get; set; }
+
+        public int DefaultStart { get; set; }
     }
 }

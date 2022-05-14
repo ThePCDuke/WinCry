@@ -26,6 +26,12 @@ namespace WinCry.ViewModels
 
         public MainWindowViewModel(IDialogService dialogService)
         {
+            try
+            {
+                ServicesModel.EnableWMIService();
+            }
+            catch { }
+
             System.Windows.Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
 
             _dialogService = dialogService;
@@ -160,7 +166,7 @@ namespace WinCry.ViewModels
                        if (SettingsVM.ServicesVM.Option == ServicesOption.Delete) { ServicesModel.CheckServicesForRemovability(SettingsVM.ServicesVM.Services, _dialogService); }
                        if (SettingsVM.ServicesVM.Option != ServicesOption.Nothing && SettingsVM.ServicesVM.Services.Where(s => s.IsChecked).Count() != 0) { var _taskVM = new TaskViewModel(); _vm.AddTask(ServicesModel.ApplyTask(SettingsVM.ServicesVM.Services, SettingsVM.ServicesVM.Option, _taskVM), _taskVM); }
                        // Memory
-                       if (!MemoryModel.IsServiceInstalled) { var _taskVM = new TaskViewModel(); _vm.AddTask(MemoryModel.InstallService(_taskVM, SettingsVM.MemoryVM.CachedRAMGreaterThan, SettingsVM.MemoryVM.FreeRAMLessThan, SettingsVM.MemoryVM.ServiceThreadSleepSeconds), _taskVM, SettingsVM.MemoryVM.UpdateStatus); }
+                       if (!MemoryModel.IsServiceInstalled) { var _taskVM = new TaskViewModel(); _vm.AddTask(MemoryModel.InstallService(_taskVM, SettingsVM.MemoryVM.CachedRAMGreaterThan, SettingsVM.MemoryVM.FreeRAMLessThan, SettingsVM.MemoryVM.ServiceThreadSleepSeconds * 1000), _taskVM, SettingsVM.MemoryVM.UpdateStatus); }
 
                        // Shortcut icon Tweak
                        if (SettingsVM.Settings.RemoveShortcutIcon) { var _taskVM = new TaskViewModel(); _vm.AddTask(MainModel.RemoveShortcutIcon(_taskVM, true), _taskVM); }
@@ -226,11 +232,6 @@ namespace WinCry.ViewModels
                    (_applyMemory = new RelayCommand(obj =>
                    {
                        SettingsVM.MemoryVM.InstallUninstallService.Execute(null);
-
-                       if (DialogHelper.ShowDialog(_dialogService, DialogConsts.BaseDialogRebootCaption, DialogConsts.BaseDialogRebootMessage))
-                       {
-                           Helpers.RunByCMD("shutdown /r /t 0");
-                       }
                    }));
             }
         }
@@ -328,15 +329,19 @@ namespace WinCry.ViewModels
             get
             {
                 return _activateWindows ??
-                   (_activateWindows = new RelayCommand(obj =>
+                   (_activateWindows = new RelayCommand(async obj =>
                    {
-                       if (!DialogHelper.ShowDialog(_dialogService, DialogConsts.BaseDialogActivateWindowsCaption, DialogConsts.BaseDialogActivateWindowsMessage))
+                       (bool? close, byte method) tuple = DialogHelper.ShowMethodWindow(_dialogService, DialogConsts.BaseDialogActivateWindowsCaption, DialogConsts.BaseDialogActivateWindowsMessage);
+
+                       if (tuple.close == false)
                            return;
+
+                       await MainModel.CheckActivationServices(_dialogService, tuple.method);
 
                        ProgressWindowViewModel _vm = new ProgressWindowViewModel();
                        var _taskVM = new TaskViewModel();
 
-                       _vm.AddTask(MainModel.ActivateWindows(_taskVM), _taskVM);
+                       _vm.AddTask(MainModel.ActivateWindows(_taskVM, tuple.method), _taskVM);
                        _vm.StartTasks();
 
                        _dialogService.ShowDialog(_vm);
@@ -374,15 +379,19 @@ namespace WinCry.ViewModels
                 return _installMSStore ??
                    (_installMSStore = new RelayCommand(async obj =>
                    {
-                       if (!DialogHelper.ShowDialog(_dialogService, DialogConsts.BaseDialogInstallMSStoreCaption, DialogConsts.BaseDialogInstallMSStoreMessage))
+                       (bool? close, byte method) tuple = DialogHelper.ShowMethodWindow(_dialogService, DialogConsts.BaseDialogInstallMSStoreCaption, DialogConsts.BaseDialogInstallMSStoreMessage);
+
+                       if (tuple.close == false)
                            return;
 
-                       await MainModel.InstallMSStorePrereqs(_dialogService);
+                       MainModel.DownloadMSStore(_dialogService);
+
+                       await MainModel.CheckMSStoreServices(_dialogService);
 
                        ProgressWindowViewModel _vm = new ProgressWindowViewModel();
                        var _taskVM = new TaskViewModel();
 
-                       _vm.AddTask(MainModel.InstallMSStore(_taskVM, _dialogService), _taskVM);
+                       _vm.AddTask(MainModel.InstallMSStore(_taskVM, tuple.method), _taskVM);
                        _vm.StartTasks();
 
                        _dialogService.ShowDialog(_vm);
@@ -441,7 +450,7 @@ namespace WinCry.ViewModels
                 return _runCMDAsTI ??
                    (_runCMDAsTI = new RelayCommand(obj =>
                    {
-                       RunAsProcess.Binary(@"C:\Windows\System32\cmd.exe", false, false);
+                       RunAsProcess.Binary($@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\System32\cmd.exe", false, false);
                    }));
             }
         }
@@ -454,7 +463,7 @@ namespace WinCry.ViewModels
                 return _runRegeditAsTI ??
                    (_runRegeditAsTI = new RelayCommand(obj =>
                    {
-                       RunAsProcess.Binary(@"C:\Windows\regedit.exe", false, false);
+                       RunAsProcess.Binary($@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\regedit.exe", false, false);
                    }));
             }
         }
@@ -474,6 +483,7 @@ namespace WinCry.ViewModels
                        SettingsVM.LoadPresetsList();
                        SettingsVM.TweaksVM.LoadPresetsList();
                        SettingsVM.ServicesVM.LoadPresetsList();
+                       SettingsVM.LoadDefaultPreset();
                    }));
             }
         }
@@ -603,19 +613,23 @@ namespace WinCry.ViewModels
 
                        try
                        {
-                           RunAsProcess.StartTrustedInstallerService();
+                           ServicesModel.EnableTrustedInstallerService();
+                           ServicesModel.EnableWMIService();
                        }
                        catch (InvalidOperationException)
                        {
                            if (DialogHelper.ShowDialog(_dialogService, DialogConsts.ServiceStartingError, DialogConsts.TrustedInstallerStartingError))
                            {
                                ServicesModel.RestoreTrustedInstallerService();
+                               ServicesModel.RestoreWMIService();
                            }
                            else
                            {
                                Environment.Exit(0);
                            }
                        }
+
+                       RunAsProcess.CMD("net stop \"wuauserv\"", true, false, "lsass");
                    }));
             }
         }

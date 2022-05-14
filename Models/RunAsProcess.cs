@@ -185,7 +185,37 @@ namespace WinCry.Models
                     controller.Start();
             }
 
-            while (!IsTrustedInstallerServiceRunning) ;
+            byte tryCount = 0;
+
+            while (!IsTrustedInstallerServiceRunning)
+            {
+                System.Threading.Thread.Sleep(500);
+                tryCount++;
+
+                if (tryCount >= 30)
+                {
+                    return;
+                }
+            }
+        }
+
+        public static void ExecutePowershellCommand(string command, bool hidden = false, bool waitForExit = true)
+        {
+            ProcessStartInfo info = new ProcessStartInfo
+            {
+                FileName = "powershell.exe",
+                UseShellExecute = false,
+                CreateNoWindow = hidden,
+                RedirectStandardOutput = true,
+                Arguments = command
+            };
+
+            Process process = Process.Start(info);
+
+            if (waitForExit)
+            {
+                process.WaitForExit();
+            }
         }
 
         /// <summary>
@@ -198,8 +228,8 @@ namespace WinCry.Models
         /// <returns></returns>
         public static string CMD(string args, bool hidden = false, bool waitForExit = true, string processName = "TrustedInstaller")
         {
-            string _binaryPath = $@"C:\Windows\System32\cmd.exe";
-            string _args = $@"/c {args}";
+            string _binaryPath = $@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\System32\cmd.exe";
+            string _args = $@"/c {args} & exit";
             int parentProcessId;
 
             Process[] explorerproc = Process.GetProcessesByName(processName);
@@ -214,26 +244,6 @@ namespace WinCry.Models
             parentProcessId = explorerproc[0].Id;
 
             return CreateProcess(parentProcessId, _binaryPath, hidden, waitForExit, true, _args);
-        }
-
-        public static string CMD1(string args, bool hidden = false, bool waitForExit = true, string processName = "TrustedInstaller")
-        {
-            string _binaryPath = $@"C:\Windows\System32\cmd.exe";
-            string _args = $@"cmd.exe /c {args}";
-            int parentProcessId;
-
-            Process[] explorerproc = Process.GetProcessesByName(processName);
-            if (explorerproc.Length == 0 && processName == "TrustedInstaller")
-            {
-                if (!IsTrustedInstallerServiceRunning)
-                    StartTrustedInstallerService();
-
-                explorerproc = Process.GetProcessesByName(processName);
-            }
-
-            parentProcessId = explorerproc[0].Id;
-
-            return CreateProcess(parentProcessId, null, hidden, waitForExit, true, _args);
         }
 
         /// <summary>
@@ -392,6 +402,8 @@ namespace WinCry.Models
                     throw new Exception("Could not create process!");
                 }
 
+                int tryCount = 0;
+
                 if (!captureOutput && waitForExit)
                 {
                     do
@@ -399,6 +411,13 @@ namespace WinCry.Models
                         if (WaitForSingleObject(pInfo.hProcess, 100) == 0)
                         {
                             return "Done";
+                        }
+
+                        tryCount++;
+
+                        if (tryCount >= 5)
+                        {
+                            return "Timeout";
                         }
                     }
                     while (true);
@@ -459,6 +478,14 @@ namespace WinCry.Models
                             }
 
                             result += _string;
+                        }
+
+                        tryCount++;
+
+                        if (tryCount >= 5)
+                        {
+                            result = "Timeout";
+                            break;
                         }
 
                     } while (true);
