@@ -1,9 +1,8 @@
-﻿bcdedit /deletevalue hypervisorlaunchtype
+bcdedit /set hypervisorlaunchtype auto
 bcdedit /deletevalue tpmbootentropy
-bcdedit /deletevalue timeout
-bcdedit /deletevalue bootux disabled
-bcdedit /deletevalue bootmenupolicy 
-bcdedit /deletevalue quietboot
-bcdedit /deletevalue {globalsettings} custom:16000067 true
-bcdedit /deletevalue {globalsettings} custom:16000069 true
-bcdedit /deletevalue {globalsettings} custom:16000068 true
+bcdedit /timeout 30
+bcdedit /deletevalue bootux
+bcdedit /set bootmenupolicy standard
+bcdedit /deletevalue {globalsettings} custom:16000067
+bcdedit /deletevalue {globalsettings} custom:16000069
+bcdedit /deletevalue {globalsettings} custom:16000068

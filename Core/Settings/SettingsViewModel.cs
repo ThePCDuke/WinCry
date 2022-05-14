@@ -106,6 +106,9 @@ namespace WinCry.Settings
             get { return _selectedServicesPreset; }
             set
             {
+                if (value == null)
+                    return;
+
                 if (SelectedSettingsPreset.Name != StringConsts.ExpertPreset && value.Name == StringConsts.ExpertPreset)
                 {
                     if (!DialogHelper.ShowExpertModeDisclaimer(_dialogService))

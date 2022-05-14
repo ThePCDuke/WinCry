@@ -156,6 +156,11 @@ namespace WinCry.Memory
                        _vm.StartTasks();
 
                        _dialogService.ShowDialog(_vm);
+
+                       if (DialogHelper.ShowDialog(_dialogService, DialogConsts.BaseDialogRebootCaption, DialogConsts.BaseDialogRebootMessage))
+                       {
+                           Helpers.RunByCMD("shutdown /r /t 0");
+                       }
                    }));
             }
         }

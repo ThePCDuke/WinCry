@@ -19,6 +19,7 @@ namespace WinCry.Views
             _dialogService.Register<MessageWindowViewModel, MessageWindow>();
             _dialogService.Register<DisclaimerWindowViewModel, DisclaimerWindow>();
             _dialogService.Register<ExpertModeDisclaimerWindowViewModel, ExpertModeDisclaimerWindow>();
+            _dialogService.Register<MethodsWindowViewModel, MethodsWindow>();
 
             DataContext = new MainWindowViewModel(_dialogService);
 

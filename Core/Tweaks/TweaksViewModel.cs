@@ -102,6 +102,9 @@ namespace WinCry.Tweaks
 
                        _dialogService.ShowDialog(_vm);
 
+                       TweaksModel.Update(Tweaks);
+                       TweaksVM = TweaksModel.BuildTree(Tweaks);
+
                        if (DialogHelper.ShowDialog(_dialogService, DialogConsts.BaseDialogRebootCaption, DialogConsts.BaseDialogRebootMessage))
                        {
                            Helpers.RunByCMD("shutdown /r /t 0");

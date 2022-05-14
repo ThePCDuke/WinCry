@@ -25,6 +25,19 @@ namespace WinCry.Models
             return (_vm.DoNotShow, _vm.DoBackup);
         }
 
+        public static (bool? close, byte method) ShowMethodWindow(IDialogService dialogService, string dialogCaption, string dialogText)
+        {
+            MethodsWindowViewModel _vm = new MethodsWindowViewModel()
+            {
+                DialogCaption = dialogCaption,
+                DialogText = dialogText
+            };
+
+            bool? closed = dialogService.ShowDialog(_vm);
+
+            return (closed, _vm.Method);
+        }
+
         public static bool ShowExpertModeDisclaimer(IDialogService dialogService)
         {
             ExpertModeDisclaimerWindowViewModel _vm = new ExpertModeDisclaimerWindowViewModel();

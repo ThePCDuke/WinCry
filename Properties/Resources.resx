@@ -118,20 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Activation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\tweaks\activation.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="BlankIco" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\icons\blankico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DecreaseBootSpeed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\tweaks\decreasebootspeed.bat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="HWID" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\tweaks\hwid.cmd;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="HWIDDependingServices" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\services\hwiddependingservices.xml;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="IncreaseBootSpeed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\tweaks\increasebootspeed.bat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="KMS38" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\tweaks\kms38.cmd;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="KMS38DependingServices" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\services\kms38dependingservices.xml;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="MSStoreDependingServices" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\services\msstoredependingservices.xml;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -174,5 +177,8 @@
   </data>
   <data name="WinCry" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\icons\wincry.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Winmgmt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\services\winmgmt.reg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

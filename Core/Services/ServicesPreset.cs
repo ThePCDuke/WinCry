@@ -76,6 +76,7 @@ namespace WinCry.Services
         {
             var options = new JsonSerializerOptions()
             {
+                IncludeFields = true,
                 Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                 WriteIndented = true
             };

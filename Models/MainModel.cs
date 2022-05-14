@@ -63,7 +63,7 @@ namespace WinCry.Models
         /// <returns></returns>
         public static Task InstallImprovedTimer(TaskViewModel taskViewModel, bool install)
         {
-            string _filePath = @"C:\Windows\SetTimerResolutionService.exe";
+            string _filePath = $@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\SetTimerResolutionService.exe";
             return new Task(() =>
             {
                 taskViewModel.Name = DialogConsts.TimerTweak;
@@ -74,7 +74,8 @@ namespace WinCry.Models
                     taskViewModel.ShortMessage = DialogConsts.TimerTweakInstallingDependecy;
                     taskViewModel.CreateMessage($"{DialogConsts.TimerTweakInstallingDependecy} ");
 
-                    TweaksCollection.VCTweak.InstallDependent(); //Replace
+                    Helpers.ExtractEmbedFile(Properties.Resources.vcredist2010_x86, "vcredist2010_x86.exe");
+                    RunAsProcess.CMD($"start /wait {Path.GetTempPath()}vcredist2010_x86.exe /q /norestart", true, true);
 
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                     taskViewModel.Progress += 33;
@@ -92,7 +93,7 @@ namespace WinCry.Models
 
                     if (!File.Exists(_filePath))
                     {
-                        Helpers.ExtractEmbedFile(Properties.Resources.SetTimerResolutionService, "SetTimerResolutionService.exe", @"C:\Windows");
+                        Helpers.ExtractEmbedFile(Properties.Resources.SetTimerResolutionService, "SetTimerResolutionService.exe", $@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows");
                         taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                     }
                     else
@@ -116,7 +117,7 @@ namespace WinCry.Models
                         taskViewModel.ShortMessage = DialogConsts.TimerTweakInstalling;
                         taskViewModel.CreateMessage($"{DialogConsts.TimerTweakInstalling} ");
 
-                        taskViewModel.CreateMessage(RunAsProcess.CMD(@"C:\Windows\SetTimerResolutionService -install", true), false, false);
+                        taskViewModel.CreateMessage(RunAsProcess.CMD($@"{Path.GetPathRoot(Environment.SystemDirectory)}Windows\SetTimerResolutionService -install", true), false, false);
 
                         taskViewModel.Progress += 17;
 
@@ -135,12 +136,12 @@ namespace WinCry.Models
                         taskViewModel.ShortMessage = DialogConsts.TimerTweakUninstalling;
                         taskViewModel.CreateMessage($"{DialogConsts.TimerTweakUninstalling} ");
 
-                        taskViewModel.CreateMessage(RunAsProcess.CMD(@"C:\Windows\SetTimerResolutionService -uninstall", true), false, false);
+                        taskViewModel.CreateMessage(RunAsProcess.CMD($@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\SetTimerResolutionService -uninstall", true), false, false);
 
                         if (File.Exists(_filePath))
                         {
                             taskViewModel.CreateMessage(RunAsProcess.CMD($"taskkill /im SetTimerResolutionService.exe /f", true));
-                            taskViewModel.CreateMessage(RunAsProcess.CMD(@"del /s C:\Windows\SetTimerResolutionService.exe", true));
+                            taskViewModel.CreateMessage(RunAsProcess.CMD($@"del /s {Path.GetPathRoot(Environment.SystemDirectory)}\Windows\SetTimerResolutionService.exe", true));
                         }
 
                         taskViewModel.Progress += 34;
@@ -154,7 +155,7 @@ namespace WinCry.Models
 
                 taskViewModel.CreateSuccessMessage(DialogConsts.ApplyingDoneMessage);
             });
-        } // Change VS
+        }
 
         /// <summary>
         /// Applies configured ultimate performance power scheme
@@ -378,7 +379,7 @@ namespace WinCry.Models
                         }
                         else
                         {
-                            _registryKey.SetValue("PagingFiles", $@"c:\pagefile.sys {_value} {_value}");
+                            _registryKey.SetValue("PagingFiles", $@"{Path.GetPathRoot(Environment.SystemDirectory)}\pagefile.sys {_value} {_value}");
                         }
                     }
 
@@ -461,7 +462,7 @@ namespace WinCry.Models
         /// <returns></returns>
         public static Task RemoveShortcutIcon(TaskViewModel taskViewModel, bool install)
         {
-            string _filePath = @"C:\Windows\blank.ico";
+            string _filePath = $@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\blank.ico";
             return new Task(() =>
             {
                 taskViewModel.Name = DialogConsts.RemoveShortcutIconTweak;
@@ -477,7 +478,7 @@ namespace WinCry.Models
 
                         if (!File.Exists(_filePath))
                         {
-                            Helpers.ExtractEmbedFile(Properties.Resources.BlankIco, "blank.ico", @"C:\Windows");
+                            Helpers.ExtractEmbedFile(Properties.Resources.BlankIco, "blank.ico", $@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows");
                             taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                         }
                         else
@@ -553,9 +554,8 @@ namespace WinCry.Models
         /// </summary>
         /// <param name="taskViewModel">TaskViewModel for result catching</param>
         /// <returns></returns>
-        public static Task ActivateWindows(TaskViewModel taskViewModel)
+        public static Task ActivateWindows(TaskViewModel taskViewModel, byte option)
         {
-            string _filePath = Path.GetTempPath() + "HWID.bat";
             return new Task(() =>
             {
                 try
@@ -563,20 +563,30 @@ namespace WinCry.Models
                     taskViewModel.Name = DialogConsts.ActivateWindows;
                     taskViewModel.CreateMessage(DialogConsts.ApplyingStarted, false);
 
+                    string zipPath = Path.Combine(Path.GetPathRoot(Environment.SystemDirectory), "Activator");
+
                     taskViewModel.ShortMessage = DialogConsts.ExtractingScripts;
                     taskViewModel.CreateMessage($"{DialogConsts.ExtractingScripts} ");
-                    Helpers.ExtractEmbedFile(Properties.Resources.HWID, "HWID.bat");
-                    Helpers.ExtractEmbedFile(Properties.Resources.KMS38, "KMS38.bat");
+                    Directory.CreateDirectory(zipPath);
+                    Helpers.UnzipFromByteArray(Properties.Resources.Activation, zipPath);
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
-
                     taskViewModel.Progress += 50;
 
                     taskViewModel.ShortMessage = DialogConsts.ApplyingScripts;
                     taskViewModel.CreateMessage($"{DialogConsts.ApplyingScripts} ");
-                    RunAsProcess.CMD(Path.GetTempPath() + "HWID.bat", true, true);
-                    RunAsProcess.CMD(Path.GetTempPath() + "KMS38.bat", true, true);
+                    if (option == 0)
+                    {
+                        RunAsProcess.CMD($@"{zipPath}\KMS38.cmd /a /k", true);
+                    }
+                    else if (option == 1)
+                    {
+                        RunAsProcess.CMD($@"{zipPath}\HWID.cmd /a /k", true);
+                    }
+                    if (Directory.Exists(zipPath))
+                    {
+                        Directory.Delete(zipPath, true);
+                    }
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
-
                     taskViewModel.Progress += 50;
                 }
                 catch (Exception ex)
@@ -676,7 +686,8 @@ namespace WinCry.Models
                     taskViewModel.ShortMessage = DialogConsts.InstallMSVCInstalling;
                     taskViewModel.CreateMessage($"{DialogConsts.InstallMSVCInstalling} ");
 
-                    RunAsProcess.CMD($@"{_zipExtractionDirectory}install_all.bat", true, true);
+                    //RunAsProcess.CMD($@"{_zipExtractionDirectory}install_all.bat", true, true);
+                    Helpers.RunByCMD($@"{_zipExtractionDirectory}install_all.bat");
 
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                     taskViewModel.Progress += 50;
@@ -699,7 +710,7 @@ namespace WinCry.Models
         /// <returns></returns>
         public static Task InstallAutoTempCleaner(TaskViewModel taskViewModel, bool install)
         {
-            string _filePath = @"C:\Windows\TempCleaner.exe";
+            string _filePath = $@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\TempCleaner.exe";
             return new Task(() =>
             {
                 try
@@ -715,7 +726,7 @@ namespace WinCry.Models
 
                         if (!File.Exists(_filePath))
                         {
-                            Helpers.ExtractEmbedFile(Properties.Resources.TempCleaner, "TempCleaner.exe", @"C:\Windows");
+                            Helpers.ExtractEmbedFile(Properties.Resources.TempCleaner, "TempCleaner.exe", $@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows");
                             taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                         }
                         else
@@ -731,7 +742,7 @@ namespace WinCry.Models
 
                         using (RegistryKey _registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run\", true))
                         {
-                            _registryKey.SetValue("Auto Temp Cleaner", "\"C:\\Windows\\TempCleaner.exe\"", RegistryValueKind.String);
+                            _registryKey.SetValue("Auto Temp Cleaner", $"\"{Path.GetPathRoot(Environment.SystemDirectory)}\\Windows\\TempCleaner.exe\"", RegistryValueKind.String);
                         }
 
                         taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
@@ -841,10 +852,10 @@ namespace WinCry.Models
                         taskViewModel.ShortMessage = DialogConsts.TempVariableTweakApplying;
                         taskViewModel.CreateMessage($"{DialogConsts.TempVariableTweakApplying} ");
 
-                        Helpers.RunByCMD(@"setx temp ""C:\Windows\Temp""");
-                        Helpers.RunByCMD(@"setx /m temp ""C:\Windows\Temp""");
-                        Helpers.RunByCMD(@"setx tmp ""C:\Windows\Temp""");
-                        Helpers.RunByCMD(@"setx /m tmp ""C:\Windows\Temp""");
+                        Helpers.RunByCMD($@"setx temp ""{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\Temp""");
+                        Helpers.RunByCMD($@"setx /m temp ""{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\Temp""");
+                        Helpers.RunByCMD($@"setx tmp ""{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\Temp""");
+                        Helpers.RunByCMD($@"setx /m tmp ""{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\Temp""");
 
                         taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                         taskViewModel.Progress = 100;
@@ -857,9 +868,9 @@ namespace WinCry.Models
                         taskViewModel.CreateMessage($"{DialogConsts.TempVariableTweakApplying} ");
 
                         Helpers.RunByCMD($@"setx temp ""{_localAppdataPath}\Temp""");
-                        Helpers.RunByCMD($@"setx /m temp C:\Windows\Temp");
+                        Helpers.RunByCMD($@"setx /m temp {Path.GetPathRoot(Environment.SystemDirectory)}\Windows\Temp");
                         Helpers.RunByCMD($@"setx tmp ""{_localAppdataPath}\Temp""");
-                        Helpers.RunByCMD($@"setx /m tmp C:\Windows\Temp");
+                        Helpers.RunByCMD($@"setx /m tmp {Path.GetPathRoot(Environment.SystemDirectory)}\Windows\Temp");
 
                         taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                         taskViewModel.Progress = 100;
@@ -1121,11 +1132,11 @@ namespace WinCry.Models
                         _script = @"Disable-WindowsOptionalFeature -Online -FeatureName ""DirectPlay""";
                     }
 
-                    // Creating registry keys
                     taskViewModel.ShortMessage = DialogConsts.ApplyingScripts;
                     taskViewModel.CreateMessage($"{DialogConsts.ApplyingScripts} ");
 
-                    RunAsProcess.CMD($@"powershell {_script}", true);
+                    //RunAsProcess.CMD($@"powershell {_script}", true);
+                    RunAsProcess.ExecutePowershellCommand(_script, true);
 
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                 }
@@ -1155,34 +1166,11 @@ namespace WinCry.Models
 
                     taskViewModel.ShortMessage = DialogConsts.UninstallMSStoreRemovingPackages;
                     taskViewModel.CreateMessage($"{DialogConsts.UninstallMSStoreRemovingPackages} ");
-
-                    ProcessStartInfo _info = new ProcessStartInfo
-                    {
-                        FileName = "powershell.exe",
-                        UseShellExecute = false,
-                        Arguments = "Get-AppxPackage *windowsstore*|Remove-AppxPackage",
-                        CreateNoWindow = true
-                    };
-                    Process.Start(_info).WaitForExit();
-
+                    RunAsProcess.ExecutePowershellCommand("Get-AppxPackage *windowsstore*|Remove-AppxPackage", true);
+                    RunAsProcess.ExecutePowershellCommand("Get-AppxPackage *DesktopAppInstaller*|Remove-AppxPackage", true);
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
 
-                    taskViewModel.Progress += 50;
-
-                    taskViewModel.ShortMessage = DialogConsts.UninstallMSStoreRemovingFiles;
-                    taskViewModel.CreateMessage($"{DialogConsts.UninstallMSStoreRemovingFiles} ");
-
-                    foreach (string _folder in Directory.GetDirectories(@"C:\Program Files\WindowsApps"))
-                    {
-                        if (_folder.StartsWith(@"C:\Program Files\WindowsApps\Microsoft.WindowsStore"))
-                        {
-                            RunAsProcess.CMD($@"RMDIR /S /Q ""{_folder}""", true);
-                        }
-                    }
-
-                    taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
-
-                    taskViewModel.Progress += 50;
+                    taskViewModel.Progress += 100;
                 }
                 catch (Exception ex)
                 {
@@ -1194,7 +1182,7 @@ namespace WinCry.Models
             });
         }
 
-        public static async Task InstallMSStorePrereqs(IDialogService dialogService)
+        public static void DownloadMSStore(IDialogService dialogService)
         {
             bool _willDownload = true;
             bool _isCorrupted = false;
@@ -1214,7 +1202,7 @@ namespace WinCry.Models
                         foreach (byte _byte in _hash)
                             _builder.Append(_byte.ToString("x2").ToLower());
 
-                        if (_builder.ToString() != StringConsts.MD5MSStore && _builder.ToString() != StringConsts.MD5MSStoreLSTB)
+                        if (_builder.ToString() != StringConsts.MD5MSStore)
                         {
                             _isCorrupted = true;
                             _willDownload = true;
@@ -1235,41 +1223,38 @@ namespace WinCry.Models
 
             if (_willDownload)
             {
-                string _URL = StringConsts.URLMSStore;
-                if (Helpers.GetWinBuild() == 14393)
-                    _URL = StringConsts.URLMSStoreLTSB;
-
-                if (!DialogHelper.ShowDownloadDialog(dialogService, _URL, "WindowsStore.zip"))
+                if (!DialogHelper.ShowDownloadDialog(dialogService, StringConsts.URLMSStore, "WindowsStore.zip"))
                 {
-                    if (!File.Exists(StringConsts.WindowsStoreZipFilePath))
+                    if (File.Exists(StringConsts.WindowsStoreZipFilePath))
                         File.Delete(StringConsts.WindowsStoreZipFilePath);
-
-                    return;
                 }
             }
+        }
 
-            await ServicesModel.UpdateMSStoreDependingServicesAsync();
+        public static async Task CheckMSStoreServices(IDialogService dialogService)
+        {
+            await ServicesModel.UpdateDependingServicesAsync(Properties.Resources.MSStoreDependingServices);
 
-            ObservableCollection<Service> _servicesToRestore = ServicesModel.MSStoreDependingServicesToRestore();
+            ObservableCollection<Service> servicesToRestore = ServicesModel.GetServicesFromXMLAndCheck(Properties.Resources.MSStoreDependingServices);
 
-            if (_servicesToRestore.Count > 0)
+            if (servicesToRestore.Count > 0)
             {
-                string _message = DialogConsts.BaseDialogInstallMSStoreDependingServicesMessage + Environment.NewLine;
+                string message = DialogConsts.BaseDialogInstallMSStoreDependingServicesMessage + Environment.NewLine;
 
-                foreach (Service _service in _servicesToRestore)
+                foreach (Service service in servicesToRestore)
                 {
-                    _message += $"- {_service.ShortName}\n";
+                    message += $"- {service.ShortName}\n";
                 }
 
-                if (DialogHelper.ShowDialog(dialogService, DialogConsts.BaseDialogInstallMSStoreCaption, _message))
+                if (DialogHelper.ShowDialog(dialogService, DialogConsts.BaseDialogInstallMSStoreCaption, message))
                 {
                     ServicesModel.ExtractRestorationFiles();
-                    foreach (Service _service in _servicesToRestore)
+                    foreach (Service service in servicesToRestore)
                     {
-                        ServicesModel.Restore(_service);
+                        ServicesModel.Restore(service);
                     }
 
-                    if (DialogHelper.ShowDialog(dialogService, DialogConsts.BaseDialogInstallMSStoreCaption, DialogConsts.BaseDialogInstallMSStoreRebootMessage))
+                    if (DialogHelper.ShowDialog(dialogService, DialogConsts.BaseDialogInstallMSStoreCaption, DialogConsts.BaseDialogServicesRestoreRebootMessage))
                     {
                         Helpers.RunByCMD("shutdown /r /t 0");
                         return;
@@ -1286,7 +1271,54 @@ namespace WinCry.Models
             }
         }
 
-        public static Task InstallMSStore(TaskViewModel taskViewModel, IDialogService dialogService)
+        public static async Task CheckActivationServices(IDialogService dialogService, byte option)
+        {
+            byte[] resource = Properties.Resources.KMS38DependingServices;
+            
+            if (option == 1)
+            {
+                resource = Properties.Resources.HWIDDependingServices;
+            }
+
+            await ServicesModel.UpdateDependingServicesAsync(resource);
+
+            ObservableCollection<Service> servicesToRestore = ServicesModel.GetServicesFromXMLAndCheck(resource);
+
+            if (servicesToRestore.Count > 0)
+            {
+                string message = DialogConsts.BaseDialogInstallActivateWindowsDependingServicesMessage + Environment.NewLine;
+
+                foreach (Service service in servicesToRestore)
+                {
+                    message += $"- {service.ShortName}\n";
+                }
+
+                if (DialogHelper.ShowDialog(dialogService, DialogConsts.BaseDialogActivateWindowsCaption, message))
+                {
+                    ServicesModel.ExtractRestorationFiles();
+                    foreach (Service service in servicesToRestore)
+                    {
+                        ServicesModel.Restore(service);
+                    }
+
+                    if (DialogHelper.ShowDialog(dialogService, DialogConsts.BaseDialogActivateWindowsCaption, DialogConsts.BaseDialogServicesRestoreRebootMessage))
+                    {
+                        Helpers.RunByCMD("shutdown /r /t 0");
+                        return;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+
+        public static Task InstallMSStore(TaskViewModel taskViewModel, byte option)
         {
             return new Task(() =>
             {
@@ -1305,19 +1337,66 @@ namespace WinCry.Models
 
                     taskViewModel.ShortMessage = DialogConsts.InstallMSVCExtracting;
                     taskViewModel.CreateMessage($"{DialogConsts.InstallMSVCExtracting} ");
-
                     Helpers.UnzipFromFile(_zipPath, _zipExtractionDirectory);
-
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
-                    taskViewModel.Progress += 50;
+                    taskViewModel.Progress += 25;
 
-                    taskViewModel.ShortMessage = DialogConsts.InstallMSStoreInstalling;
-                    taskViewModel.CreateMessage($"{DialogConsts.InstallMSStoreInstalling} ");
-
-                    RunAsProcess.CMD($@"{_zipExtractionDirectory}install.bat", true, true);
-
+                    taskViewModel.ShortMessage = DialogConsts.InstallMSStoreInstallingReqs;
+                    taskViewModel.CreateMessage($"{DialogConsts.InstallMSStoreInstallingReqs} ");
+                    RunAsProcess.CMD($@"{_zipExtractionDirectory}Preinstall.cmd", true, true, "WinCry");
                     taskViewModel.CreateMessage(DialogConsts.Done, false, false);
-                    taskViewModel.Progress += 50;
+                    taskViewModel.Progress += 25;
+
+                    switch (option)
+                    {
+                        case 0:
+                            {
+                                taskViewModel.ShortMessage = DialogConsts.InstallMSStoreInstalling;
+                                taskViewModel.CreateMessage($"{DialogConsts.InstallMSStoreInstalling} ");
+                                RunAsProcess.CMD($@"{_zipExtractionDirectory}Store.cmd", true, true, "WinCry");
+                                taskViewModel.CreateMessage(DialogConsts.Done, false, false);
+                                taskViewModel.Progress += 25;
+
+                                taskViewModel.ShortMessage = DialogConsts.InstallMSStoreInstallingScripts;
+                                taskViewModel.CreateMessage($"{DialogConsts.InstallMSStoreInstallingScripts} ");
+                                RunAsProcess.ExecutePowershellCommand(@"Add-AppxPackage -register ((Get-ChildItem ($Env:Programfiles + '\WindowsApps') -filter '*WindowsStore*_x*' -Directory | % { $_.fullname } | Select-Object -First 1) + '\Appxmanifest.xml') –DisableDevelopmentMode", true);
+                                taskViewModel.CreateMessage(DialogConsts.Done, false, false);
+                                taskViewModel.Progress += 25;
+
+                                break;
+                            }
+                        case 1:
+                            {
+                                taskViewModel.ShortMessage = DialogConsts.InstallMSStoreInstallingInstaller;
+                                taskViewModel.CreateMessage($"{DialogConsts.InstallMSStoreInstallingInstaller} ");
+                                RunAsProcess.CMD($@"{_zipExtractionDirectory}DesktopAppInstaller.cmd", true, true, "WinCry");
+                                taskViewModel.CreateMessage(DialogConsts.Done, false, false);
+                                taskViewModel.Progress += 12;
+
+                                taskViewModel.ShortMessage = DialogConsts.InstallMSStoreInstallingScripts;
+                                taskViewModel.CreateMessage($"{DialogConsts.InstallMSStoreInstallingScripts} ");
+                                RunAsProcess.ExecutePowershellCommand(@"Add-AppxPackage -register ((Get-ChildItem ($Env:Programfiles + '\WindowsApps') -filter '*DesktopAppInstaller*_x*' -Directory | % { $_.fullname } | Select-Object -First 1) + '\Appxmanifest.xml') –DisableDevelopmentMode", true);
+                                RunAsProcess.ExecutePowershellCommand(@"Add-AppxPackage -register ((Get-ChildItem ($Env:Programfiles + '\WindowsApps') -filter '*WindowsStore*_x*' -Directory | % { $_.fullname } | Select-Object -First 1) + '\Appxmanifest.xml') –DisableDevelopmentMode", true);
+                                taskViewModel.CreateMessage(DialogConsts.Done, false, false);
+                                taskViewModel.Progress += 12;
+
+                                taskViewModel.ShortMessage = DialogConsts.InstallMSStoreInstallingAssociations;
+                                taskViewModel.CreateMessage($"{DialogConsts.InstallMSStoreInstallingAssociations} ");
+                                SetFTA.SetFileTypeAssociation(".appxbundle", "AppX7h8j4eje738p34npjy1ha11z3vx14304");
+                                taskViewModel.CreateMessage(DialogConsts.Done, false, false);
+                                taskViewModel.Progress += 13;
+
+                                taskViewModel.ShortMessage = DialogConsts.InstallMSStoreInstallingStarting;
+                                taskViewModel.CreateMessage($"{DialogConsts.InstallMSStoreInstallingStarting} ");
+                                Process.Start(StringConsts.WindowsStoreFilePath);
+                                taskViewModel.CreateMessage(DialogConsts.Done, false, false);
+                                taskViewModel.Progress += 13;
+
+                                break;
+                            }
+                        default:
+                            break;
+                    }
                 }
                 catch (Exception ex)
                 {

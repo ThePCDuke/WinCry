@@ -63,6 +63,16 @@ namespace WinCry.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Activation {
+            get {
+                object obj = ResourceManager.GetObject("Activation", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] BlankIco {
             get {
                 object obj = ResourceManager.GetObject("BlankIco", resourceCulture);
@@ -83,9 +93,9 @@ namespace WinCry.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] HWID {
+        internal static byte[] HWIDDependingServices {
             get {
-                object obj = ResourceManager.GetObject("HWID", resourceCulture);
+                object obj = ResourceManager.GetObject("HWIDDependingServices", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -103,9 +113,9 @@ namespace WinCry.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] KMS38 {
+        internal static byte[] KMS38DependingServices {
             get {
-                object obj = ResourceManager.GetObject("KMS38", resourceCulture);
+                object obj = ResourceManager.GetObject("KMS38DependingServices", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -247,6 +257,16 @@ namespace WinCry.Properties {
             get {
                 object obj = ResourceManager.GetObject("WinCry", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Winmgmt {
+            get {
+                object obj = ResourceManager.GetObject("Winmgmt", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

@@ -135,9 +135,12 @@ namespace WinCry.Services
 
                        _dialogService.ShowDialog(_vm);
 
-                       if (DialogHelper.ShowDialog(_dialogService, DialogConsts.BaseDialogRebootCaption, DialogConsts.BaseDialogRebootMessage))
+                       if (Option != ServicesOption.Backup)
                        {
-                           Helpers.RunByCMD("shutdown /r /t 0");
+                           if (DialogHelper.ShowDialog(_dialogService, DialogConsts.BaseDialogRebootCaption, DialogConsts.BaseDialogRebootMessage))
+                           {
+                               Helpers.RunByCMD("shutdown /r /t 0");
+                           }
                        }
                    }));
             }
