@@ -629,7 +629,7 @@ namespace WinCry.ViewModels
                            }
                        }
 
-                       RunAsProcess.CMD("net stop \"wuauserv\"", true, false, "lsass");
+                       Helpers.RunByCMD("net stop \"wuauserv\"", false);
                    }));
             }
         }

@@ -28,7 +28,7 @@ namespace WinCry.Models
             File.WriteAllBytes(_path, resource);
         }
 
-        public static void RunByCMD(string command)
+        public static void RunByCMD(string command, bool waitForExit = true)
         {
             Process process = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo
@@ -39,7 +39,9 @@ namespace WinCry.Models
             };
             process.StartInfo = startInfo;
             process.Start();
-            process.WaitForExit();
+
+            if (waitForExit)
+                process.WaitForExit();
         }
 
         /// <summary>
