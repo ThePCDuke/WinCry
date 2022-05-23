@@ -35,6 +35,12 @@ namespace WinCry.Memory
         public const string ServiceIsNotSuccessfulyStopped = "Не удалось остановить службу";
         public const string ServiceIsNotSuccessfulyRemoved = "Не удалось удалить службу";
 
+        public const string ErrorFreeMemoryZero = "Значение свободной памяти должно быть больше 0 мегабайт."; //FreeMemory cannot be equal to or less than 0
+        public const string ErrorFreeMemorySystem = "Значение свободной памяти не может равняться или превышать объем оперативной памяти."; //FreeMemory cannot be equal to or greater than
+        public const string ErrorStandByMemoryZero = "Значение размера занятого кэша должно быть больше 0 мегабайт."; //StandByMemory cannot be equal to or less than 0
+        public const string ErrorStandByMemorySystem = "Значение размера занятого кэша не может равняться или превышать объем оперативной памяти."; //StandByMemory cannot be equal to or greater than
+        public const string ErrorServiceThreadSleepMillisecondsZero = "Частота проверки условий должна быть больше 1 секунды."; //ServiceThreadSleepMilliseconds cannot be equal to or less than 0
+
         #endregion
     }
 }

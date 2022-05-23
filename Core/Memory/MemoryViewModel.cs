@@ -142,6 +142,16 @@ namespace WinCry.Memory
                            if (!DialogHelper.ShowDialog(_dialogService, DialogConsts.BaseDialogInstallMemoryTweakCaption, DialogConsts.BaseDialogInstallMemoryTweakMessage))
                                return;
 
+                           try
+                           {
+                               MemoryModel.ValidateRegulationsData(Data);
+                           }
+                           catch (System.Exception ex)
+                           {
+                               DialogHelper.ShowMessageDialog(_dialogService, DialogConsts.Error, $"{ex.Message}");
+                               return;
+                           }
+
                            _vm.AddTask(MemoryModel.InstallService(_taskVM, CachedRAMGreaterThan, FreeRAMLessThan, ServiceThreadSleepSeconds * 1000), _taskVM, UpdateStatus);
                        }
                        else
@@ -178,6 +188,16 @@ namespace WinCry.Memory
 
                        if (!IsServiceRunning)
                        {
+                           try
+                           {
+                               MemoryModel.ValidateRegulationsData(Data);
+                           }
+                           catch (System.Exception ex)
+                           {
+                               DialogHelper.ShowMessageDialog(_dialogService, DialogConsts.Error, $"{ex.Message}");
+                               return;
+                           }
+
                            _vm.AddTask(MemoryModel.StartService(_taskVM, CachedRAMGreaterThan, FreeRAMLessThan, ServiceThreadSleepSeconds * 1000), _taskVM, UpdateStatus);
                        }
                        else

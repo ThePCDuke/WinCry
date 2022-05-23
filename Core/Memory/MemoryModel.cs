@@ -409,5 +409,31 @@ namespace WinCry.Memory
             var service = services.FirstOrDefault(s => s.ServiceName == MemoryStrings.ServiceName);
             return service;
         }
+
+        public static void ValidateRegulationsData(MemoryData data)
+        {
+            MemoryCounter memoryCounter = new MemoryCounter();
+
+            if (data.FreeRAMLessThan <= 0)
+            {
+                throw new Exception(MemoryStrings.ErrorFreeMemoryZero);
+            }
+            if (data.CachedRAMGreaterThan <= 0)
+            {
+                throw new Exception(MemoryStrings.ErrorStandByMemoryZero);
+            }
+            if (data.ServiceThreadSleepSeconds <= 0)
+            {
+                throw new Exception(MemoryStrings.ErrorServiceThreadSleepMillisecondsZero);
+            }
+            if (data.FreeRAMLessThan >= memoryCounter.TotalSystemMemory)
+            {
+                throw new Exception(MemoryStrings.ErrorFreeMemorySystem);
+            }
+            if (data.CachedRAMGreaterThan >= memoryCounter.TotalSystemMemory)
+            {
+                throw new Exception(MemoryStrings.ErrorStandByMemorySystem);
+            }
+        }
     }
 }
