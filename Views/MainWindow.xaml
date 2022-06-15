@@ -14,171 +14,200 @@
         Height="403"
         Width="643"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen" 
+        WindowStartupLocation="CenterScreen"
         FontFamily="/WinCry;component/Resources/Fonts/#Segoe UI Variable Static Display"
         Loaded="Window_Loaded"
         BorderBrush="#FF212121"
         BorderThickness="1">
 
     <Window.Resources>
-        <tweaks:IntToTweaksOptionConverter x:Key="IntToTweaksOptionConverter"/>
-        <services:IntToServicesOptionConverter x:Key="IntToServicesOptionConverter"/>
+        <tweaks:IntToTweaksOptionConverter x:Key="IntToTweaksOptionConverter" />
+        <services:IntToServicesOptionConverter x:Key="IntToServicesOptionConverter" />
     </Window.Resources>
 
     <Window.Background>
-        <SolidColorBrush Color="#FF1B1B1B" Opacity=".4"/>
+        <SolidColorBrush Color="#FF1B1B1B"
+                         Opacity=".4" />
     </Window.Background>
 
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded" >
-            <i:InvokeCommandAction Command="{Binding WindowLoaded}"/>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding WindowLoaded}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
     <Grid>
         <Border Margin="0,0,0,368">
             <Border.Effect>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="5"/>
+                <DropShadowEffect ShadowDepth="0"
+                                  BlurRadius="5" />
             </Border.Effect>
 
             <Grid models:DragProperty.IsEnabled="True">
                 <Grid.Background>
-                    <SolidColorBrush Color="#FF2C2C2C" Opacity=".1"/>
+                    <SolidColorBrush Color="#FF2C2C2C"
+                                     Opacity=".1" />
                 </Grid.Background>
 
-                <TextBlock Text="WinCry" Padding="0" Margin="15,7,0,7" FontSize="14" Foreground="White" 
-                           VerticalAlignment="Center" HorizontalAlignment="Left" Width="auto"/>
+                <TextBlock Text="WinCry"
+                           Padding="0"
+                           Margin="15,7,0,7"
+                           FontSize="14"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Width="auto" />
 
-                <StackPanel Cursor="Hand" Orientation="Horizontal" HorizontalAlignment="Right" Width="140">
-                    <Viewbox Width="28" Height="28" Margin="0, 2">
-                        <Image Source="/WinCry;component/Resources/Icons/icon_youtube.png"/>
+                <StackPanel Cursor="Hand"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Width="140">
+                    <Viewbox Width="28"
+                             Height="28"
+                             Margin="0, 2">
+                        <Image Source="/WinCry;component/Resources/Icons/icon_youtube.png" />
                     </Viewbox>
 
-                    <TextBlock Foreground="White" FontSize="14" Margin="2,0" Text="The Peace Duke" 
-                               VerticalAlignment="Center" 
-                               FontFamily="/WinCry;component/Resources/Fonts/#Segoe UI Variable Static Display Semilight"/>
+                    <TextBlock Foreground="White"
+                               FontSize="14"
+                               Margin="2,0"
+                               Text="The Peace Duke"
+                               VerticalAlignment="Center"
+                               FontFamily="/WinCry;component/Resources/Fonts/#Segoe UI Variable Static Display Semilight" />
 
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseDown" >
+                        <i:EventTrigger EventName="MouseDown">
                             <i:InvokeCommandAction Command="{Binding GotoChannel}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </StackPanel>
 
-                <Rectangle Fill="White" Margin="0,32,0,0" Height="0.1" VerticalAlignment="Top"/>
+                <Rectangle Fill="White"
+                           Margin="0,32,0,0"
+                           Height="0.1"
+                           VerticalAlignment="Top" />
             </Grid>
         </Border>
 
-        <Grid x:Name="MainGrid" Margin="0,33,0,0">
-            <TabControl BorderThickness="0.1,0,0,0" 
+        <Grid x:Name="MainGrid"
+              Margin="0,33,0,0">
+            <TabControl BorderThickness="0.1,0,0,0"
                         BorderBrush="White"
-                        SelectedIndex="{Binding SelectedTab}" 
+                        SelectedIndex="{Binding SelectedTab}"
                         TabStripPlacement="Left">
 
-                <TabItem Foreground="White" FontSize="16">
+                <TabItem Foreground="White"
+                         FontSize="16">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Viewbox Width="20" Height="20">
-                                <Image Source="/WinCry;component/Resources/Icons/icon_apply.png"/>
+                            <Viewbox Width="20"
+                                     Height="20">
+                                <Image Source="/WinCry;component/Resources/Icons/icon_apply.png" />
                             </Viewbox>
-                            <TextBlock Margin="10, -2, 0, 0" Text="Применение" />
+                            <TextBlock Margin="10, -2, 0, 0"
+                                       Text="Применение" />
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
-                        <Label Template="{StaticResource ApplicationTabHeader}" 
-                               Content="Пресет настроек" 
-                               Margin="10,10,10,0" 
-                               VerticalAlignment="Top"/>
+                        <Label Template="{StaticResource ApplicationTabHeader}"
+                               Content="Пресет настроек"
+                               Margin="10,10,10,0"
+                               VerticalAlignment="Top" />
 
-                        <ComboBox ItemsSource="{Binding SettingsVM.Presets}" 
-                                  SelectedItem="{Binding SettingsVM.SelectedSettingsPreset}" 
+                        <ComboBox ItemsSource="{Binding SettingsVM.Presets}"
+                                  SelectedItem="{Binding SettingsVM.SelectedSettingsPreset}"
                                   DisplayMemberPath="Name"
-                                  FontSize="14" 
-                                  Margin="10,37,10,0" 
-                                  VerticalAlignment="Top" 
-                                  Height="25"/>
+                                  FontSize="14"
+                                  Margin="10,37,10,0"
+                                  VerticalAlignment="Top"
+                                  Height="25" />
 
-                        <Label Template="{StaticResource ApplicationTabHeader}" 
-                               Content="Основные настройки" 
-                               Margin="10,84,10,0" 
-                               VerticalAlignment="Top"/>
+                        <Label Template="{StaticResource ApplicationTabHeader}"
+                               Content="Основные настройки"
+                               Margin="10,84,10,0"
+                               VerticalAlignment="Top" />
 
-                        <ComboBox SelectedIndex="{Binding SettingsVM.CurrentSettingsPreset.Settings.PagefileOption}" 
-                                  BorderThickness="0" 
-                                  IsEditable="False" 
-                                  FontSize="14" 
-                                  VerticalAlignment="Top" 
-                                  Height="25" 
+                        <ComboBox SelectedIndex="{Binding SettingsVM.CurrentSettingsPreset.Settings.PagefileOption}"
+                                  BorderThickness="0"
+                                  IsEditable="False"
+                                  FontSize="14"
+                                  VerticalAlignment="Top"
+                                  Height="25"
                                   Margin="315,218,71,0">
 
-                            <ComboBoxItem Content="Авто"/>
-                            <ComboBoxItem Content="4 Гб"/>
-                            <ComboBoxItem Content="8 Гб"/>
-                            <ComboBoxItem Content="12 Гб"/>
-                            <ComboBoxItem Content="16 Гб"/>
+                            <ComboBoxItem Content="Авто" />
+                            <ComboBoxItem Content="4 Гб" />
+                            <ComboBoxItem Content="8 Гб" />
+                            <ComboBoxItem Content="12 Гб" />
+                            <ComboBoxItem Content="16 Гб" />
                         </ComboBox>
 
-                        <CheckBox Content="Применить улучшенный таймер ОС" 
-                                  IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.DoTimerTweak}" 
-                                  HorizontalAlignment="Left" 
-                                  VerticalAlignment="Top" 
-                                  Height="21" 
+                        <CheckBox Content="Применить улучшенный таймер ОС"
+                                  IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.DoTimerTweak}"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  Height="21"
                                   Width="auto"
                                   Margin="30,116,0,0">
 
                             <CheckBox.ToolTip>
-                                <TextBlock Text="Модифицирует системный таймер Windows путем увеличения разрешающей способности таймера, что приводит к понижению задержек." 
-                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="Модифицирует системный таймер Windows путем увеличения разрешающей способности таймера, что приводит к понижению задержек."
+                                           TextWrapping="Wrap" />
                             </CheckBox.ToolTip>
                         </CheckBox>
 
-                        <CheckBox Content="Установить производительную схему питания" 
-                                  IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.DoSchemeTweak}" 
-                                  HorizontalAlignment="Left" 
-                                  VerticalAlignment="Top" 
-                                  Height="21" 
-                                  Width="auto" 
+                        <CheckBox Content="Установить производительную схему питания"
+                                  IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.DoSchemeTweak}"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  Height="21"
+                                  Width="auto"
                                   Margin="30,142,0,0">
 
                             <CheckBox.ToolTip>
-                                <TextBlock Text="Отключает все программные функции Windows по сбережению электроэнергии." 
-                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="Отключает все программные функции Windows по сбережению электроэнергии."
+                                           TextWrapping="Wrap" />
                             </CheckBox.ToolTip>
                         </CheckBox>
 
-                        <StackPanel Orientation="Horizontal" 
-                                    Height="21" 
-                                    Width="auto" 
-                                    Margin="30,166,-52,181" 
+                        <StackPanel Orientation="Horizontal"
+                                    Height="21"
+                                    Width="auto"
+                                    Margin="30,166,-52,181"
                                     HorizontalAlignment="Left">
 
-                            <TextBlock Text="Применить настройки панелей " Margin="0,2,5,-2">
+                            <TextBlock Text="Применить настройки панелей "
+                                       Margin="0,2,5,-2">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsSecondaryGPUDetected}" Value="True">
-                                                <Setter Property="Visibility" Value="Visible"/>
+                                            <DataTrigger Binding="{Binding IsSecondaryGPUDetected}"
+                                                         Value="True">
+                                                <Setter Property="Visibility"
+                                                        Value="Visible" />
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding IsSecondaryGPUDetected}" Value="False">
-                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            <DataTrigger Binding="{Binding IsSecondaryGPUDetected}"
+                                                         Value="False">
+                                                <Setter Property="Visibility"
+                                                        Value="Collapsed" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
 
-                            <CheckBox x:Name="DoPrimaryGPUTweakCheckBox" 
-                                      IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.DoPrimaryGPUTweak}" 
-                                      IsEnabled="{Binding IsPrimaryGPUDetected}" 
-                                      HorizontalAlignment="Left" 
-                                      VerticalAlignment="Top" 
-                                      Height="21" 
+                            <CheckBox x:Name="DoPrimaryGPUTweakCheckBox"
+                                      IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.DoPrimaryGPUTweak}"
+                                      IsEnabled="{Binding IsPrimaryGPUDetected}"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      Height="21"
                                       Width="auto"
                                       Margin="0,2,0,-2">
 
                                 <CheckBox.ToolTip>
-                                    <TextBlock Text="Отключает всё энергосбережение в видеодрайвере." 
-                                           TextWrapping="Wrap"/>
+                                    <TextBlock Text="Отключает всё энергосбережение в видеодрайвере."
+                                               TextWrapping="Wrap" />
                                 </CheckBox.ToolTip>
 
                                 <StackPanel Orientation="Horizontal">
@@ -186,8 +215,10 @@
                                         <TextBlock.Style>
                                             <Style TargetType="{x:Type TextBlock}">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsSecondaryGPUDetected}" Value="True">
-                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <DataTrigger Binding="{Binding IsSecondaryGPUDetected}"
+                                                                 Value="True">
+                                                        <Setter Property="Visibility"
+                                                                Value="Collapsed" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -197,14 +228,20 @@
                                         <TextBlock.Style>
                                             <Style TargetType="{x:Type TextBlock}">
                                                 <Style.Triggers>
-                                                    <Trigger Property="Text" Value="AMD">
-                                                        <Setter Property="Foreground" Value="#FFFF0046"/>
+                                                    <Trigger Property="Text"
+                                                             Value="AMD">
+                                                        <Setter Property="Foreground"
+                                                                Value="#FFFF0046" />
                                                     </Trigger>
-                                                    <Trigger Property="Text" Value="NVIDIA">
-                                                        <Setter Property="Foreground" Value="#FF0B8000"/>
+                                                    <Trigger Property="Text"
+                                                             Value="NVIDIA">
+                                                        <Setter Property="Foreground"
+                                                                Value="#FF0B8000" />
                                                     </Trigger>
-                                                    <Trigger Property="Text" Value="">
-                                                        <Setter Property="Foreground" Value="Transparent"/>
+                                                    <Trigger Property="Text"
+                                                             Value="">
+                                                        <Setter Property="Foreground"
+                                                                Value="Transparent" />
                                                     </Trigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -212,31 +249,37 @@
                                     </TextBlock>
                                 </StackPanel>
                             </CheckBox>
-                            <CheckBox IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.DoSecondaryGPUTweak}" 
-                                      Margin="10, 2, 0, 0" 
-                                      IsEnabled="{Binding IsSecondaryGPUDetected}" 
-                                      HorizontalAlignment="Left" 
-                                      VerticalAlignment="Top" 
-                                      Height="21" 
+                            <CheckBox IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.DoSecondaryGPUTweak}"
+                                      Margin="10, 2, 0, 0"
+                                      IsEnabled="{Binding IsSecondaryGPUDetected}"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      Height="21"
                                       Width="auto">
 
                                 <CheckBox.ToolTip>
-                                    <TextBlock Text="Отключает всё энергосбережение в видеодрайвере." 
-                                           TextWrapping="Wrap"/>
+                                    <TextBlock Text="Отключает всё энергосбережение в видеодрайвере."
+                                               TextWrapping="Wrap" />
                                 </CheckBox.ToolTip>
 
                                 <TextBlock Text="{Binding SecondaryGPUManufacturer}">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
                                             <Style.Triggers>
-                                                <Trigger Property="Text" Value="AMD">
-                                                    <Setter Property="Foreground" Value="#FFFF0046"/>
+                                                <Trigger Property="Text"
+                                                         Value="AMD">
+                                                    <Setter Property="Foreground"
+                                                            Value="#FFFF0046" />
                                                 </Trigger>
-                                                <Trigger Property="Text" Value="NVIDIA">
-                                                    <Setter Property="Foreground" Value="#FF0B8000"/>
+                                                <Trigger Property="Text"
+                                                         Value="NVIDIA">
+                                                    <Setter Property="Foreground"
+                                                            Value="#FF0B8000" />
                                                 </Trigger>
-                                                <Trigger Property="Text" Value="">
-                                                    <Setter Property="Foreground" Value="Transparent"/>
+                                                <Trigger Property="Text"
+                                                         Value="">
+                                                    <Setter Property="Foreground"
+                                                            Value="Transparent" />
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>
@@ -244,11 +287,15 @@
                                 </TextBlock>
 
                                 <CheckBox.Style>
-                                    <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource CheckBoxStyle}">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style TargetType="{x:Type CheckBox}"
+                                           BasedOn="{StaticResource CheckBoxStyle}">
+                                        <Setter Property="Visibility"
+                                                Value="Collapsed" />
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsSecondaryGPUDetected}" Value="True">
-                                                <Setter Property="Visibility" Value="Visible"/>
+                                            <DataTrigger Binding="{Binding IsSecondaryGPUDetected}"
+                                                         Value="True">
+                                                <Setter Property="Visibility"
+                                                        Value="Visible" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -256,110 +303,121 @@
                             </CheckBox>
                         </StackPanel>
 
-                        <CheckBox Content="Установить размер файла подкачки:" 
-                                  IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.DoPagefileTweak}" 
-                                  HorizontalAlignment="Left" 
-                                  VerticalAlignment="Top" 
+                        <CheckBox Content="Установить размер файла подкачки:"
+                                  IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.DoPagefileTweak}"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
                                   Height="21"
-                                  Width="auto" 
+                                  Width="auto"
                                   Margin="30,220,0,0">
 
                             <CheckBox.ToolTip>
-                                <TextBlock Text="Задает статический размер своп-файла." 
-                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="Задает статический размер своп-файла."
+                                           TextWrapping="Wrap" />
                             </CheckBox.ToolTip>
                         </CheckBox>
 
-                        <CheckBox Content="Автоматическая очистка временных файлов" IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.DoTempTweak}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="auto" Margin="30,194,0,0">
+                        <CheckBox Content="Автоматическая очистка временных файлов"
+                                  IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.DoTempTweak}"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  Height="21"
+                                  Width="auto"
+                                  Margin="30,194,0,0">
 
                             <CheckBox.ToolTip>
-                                <TextBlock Text="Задает автоматическую очистку временных файлов при включении Windows с условием, что они старше семи дней." 
-                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="Задает автоматическую очистку временных файлов при включении Windows с условием, что они старше семи дней."
+                                           TextWrapping="Wrap" />
                             </CheckBox.ToolTip>
                         </CheckBox>
 
-                        <Button models:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True" Margin="10,0,10,10" 
-                                VerticalAlignment="Bottom" Height="93">
+                        <Button models:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
+                                Margin="10,0,10,10"
+                                VerticalAlignment="Bottom"
+                                Height="93">
 
                             <Button.ContextMenu>
                                 <ContextMenu FontSize="16">
-                                    <MenuItem Header="Всё" 
-                                              Command="{Binding QuickApply}" 
-                                              CommandParameter="Quick"/>
-                                    <MenuItem Header="Твики" 
-                                              Command="{Binding ApplyTweaks}" 
-                                              CommandParameter="Quick"/>
-                                    <MenuItem Header="Службы" 
-                                              Command="{Binding ApplyServices}" 
-                                              CommandParameter="Quick"/>
-                                    <MenuItem Header="Память" 
-                                              Command="{Binding ApplyMemory}" 
-                                              CommandParameter="Quick"/>
-                                    <MenuItem Header="Основные настройки" 
-                                              Command="{Binding ApplyMain}" 
-                                              CommandParameter="Quick"/>
-                                    <MenuItem Header="Прочие настройки" 
-                                              Command="{Binding ApplyOther}" 
-                                              CommandParameter="Quick"/>
+                                    <MenuItem Header="Всё"
+                                              Command="{Binding QuickApply}"
+                                              CommandParameter="Quick" />
+                                    <MenuItem Header="Твики"
+                                              Command="{Binding ApplyTweaks}"
+                                              CommandParameter="Quick" />
+                                    <MenuItem Header="Службы"
+                                              Command="{Binding ApplyServices}"
+                                              CommandParameter="Quick" />
+                                    <MenuItem Header="Память"
+                                              Command="{Binding ApplyMemory}"
+                                              CommandParameter="Quick" />
+                                    <MenuItem Header="Основные настройки"
+                                              Command="{Binding ApplyMain}"
+                                              CommandParameter="Quick" />
+                                    <MenuItem Header="Прочие настройки"
+                                              Command="{Binding ApplyOther}"
+                                              CommandParameter="Quick" />
                                 </ContextMenu>
                             </Button.ContextMenu>
 
-                            <TextBlock Text="Применить" 
-                                       HorizontalAlignment="Center" 
-                                       VerticalAlignment="Center"/>
+                            <TextBlock Text="Применить"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
                         </Button>
                     </Grid>
                 </TabItem>
-                <TabItem Foreground="White" FontSize="16">
+                <TabItem Foreground="White"
+                         FontSize="16">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Viewbox Width="20" Height="20">
-                                <Image Source="/WinCry;component/Resources/Icons/icon_tweaks.png"/>
+                            <Viewbox Width="20"
+                                     Height="20">
+                                <Image Source="/WinCry;component/Resources/Icons/icon_tweaks.png" />
                             </Viewbox>
-                            <TextBlock Margin="10, -2, 0, 0" Text="Твики"/>
+                            <TextBlock Margin="10, -2, 0, 0"
+                                       Text="Твики" />
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
-                        <Label Template="{StaticResource ApplicationTabHeader}" 
-                               Content="Пресет" 
-                               Margin="10,10,10,0" 
-                               VerticalAlignment="Top"/>
+                        <Label Template="{StaticResource ApplicationTabHeader}"
+                               Content="Пресет"
+                               Margin="10,10,10,0"
+                               VerticalAlignment="Top" />
 
-                        <ComboBox SelectedIndex="{Binding SettingsVM.TweaksVM.Option, Converter={StaticResource IntToTweaksOptionConverter}}" 
-                                  FontSize="12" 
-                                  VerticalAlignment="Top" 
-                                  Margin="188,73,131,0" 
+                        <ComboBox SelectedIndex="{Binding SettingsVM.TweaksVM.Option, Converter={StaticResource IntToTweaksOptionConverter}}"
+                                  FontSize="12"
+                                  VerticalAlignment="Top"
+                                  Margin="188,73,131,0"
                                   Height="25">
 
-                            <ComboBoxItem Content="Не трогать"/>
-                            <ComboBoxItem Content="Установить"/>
-                            <ComboBoxItem Content="Откатить"/>
+                            <ComboBoxItem Content="Не трогать" />
+                            <ComboBoxItem Content="Установить" />
+                            <ComboBoxItem Content="Откатить" />
                         </ComboBox>
 
-                        <Button Content="Применить" 
-                                Command="{Binding SettingsVM.TweaksVM.Apply}" 
-                                FontSize="14" 
-                                Margin="0,73,10,0" 
-                                Height="25" 
-                                VerticalAlignment="Top" 
-                                HorizontalAlignment="Right" 
-                                Width="116"/>
+                        <Button Content="Применить"
+                                Command="{Binding SettingsVM.TweaksVM.Apply}"
+                                FontSize="14"
+                                Margin="0,73,10,0"
+                                Height="25"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Right"
+                                Width="116" />
 
-                        <ComboBox ItemsSource="{Binding SettingsVM.TweaksVM.Presets}" 
+                        <ComboBox ItemsSource="{Binding SettingsVM.TweaksVM.Presets}"
                                   SelectedItem="{Binding SettingsVM.SelectedTweaksPreset}"
                                   DisplayMemberPath="Name"
-                                  FontSize="14" 
-                                  VerticalAlignment="Top" 
-                                  Margin="10,37,10,0" 
-                                  RenderTransformOrigin="0.958,0.4" 
-                                  Height="25"/>
+                                  FontSize="14"
+                                  VerticalAlignment="Top"
+                                  Margin="10,37,10,0"
+                                  RenderTransformOrigin="0.958,0.4"
+                                  Height="25" />
 
-                        <Label Template="{StaticResource ApplicationTabHeader}" 
+                        <Label Template="{StaticResource ApplicationTabHeader}"
                                Content="Твики"
                                Margin="10,75,0,0"
                                VerticalAlignment="Top"
-                               HorizontalAlignment="Left" 
-                               Width="173"/>
+                               HorizontalAlignment="Left"
+                               Width="173" />
 
                         <TreeView Margin="0,105,0,0"
                                   Background="Transparent"
@@ -368,20 +426,21 @@
                                   ItemsSource="{Binding SettingsVM.TweaksVM.TweaksVM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                             <TreeView.ItemTemplate>
-                                <HierarchicalDataTemplate 
-                                    ItemsSource="{Binding Children, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <HierarchicalDataTemplate ItemsSource="{Binding Children, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                                     <StackPanel Orientation="Horizontal">
-                                        <Viewbox Width="12" 
-                                                 Height="12" 
+                                        <Viewbox Width="12"
+                                                 Height="12"
                                                  HorizontalAlignment="Center"
                                                  Margin="0,0,5,0">
 
                                             <Viewbox.Style>
                                                 <Style TargetType="{x:Type Viewbox}">
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Path=Tweak.IsApplied}" Value="{x:Null}">
-                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        <DataTrigger Binding="{Binding Path=Tweak.IsApplied}"
+                                                                     Value="{x:Null}">
+                                                            <Setter Property="Visibility"
+                                                                    Value="Collapsed" />
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
@@ -390,11 +449,15 @@
                                                 <Path.Style>
                                                     <Style TargetType="{x:Type Path}">
                                                         <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding Path=Tweak.IsApplied}" Value="True">
-                                                                <Setter Property="Fill" Value="LightGreen"/>
+                                                            <DataTrigger Binding="{Binding Path=Tweak.IsApplied}"
+                                                                         Value="True">
+                                                                <Setter Property="Fill"
+                                                                        Value="LightGreen" />
                                                             </DataTrigger>
-                                                            <DataTrigger Binding="{Binding Path=Tweak.IsApplied}" Value="False">
-                                                                <Setter Property="Fill" Value="PaleVioletRed"/>
+                                                            <DataTrigger Binding="{Binding Path=Tweak.IsApplied}"
+                                                                         Value="False">
+                                                                <Setter Property="Fill"
+                                                                        Value="PaleVioletRed" />
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>
@@ -402,118 +465,131 @@
                                             </Path>
                                         </Viewbox>
 
-                                        <CheckBox Focusable="False" 
+                                        <CheckBox Focusable="False"
                                                   IsChecked="{Binding IsChecked}"
                                                   FontSize="14"
                                                   VerticalAlignment="Center">
 
                                             <CheckBox.Style>
-                                                <Style TargetType="{x:Type CheckBox}" 
+                                                <Style TargetType="{x:Type CheckBox}"
                                                        BasedOn="{StaticResource CheckBoxStyle}">
 
-                                                    <Setter Property="ToolTipService.ShowDuration" Value="20000"/>
-                                                    <Setter Property="ToolTipService.InitialShowDelay" Value="300"/>
+                                                    <Setter Property="ToolTipService.ShowDuration"
+                                                            Value="20000" />
+                                                    <Setter Property="ToolTipService.InitialShowDelay"
+                                                            Value="300" />
 
                                                     <Setter Property="ToolTip">
                                                         <Setter.Value>
                                                             <StackPanel>
-                                                                <TextBlock Text="{Binding Path=Tweak.Name}" 
-                                                                           FontWeight="Bold" 
-                                                                           TextWrapping="Wrap" 
-                                                                           TextAlignment="Left"/>
+                                                                <TextBlock Text="{Binding Path=Tweak.Name}"
+                                                                           FontWeight="Bold"
+                                                                           TextWrapping="Wrap"
+                                                                           TextAlignment="Left" />
 
-                                                                <Separator/>
+                                                                <Separator />
 
-                                                                <TextBlock Text="{Binding Path=Tweak.Description}" 
-                                                                           TextWrapping="Wrap" 
-                                                                           TextAlignment="Left"/>
+                                                                <TextBlock Text="{Binding Path=Tweak.Description}"
+                                                                           TextWrapping="Wrap"
+                                                                           TextAlignment="Left" />
 
-                                                                <Separator/>
+                                                                <Separator />
 
-                                                                <TextBlock TextWrapping="Wrap" 
+                                                                <TextBlock TextWrapping="Wrap"
                                                                            TextAlignment="Left">
-                                                                    <Run Text="Ключ:"/>
-                                                                    <Run Text="{Binding Path=Tweak.Key}"/>
+                                                                    <Run Text="Ключ:" />
+                                                                    <Run Text="{Binding Path=Tweak.Key}" />
                                                                 </TextBlock>
 
-                                                                <TextBlock TextWrapping="Wrap" TextAlignment="Left">
-                                                                    <Run Text="Путь:"/>
-                                                                    <Run Text="{Binding Path=Tweak.KeyLocation}"/>
+                                                                <TextBlock TextWrapping="Wrap"
+                                                                           TextAlignment="Left">
+                                                                    <Run Text="Путь:" />
+                                                                    <Run Text="{Binding Path=Tweak.KeyLocation}" />
                                                                 </TextBlock>
 
-                                                                <TextBlock TextWrapping="Wrap" TextAlignment="Left">
-                                                                    <Run Text="Текущее значение:"/>
-                                                                    <Run Text="{Binding Path=Tweak.CurrentValue, TargetNullValue='Нет'}"/>
+                                                                <TextBlock TextWrapping="Wrap"
+                                                                           TextAlignment="Left">
+                                                                    <Run Text="Текущее значение:" />
+                                                                    <Run Text="{Binding Path=Tweak.CurrentValue, TargetNullValue='Нет'}" />
                                                                 </TextBlock>
 
-                                                                <TextBlock TextWrapping="Wrap" TextAlignment="Left">
-                                                                    <Run Text="Применяемое значение:"/>
-                                                                    <Run Text="{Binding Path=Tweak.Value, TargetNullValue='Нет'}"/>
+                                                                <TextBlock TextWrapping="Wrap"
+                                                                           TextAlignment="Left">
+                                                                    <Run Text="Применяемое значение:" />
+                                                                    <Run Text="{Binding Path=Tweak.Value, TargetNullValue='Нет'}" />
                                                                 </TextBlock>
 
-                                                                <TextBlock TextWrapping="Wrap" TextAlignment="Left">
-                                                                    <Run Text="Значение по умолчанию:"/>
-                                                                    <Run Text="{Binding Path=Tweak.DefaultValue, TargetNullValue='Нет'}"/>
+                                                                <TextBlock TextWrapping="Wrap"
+                                                                           TextAlignment="Left">
+                                                                    <Run Text="Значение по умолчанию:" />
+                                                                    <Run Text="{Binding Path=Tweak.DefaultValue, TargetNullValue='Нет'}" />
                                                                 </TextBlock>
                                                             </StackPanel>
                                                         </Setter.Value>
                                                     </Setter>
 
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Path=Tweak.Description}" Value="">
+                                                        <DataTrigger Binding="{Binding Path=Tweak.Description}"
+                                                                     Value="">
                                                             <Setter Property="ToolTip">
                                                                 <Setter.Value>
                                                                     <StackPanel>
-                                                                        <TextBlock Text="{Binding Path=Tweak.Name}" 
-                                                                                   FontWeight="Bold" 
-                                                                                   TextWrapping="Wrap" 
-                                                                                   TextAlignment="Left"/>
+                                                                        <TextBlock Text="{Binding Path=Tweak.Name}"
+                                                                                   FontWeight="Bold"
+                                                                                   TextWrapping="Wrap"
+                                                                                   TextAlignment="Left" />
 
-                                                                        <Separator/>
+                                                                        <Separator />
 
-                                                                        <TextBlock TextWrapping="Wrap" TextAlignment="Left">
-                                                                            <Run Text="Ключ:"/>                  
-                                                                            <Run Text="{Binding Path=Tweak.Key}"/>
+                                                                        <TextBlock TextWrapping="Wrap"
+                                                                                   TextAlignment="Left">
+                                                                            <Run Text="Ключ:" />                  
+                                                                            <Run Text="{Binding Path=Tweak.Key}" />
                                                                         </TextBlock>
 
-                                                                        <TextBlock TextWrapping="Wrap" TextAlignment="Left">
-                                                                            <Run Text="Путь:"/>
-                                                                            <Run Text="{Binding Path=Tweak.KeyLocation}"/>
+                                                                        <TextBlock TextWrapping="Wrap"
+                                                                                   TextAlignment="Left">
+                                                                            <Run Text="Путь:" />
+                                                                            <Run Text="{Binding Path=Tweak.KeyLocation}" />
                                                                         </TextBlock>
 
-                                                                        <TextBlock TextWrapping="Wrap" TextAlignment="Left">
-                                                                            <Run Text="Текущее значение:"/>
-                                                                            <Run Text="{Binding Path=Tweak.CurrentValue, TargetNullValue='Нет'}"/>
+                                                                        <TextBlock TextWrapping="Wrap"
+                                                                                   TextAlignment="Left">
+                                                                            <Run Text="Текущее значение:" />
+                                                                            <Run Text="{Binding Path=Tweak.CurrentValue, TargetNullValue='Нет'}" />
                                                                         </TextBlock>
 
-                                                                        <TextBlock TextWrapping="Wrap" TextAlignment="Left">
-                                                                            <Run Text="Применяемое значение:"/>
-                                                                            <Run Text="{Binding Path=Tweak.Value, TargetNullValue='Нет'}"/>
+                                                                        <TextBlock TextWrapping="Wrap"
+                                                                                   TextAlignment="Left">
+                                                                            <Run Text="Применяемое значение:" />
+                                                                            <Run Text="{Binding Path=Tweak.Value, TargetNullValue='Нет'}" />
                                                                         </TextBlock>
 
-                                                                        <TextBlock TextWrapping="Wrap" TextAlignment="Left">
-                                                                            <Run Text="Значение по умолчанию:"/>
-                                                                            <Run Text="{Binding Path=Tweak.DefaultValue, TargetNullValue='Нет'}"/>
+                                                                        <TextBlock TextWrapping="Wrap"
+                                                                                   TextAlignment="Left">
+                                                                            <Run Text="Значение по умолчанию:" />
+                                                                            <Run Text="{Binding Path=Tweak.DefaultValue, TargetNullValue='Нет'}" />
                                                                         </TextBlock>
                                                                     </StackPanel>
                                                                 </Setter.Value>
                                                             </Setter>
                                                         </DataTrigger>
 
-                                                        <DataTrigger Binding="{Binding Path=Tweak}" Value="{x:Null}">
+                                                        <DataTrigger Binding="{Binding Path=Tweak}"
+                                                                     Value="{x:Null}">
                                                             <Setter Property="ToolTip">
                                                                 <Setter.Value>
                                                                     <StackPanel>
-                                                                        <TextBlock Text="{Binding Path=Name}" 
-                                                                                   FontWeight="Bold" 
-                                                                                   TextWrapping="Wrap" 
-                                                                                   TextAlignment="Left"/>
+                                                                        <TextBlock Text="{Binding Path=Name}"
+                                                                                   FontWeight="Bold"
+                                                                                   TextWrapping="Wrap"
+                                                                                   TextAlignment="Left" />
 
-                                                                        <Separator/>
+                                                                        <Separator />
 
-                                                                        <TextBlock Text="{Binding Path=Description}" 
-                                                                                   TextWrapping="Wrap" 
-                                                                                   TextAlignment="Left"/>
+                                                                        <TextBlock Text="{Binding Path=Description}"
+                                                                                   TextWrapping="Wrap"
+                                                                                   TextAlignment="Left" />
                                                                     </StackPanel>
                                                                 </Setter.Value>
                                                             </Setter>
@@ -521,11 +597,14 @@
 
                                                         <MultiDataTrigger>
                                                             <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding Path=Description}" Value="{x:Null}"/>
-                                                                <Condition Binding="{Binding Path=Tweak}" Value="{x:Null}"/>
+                                                                <Condition Binding="{Binding Path=Description}"
+                                                                           Value="{x:Null}" />
+                                                                <Condition Binding="{Binding Path=Tweak}"
+                                                                           Value="{x:Null}" />
                                                             </MultiDataTrigger.Conditions>
                                                             <MultiDataTrigger.Setters>
-                                                                <Setter Property="ToolTip" Value="{x:Null}"/>
+                                                                <Setter Property="ToolTip"
+                                                                        Value="{x:Null}" />
                                                             </MultiDataTrigger.Setters>
                                                         </MultiDataTrigger>
                                                     </Style.Triggers>
@@ -535,15 +614,19 @@
                                             <TextBlock>
                                                 <TextBlock.Style>
                                                     <Style TargetType="{x:Type TextBlock}">
-                                                        <Setter Property="Foreground" Value="#FFC3FAFF"/>
+                                                        <Setter Property="Foreground"
+                                                                Value="#FFC3FAFF" />
                                                         <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding Path=Tweak}" Value="{x:Null}">
-                                                                <Setter Property="Foreground" Value="#FFFFFFCC"/>
+                                                            <DataTrigger Binding="{Binding Path=Tweak}"
+                                                                         Value="{x:Null}">
+                                                                <Setter Property="Foreground"
+                                                                        Value="#FFFFFFCC" />
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>
                                                 </TextBlock.Style>
-                                                <ContentPresenter Content="{Binding Name, Mode=OneTime}" Margin="2,0"/>
+                                                <ContentPresenter Content="{Binding Name, Mode=OneTime}"
+                                                                  Margin="2,0" />
                                             </TextBlock>
                                         </CheckBox>
                                     </StackPanel>
@@ -552,105 +635,173 @@
                         </TreeView>
                     </Grid>
                 </TabItem>
-                <TabItem Foreground="White" FontSize="16">
+                <TabItem Foreground="White"
+                         FontSize="16">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Viewbox Width="20" Height="20">
-                                <Image Source="/WinCry;component/Resources/Icons/icon_services.png"/>
+                            <Viewbox Width="20"
+                                     Height="20">
+                                <Image Source="/WinCry;component/Resources/Icons/icon_services.png" />
                             </Viewbox>
-                            <TextBlock Margin="10, -2, 0, 0" Text="Службы"/>
+                            <TextBlock Margin="10, -2, 0, 0"
+                                       Text="Службы" />
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
-                        <ComboBox SelectedIndex="{Binding SettingsVM.ServicesVM.Option, Converter={StaticResource IntToServicesOptionConverter}}" FontSize="12" VerticalAlignment="Top" Margin="171,5,128,0" RenderTransformOrigin="0.958,0.4" Height="25">
-                            <ComboBoxItem Content="Не трогать"/>
-                            <ComboBoxItem Content="Отключить"/>
-                            <ComboBoxItem Content="Включить"/>
-                            <ComboBoxItem Content="Удалить"/>
-                            <ComboBoxItem Content="Восстановить"/>
-                            <ComboBoxItem Content="Сделать бэкап"/>
+                        <ComboBox SelectedIndex="{Binding SettingsVM.ServicesVM.Option, Converter={StaticResource IntToServicesOptionConverter}}"
+                                  FontSize="12"
+                                  VerticalAlignment="Top"
+                                  Margin="171,5,128,0"
+                                  RenderTransformOrigin="0.958,0.4"
+                                  Height="25">
+                            <ComboBoxItem Content="Не трогать" />
+                            <ComboBoxItem Content="Отключить" />
+                            <ComboBoxItem Content="Включить" />
+                            <ComboBoxItem Content="Удалить" />
+                            <ComboBoxItem Content="Восстановить" />
+                            <ComboBoxItem Content="Сделать бэкап" />
                         </ComboBox>
 
-                        <ComboBox ItemsSource="{Binding SettingsVM.ServicesVM.Presets}" 
+                        <ComboBox ItemsSource="{Binding SettingsVM.ServicesVM.Presets}"
                                   SelectedItem="{Binding SettingsVM.SelectedServicesPreset}"
                                   DisplayMemberPath="Name"
-                                  FontSize="12" 
-                                  VerticalAlignment="Top" 
-                                  Margin="10,5,287,0" 
-                                  Height="25"/>
+                                  FontSize="12"
+                                  VerticalAlignment="Top"
+                                  Margin="10,5,287,0"
+                                  Height="25" />
 
-                        <Button Content="Применить" 
+                        <Button Content="Применить"
                                 Command="{Binding SettingsVM.ServicesVM.Apply}"
                                 FontSize="14"
                                 Margin="330,5,10,0"
                                 Height="25"
-                                VerticalAlignment="Top"/>
+                                VerticalAlignment="Top" />
 
-                        <TextBox x:Name="SearchServiceText" FontSize="14" Text="{Binding SettingsVM.ServicesVM.TextToSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,35,10,0" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
-                        <TextBlock IsHitTestVisible="False" Padding="6, 2, 0, 0" FontSize="14" Text="Поиск по службам" VerticalAlignment="Top" Margin="10,35,10,0" Foreground="LightGray" Height="22" >
+                        <TextBox x:Name="SearchServiceText"
+                                 FontSize="14"
+                                 Text="{Binding SettingsVM.ServicesVM.TextToSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="10,35,10,0"
+                                 Height="22"
+                                 VerticalAlignment="Top"
+                                 VerticalContentAlignment="Center" />
+                        <TextBlock IsHitTestVisible="False"
+                                   Padding="6, 2, 0, 0"
+                                   FontSize="14"
+                                   Text="Поиск по службам"
+                                   VerticalAlignment="Top"
+                                   Margin="10,35,10,0"
+                                   Foreground="LightGray"
+                                   Height="22">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Setter Property="Visibility"
+                                            Value="Collapsed" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=SearchServiceText}" Value="">
-                                            <Setter Property="Visibility" Value="Visible"/>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchServiceText}"
+                                                     Value="">
+                                            <Setter Property="Visibility"
+                                                    Value="Visible" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
 
-                        <DataGrid x:Name="ServicesDataGrid" FontSize="11" BorderThickness="0" SelectionMode="Extended" VerticalGridLinesBrush="#4C000000" HorizontalGridLinesBrush="#4C000000" SelectionUnit="FullRow" ItemsSource="{Binding SettingsVM.ServicesVM.Services}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" BorderBrush="#4C000000" Margin="0,62,0,0">
+                        <DataGrid x:Name="ServicesDataGrid"
+                                  FontSize="11"
+                                  BorderThickness="0"
+                                  SelectionMode="Extended"
+                                  VerticalGridLinesBrush="#4C000000"
+                                  HorizontalGridLinesBrush="#4C000000"
+                                  SelectionUnit="FullRow"
+                                  ItemsSource="{Binding SettingsVM.ServicesVM.Services}"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  CanUserDeleteRows="False"
+                                  BorderBrush="#4C000000"
+                                  Margin="0,62,0,0">
                             <DataGrid.InputBindings>
-                                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding SettingsVM.ServicesVM.InvertSelectionSingle}" CommandParameter="{Binding ElementName=ServicesDataGrid, Path=SelectedItem}" />
-                                <KeyBinding Key="Space" Command="{Binding SettingsVM.ServicesVM.InvertSelectionMultiple}" CommandParameter="{Binding ElementName=ServicesDataGrid, Path=SelectedItems}"/>
+                                <MouseBinding Gesture="LeftDoubleClick"
+                                              Command="{Binding SettingsVM.ServicesVM.InvertSelectionSingle}"
+                                              CommandParameter="{Binding ElementName=ServicesDataGrid, Path=SelectedItem}" />
+                                <KeyBinding Key="Space"
+                                            Command="{Binding SettingsVM.ServicesVM.InvertSelectionMultiple}"
+                                            CommandParameter="{Binding ElementName=ServicesDataGrid, Path=SelectedItems}" />
                             </DataGrid.InputBindings>
                             <DataGrid.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Обновить" Command="{Binding SettingsVM.ServicesVM.Update}"/>
-                                    <Separator/>
-                                    <MenuItem Header="Остановить" Command="{Binding SettingsVM.ServicesVM.Stop}"/>
-                                    <MenuItem Header="Запустить" Command="{Binding SettingsVM.ServicesVM.Start}"/>
-                                    <Separator/>
-                                    <MenuItem Header="Выделить" ItemsSource="{Binding SettingsVM.ServicesVM.SelectionMenuItems}"/>
-                                    <MenuItem Header="Снять выделение" ItemsSource="{Binding SettingsVM.ServicesVM.DeselectionMenuItems}"/>
-                                    <MenuItem Header="Инвертировать выделение" Command="{Binding SettingsVM.ServicesVM.InvertSelectionToAll}"/>
+                                    <MenuItem Header="Обновить"
+                                              Command="{Binding SettingsVM.ServicesVM.Update}" />
+                                    <Separator />
+                                    <MenuItem Header="Остановить"
+                                              Command="{Binding SettingsVM.ServicesVM.Stop}" />
+                                    <MenuItem Header="Запустить"
+                                              Command="{Binding SettingsVM.ServicesVM.Start}" />
+                                    <Separator />
+                                    <MenuItem Header="Выделить"
+                                              ItemsSource="{Binding SettingsVM.ServicesVM.SelectionMenuItems}" />
+                                    <MenuItem Header="Снять выделение"
+                                              ItemsSource="{Binding SettingsVM.ServicesVM.DeselectionMenuItems}" />
+                                    <MenuItem Header="Инвертировать выделение"
+                                              Command="{Binding SettingsVM.ServicesVM.InvertSelectionToAll}" />
                                 </ContextMenu>
                             </DataGrid.ContextMenu>
 
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn SortMemberPath="IsChecked" Width="25" CanUserSort="True" CanUserResize="False" CanUserReorder="False">
+                                <DataGridTemplateColumn SortMemberPath="IsChecked"
+                                                        Width="25"
+                                                        CanUserSort="True"
+                                                        CanUserResize="False"
+                                                        CanUserReorder="False">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <CheckBox IsChecked="{Binding Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn SortMemberPath="Status" MaxWidth="24" CanUserSort="True" CanUserResize="True" CanUserReorder="False">
+                                <DataGridTemplateColumn SortMemberPath="Status"
+                                                        MaxWidth="24"
+                                                        CanUserSort="True"
+                                                        CanUserResize="True"
+                                                        CanUserReorder="False">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Viewbox Width="12" Height="12" HorizontalAlignment="Center">
+                                            <Viewbox Width="12"
+                                                     Height="12"
+                                                     HorizontalAlignment="Center">
                                                 <Path Data="M12 5C15.87 5 19 8.13 19 12C19 15.87 15.87 19 12 19C8.13 19 5 15.87 5 12C5 8.13 8.13 5 12 5M12 2C17.5 2 22 6.5 22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2M12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20C16.42 20 20 16.42 20 12C20 7.58 16.42 4 12 4Z">
                                                     <Path.Style>
                                                         <Style TargetType="{x:Type Path}">
                                                             <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding Path=Status}" Value="Не обнаружена">
-                                                                    <Setter Property="Fill" Value="White" />
+                                                                <DataTrigger Binding="{Binding Path=Status}"
+                                                                             Value="Не обнаружена">
+                                                                    <Setter Property="Fill"
+                                                                            Value="White" />
                                                                 </DataTrigger>
-                                                                <DataTrigger Binding="{Binding Path=Status}" Value="Запущена">
-                                                                    <Setter Property="Fill" Value="LightGreen"/>
+                                                                <DataTrigger Binding="{Binding Path=Status}"
+                                                                             Value="Запущена">
+                                                                    <Setter Property="Fill"
+                                                                            Value="LightGreen" />
                                                                 </DataTrigger>
-                                                                <DataTrigger Binding="{Binding Path=Status}" Value="Остановлена">
-                                                                    <Setter Property="Fill" Value="PaleVioletRed"/>
+                                                                <DataTrigger Binding="{Binding Path=Status}"
+                                                                             Value="Остановлена">
+                                                                    <Setter Property="Fill"
+                                                                            Value="PaleVioletRed" />
                                                                 </DataTrigger>
-                                                                <DataTrigger Binding="{Binding Path=Status}" Value="Пауза">
-                                                                    <Setter Property="Fill" Value="LightGoldenrodYellow"/>
+                                                                <DataTrigger Binding="{Binding Path=Status}"
+                                                                             Value="Пауза">
+                                                                    <Setter Property="Fill"
+                                                                            Value="LightGoldenrodYellow" />
                                                                 </DataTrigger>
-                                                                <DataTrigger Binding="{Binding Path=Status}" Value="Ожидание">
-                                                                    <Setter Property="Fill" Value="LightGoldenrodYellow"/>
+                                                                <DataTrigger Binding="{Binding Path=Status}"
+                                                                             Value="Ожидание">
+                                                                    <Setter Property="Fill"
+                                                                            Value="LightGoldenrodYellow" />
                                                                 </DataTrigger>
-                                                                <DataTrigger Binding="{Binding Path=Status}" Value="Удалена">
-                                                                    <Setter Property="Fill" Value="Gray"/>
+                                                                <DataTrigger Binding="{Binding Path=Status}"
+                                                                             Value="Удалена">
+                                                                    <Setter Property="Fill"
+                                                                            Value="Gray" />
                                                                 </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>
@@ -660,36 +811,60 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="Категория" Binding="{Binding Path=Category}" IsReadOnly="True" Width="auto"/>
-                                <DataGridTextColumn Header="Запуск" Binding="{Binding Path=Start}" IsReadOnly="True" Width="auto">
+                                <DataGridTextColumn Header="Категория"
+                                                    Binding="{Binding Path=Category}"
+                                                    IsReadOnly="True"
+                                                    Width="auto" />
+                                <DataGridTextColumn Header="Запуск"
+                                                    Binding="{Binding Path=Start}"
+                                                    IsReadOnly="True"
+                                                    Width="auto">
                                     <DataGridTextColumn.ElementStyle>
                                         <Style TargetType="{x:Type TextBlock}">
                                             <Style.Triggers>
-                                                <Trigger Property="Text" Value="Авто">
-                                                    <Setter Property="Foreground" Value="LightGreen"/>
+                                                <Trigger Property="Text"
+                                                         Value="Авто">
+                                                    <Setter Property="Foreground"
+                                                            Value="LightGreen" />
                                                 </Trigger>
-                                                <Trigger Property="Text" Value="Вручную">
-                                                    <Setter Property="Foreground" Value="LightGoldenrodYellow"/>
+                                                <Trigger Property="Text"
+                                                         Value="Вручную">
+                                                    <Setter Property="Foreground"
+                                                            Value="LightGoldenrodYellow" />
                                                 </Trigger>
-                                                <Trigger Property="Text" Value="Отключена">
-                                                    <Setter Property="Foreground" Value="PaleVioletRed"/>
+                                                <Trigger Property="Text"
+                                                         Value="Отключена">
+                                                    <Setter Property="Foreground"
+                                                            Value="PaleVioletRed" />
                                                 </Trigger>
-                                                <Trigger Property="Text" Value="Удалена">
-                                                    <Setter Property="Foreground" Value="Gray"/>
+                                                <Trigger Property="Text"
+                                                         Value="Удалена">
+                                                    <Setter Property="Foreground"
+                                                            Value="Gray" />
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>
                                     </DataGridTextColumn.ElementStyle>
                                 </DataGridTextColumn>
-                                <DataGridTextColumn Header="Краткое имя" ToolTipService.ShowDuration="5" Binding="{Binding Path=ShortName}" IsReadOnly="True" Width="*">
+                                <DataGridTextColumn Header="Краткое имя"
+                                                    ToolTipService.ShowDuration="5"
+                                                    Binding="{Binding Path=ShortName}"
+                                                    IsReadOnly="True"
+                                                    Width="*">
                                     <DataGridTextColumn.CellStyle>
-                                        <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellBase}">
+                                        <Style TargetType="DataGridCell"
+                                               BasedOn="{StaticResource DataGridCellBase}">
                                             <Setter Property="ToolTip">
                                                 <Setter.Value>
                                                     <StackPanel>
-                                                        <TextBlock Text="{Binding Path=FullName}" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Left"/>
-                                                        <Separator/>
-                                                        <TextBlock Text="{Binding Path=Description}" TextWrapping="Wrap" TextAlignment="Left"/>
+                                                        <TextBlock Text="{Binding Path=FullName}"
+                                                                   FontWeight="Bold"
+                                                                   TextWrapping="Wrap"
+                                                                   TextAlignment="Left" />
+                                                        <Separator />
+                                                        <TextBlock Text="{Binding Path=Description}"
+                                                                   TextWrapping="Wrap"
+                                                                   TextAlignment="Left" />
                                                     </StackPanel>
                                                 </Setter.Value>
                                             </Setter>
@@ -700,60 +875,188 @@
                         </DataGrid>
                     </Grid>
                 </TabItem>
-                <TabItem Foreground="White" FontSize="16">
+                <TabItem Foreground="White"
+                         FontSize="16">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Viewbox Width="20" Height="20">
-                                <Image Source="/WinCry;component/Resources/Icons/icon_pcslc.png"/>
+                            <Viewbox Width="20"
+                                     Height="20">
+                                <Image Source="/WinCry;component/Resources/Icons/icon_pcslc.png" />
                             </Viewbox>
-                            <TextBlock Margin="10, -2, 0, 0" Text="Память"/>
+                            <TextBlock Margin="10, -2, 0, 0"
+                                       Text="Память" />
                         </StackPanel>
                     </TabItem.Header>
                     <Grid Focusable="True">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <Label Template="{StaticResource ApplicationTabHeader}" Content="Служба PCSLC" Margin="10,10,10,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                        <Label Template="{StaticResource ApplicationTabHeader}"
+                               Content="Служба PCSLC"
+                               Margin="10,10,10,0"
+                               VerticalAlignment="Top"
+                               Grid.ColumnSpan="2" />
 
-                        <TextBlock Margin="10,41,10,0" Grid.ColumnSpan="2" TextWrapping="Wrap" Height="auto" VerticalAlignment="Top">
-                            <Run Text="     "/>Предназначена для интеллектуальной очистки кэша оперативной памяти Windows. С помощью внедрения в фоновый режим потребляет минимальное количество ресурсов компьютера.
+                        <TextBlock Margin="10,41,10,0"
+                                   Grid.ColumnSpan="2"
+                                   TextWrapping="Wrap"
+                                   Height="auto"
+                                   VerticalAlignment="Top">
+                            <Run Text="     " />Предназначена для интеллектуальной очистки кэша оперативной памяти Windows. С помощью внедрения в фоновый режим потребляет минимальное количество ресурсов компьютера.
                         </TextBlock>
 
-                        <Label Template="{StaticResource ApplicationTabHeader}" Content="Настройки PCSLC" Grid.ColumnSpan="2" Margin="10,154,10,0" VerticalAlignment="Top"/>
+                        <Label Template="{StaticResource ApplicationTabHeader}"
+                               Content="Настройки PCSLC"
+                               Grid.ColumnSpan="2"
+                               Margin="10,154,10,0"
+                               VerticalAlignment="Top" />
 
-                        <TextBlock Text="Размер занятого кэша больше" TextAlignment="Left" Margin="15,188,0,0" Height="24" VerticalAlignment="Top" Width="236" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
-                        <TextBlock Text="Свободной памяти меньше" TextAlignment="Left" Margin="15,217,0,0" Height="20" VerticalAlignment="Top" Width="236" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
-                        <TextBlock Text="Частота проверки условий" TextAlignment="Left" Margin="15,247,0,0" Height="20" VerticalAlignment="Top" Width="236" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                        <TextBlock Text="Размер занятого кэша больше"
+                                   TextAlignment="Left"
+                                   Margin="15,188,0,0"
+                                   Height="24"
+                                   VerticalAlignment="Top"
+                                   Width="236"
+                                   HorizontalAlignment="Left"
+                                   Grid.ColumnSpan="2" />
+                        <TextBlock Text="Свободной памяти меньше"
+                                   TextAlignment="Left"
+                                   Margin="15,217,0,0"
+                                   Height="20"
+                                   VerticalAlignment="Top"
+                                   Width="236"
+                                   HorizontalAlignment="Left"
+                                   Grid.ColumnSpan="2" />
+                        <TextBlock Text="Частота проверки условий"
+                                   TextAlignment="Left"
+                                   Margin="15,247,0,0"
+                                   Height="20"
+                                   VerticalAlignment="Top"
+                                   Width="236"
+                                   HorizontalAlignment="Left"
+                                   Grid.ColumnSpan="2" />
 
-                        <StackPanel Orientation="Horizontal" Height="24" VerticalAlignment="Top" Margin="29,185,0,0" Grid.Column="1">
-                            <models:RestrictedTextBox Style="{StaticResource TextBoxStyle}" Padding="4, 0, 4, 0" Text="{Binding SettingsVM.MemoryVM.CachedRAMGreaterThan, UpdateSourceTrigger=PropertyChanged}" MaxWidth="200" Height="24" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Left" Width="54"/>
-                            <TextBlock Text="Мегабайт" Margin="10,0,0,0" Height="auto" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="auto"/>
+                        <StackPanel Orientation="Horizontal"
+                                    Height="24"
+                                    VerticalAlignment="Top"
+                                    Margin="29,185,60,0"
+                                    Grid.Column="1">
+                            <models:RestrictedTextBox Style="{StaticResource TextBoxStyle}"
+                                                      Padding="4, 0, 4, 0"
+                                                      Text="{Binding SettingsVM.MemoryVM.CachedRAMGreaterThan, UpdateSourceTrigger=PropertyChanged}"
+                                                      MaxWidth="200"
+                                                      Height="24"
+                                                      VerticalAlignment="Top"
+                                                      TextAlignment="Center"
+                                                      HorizontalAlignment="Left"
+                                                      Width="54" />
+                            <TextBlock Text="Мегабайт"
+                                       Margin="10,0,0,0"
+                                       Height="auto"
+                                       VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Right"
+                                       Width="auto" />
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Height="24" VerticalAlignment="Top" Margin="29,214,0,0" Grid.Column="1">
-                            <models:RestrictedTextBox Style="{StaticResource TextBoxStyle}" Padding="4, 0, 4, 0" Text="{Binding SettingsVM.MemoryVM.FreeRAMLessThan, UpdateSourceTrigger=PropertyChanged}" MaxWidth="200" Height="24" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Left" Width="54"/>
-                            <TextBlock Text="Мегабайт" Margin="10,0,0,0" Height="auto" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="auto"/>
+                        <StackPanel Orientation="Horizontal"
+                                    Height="24"
+                                    VerticalAlignment="Top"
+                                    Margin="29,214,60,0"
+                                    Grid.Column="1">
+                            <models:RestrictedTextBox Style="{StaticResource TextBoxStyle}"
+                                                      Padding="4, 0, 4, 0"
+                                                      Text="{Binding SettingsVM.MemoryVM.FreeRAMLessThan, UpdateSourceTrigger=PropertyChanged}"
+                                                      MaxWidth="200"
+                                                      Height="24"
+                                                      VerticalAlignment="Top"
+                                                      TextAlignment="Center"
+                                                      HorizontalAlignment="Left"
+                                                      Width="54" />
+                            <TextBlock Text="Мегабайт"
+                                       Margin="10,0,0,0"
+                                       Height="auto"
+                                       VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Right"
+                                       Width="auto" />
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Height="24" VerticalAlignment="Top" Margin="29,243,0,0" Width="auto" Grid.Column="1">
-                            <models:RestrictedTextBox Style="{StaticResource TextBoxStyle}" Padding="4, 0, 4, 0" Text="{Binding SettingsVM.MemoryVM.ServiceThreadSleepSeconds, UpdateSourceTrigger=PropertyChanged}" MaxWidth="200" Height="24" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Left" Width="54"/>
-                            <TextBlock Text="Секунд" Margin="10,0,0,0" Height="auto" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="auto"/>
+                        <StackPanel Orientation="Horizontal"
+                                    Height="24"
+                                    VerticalAlignment="Top"
+                                    Margin="29,243,60,0"
+                                    Width="auto"
+                                    Grid.Column="1">
+                            <models:RestrictedTextBox Style="{StaticResource TextBoxStyle}"
+                                                      Padding="4, 0, 4, 0"
+                                                      Text="{Binding SettingsVM.MemoryVM.ServiceThreadSleepSeconds, UpdateSourceTrigger=PropertyChanged}"
+                                                      MaxWidth="200"
+                                                      Height="24"
+                                                      VerticalAlignment="Top"
+                                                      TextAlignment="Center"
+                                                      HorizontalAlignment="Left"
+                                                      Width="54" />
+                            <TextBlock Text="Секунд"
+                                       Margin="10,0,0,0"
+                                       Height="auto"
+                                       VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Right"
+                                       Width="auto" />
                         </StackPanel>
 
-                        <Button Margin="10,285,5,0" Height="60" VerticalAlignment="Top" Command="{Binding SettingsVM.MemoryVM.InstallUninstallService}">
-                            <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center">
+                        <Button TextBlock.TextAlignment="Center"
+                                Command="{Binding SettingsVM.MemoryVM.ResetData}"
+                                Margin="0,188,10,0"
+                                VerticalAlignment="Top"
+                                Height="24"
+                                Grid.Column="1"
+                                HorizontalAlignment="Right"
+                                Width="24">
+
+                            <Button.Content>
+                                <Viewbox Width="14"
+                                         Height="14">
+
+                                    <Canvas Width="24"
+                                            Height="24">
+
+                                        <Path Fill="White"
+                                              Data="M2 12C2 16.97 6.03 21 11 21C13.39 21 15.68 20.06 17.4 18.4L15.9 16.9C14.63 18.25 12.86 19 11 19C4.76 19 1.64 11.46 6.05 7.05C10.46 2.64 18 5.77 18 12H15L19 16H19.1L23 12H20C20 7.03 15.97 3 11 3C6.03 3 2 7.03 2 12Z" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Button.Content>
+
+                            <Button.ToolTip>
+                                <TextBlock Text="Сбрасывает значения до стандартных."
+                                           TextWrapping="Wrap" />
+                            </Button.ToolTip>
+                        </Button>
+
+                        <Button Margin="10,285,5,0"
+                                Height="60"
+                                VerticalAlignment="Top"
+                                Command="{Binding SettingsVM.MemoryVM.InstallUninstallService}">
+                            <TextBlock HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Path=SettingsVM.MemoryVM.IsServiceInstalled}" Value="False">
-                                                <Setter Property="Text" Value="Установить"/>
-                                                <Setter Property="Foreground" Value="LightGreen"/>
+                                            <DataTrigger Binding="{Binding Path=SettingsVM.MemoryVM.IsServiceInstalled}"
+                                                         Value="False">
+                                                <Setter Property="Text"
+                                                        Value="Установить" />
+                                                <Setter Property="Foreground"
+                                                        Value="LightGreen" />
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding Path=SettingsVM.MemoryVM.IsServiceInstalled}" Value="True">
-                                                <Setter Property="Text" Value="Удалить"/>
-                                                <Setter Property="Foreground" Value="PaleVioletRed"/>
+                                            <DataTrigger Binding="{Binding Path=SettingsVM.MemoryVM.IsServiceInstalled}"
+                                                         Value="True">
+                                                <Setter Property="Text"
+                                                        Value="Удалить" />
+                                                <Setter Property="Foreground"
+                                                        Value="PaleVioletRed" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -761,31 +1064,50 @@
                             </TextBlock>
                         </Button>
 
-                        <Button Margin="5,285,10,0" Height="60" VerticalAlignment="Top" Grid.Column="1" Command="{Binding SettingsVM.MemoryVM.StartStopService}">
+                        <Button Margin="5,285,10,0"
+                                Height="60"
+                                VerticalAlignment="Top"
+                                Grid.Column="1"
+                                Command="{Binding SettingsVM.MemoryVM.StartStopService}">
                             <Button.Style>
-                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyle}">
+                                <Style TargetType="{x:Type Button}"
+                                       BasedOn="{StaticResource ButtonStyle}">
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=SettingsVM.MemoryVM.IsServiceInstalled}" Value="False">
-                                            <Setter Property="IsEnabled" Value="False"/>
+                                        <DataTrigger Binding="{Binding Path=SettingsVM.MemoryVM.IsServiceInstalled}"
+                                                     Value="False">
+                                            <Setter Property="IsEnabled"
+                                                    Value="False" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </Button.Style>
-                            <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center">
+                            <TextBlock HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Path=SettingsVM.MemoryVM.IsServiceRunning}" Value="False">
-                                                <Setter Property="Text" Value="Запустить"/>
-                                                <Setter Property="Foreground" Value="LightGreen"/>
+                                            <DataTrigger Binding="{Binding Path=SettingsVM.MemoryVM.IsServiceRunning}"
+                                                         Value="False">
+                                                <Setter Property="Text"
+                                                        Value="Запустить" />
+                                                <Setter Property="Foreground"
+                                                        Value="LightGreen" />
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding Path=SettingsVM.MemoryVM.IsServiceRunning}" Value="True">
-                                                <Setter Property="Text" Value="Остановить"/>
-                                                <Setter Property="Foreground" Value="PaleVioletRed"/>
+                                            <DataTrigger Binding="{Binding Path=SettingsVM.MemoryVM.IsServiceRunning}"
+                                                         Value="True">
+                                                <Setter Property="Text"
+                                                        Value="Остановить" />
+                                                <Setter Property="Foreground"
+                                                        Value="PaleVioletRed" />
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding Path=SettingsVM.MemoryVM.IsServiceInstalled}" Value="False">
-                                                <Setter Property="IsEnabled" Value="False"/>
-                                                <Setter Property="Foreground" Value="Gray"/>
+                                            <DataTrigger Binding="{Binding Path=SettingsVM.MemoryVM.IsServiceInstalled}"
+                                                         Value="False">
+                                                <Setter Property="IsEnabled"
+                                                        Value="False" />
+                                                <Setter Property="Foreground"
+                                                        Value="Gray" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -794,198 +1116,400 @@
                         </Button>
                     </Grid>
                 </TabItem>
-                <TabItem Foreground="White" FontSize="16">
+                <TabItem Foreground="White"
+                         FontSize="16">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Viewbox Width="20" Height="20">
-                                <Image Source="/WinCry;component/Resources/Icons/icon_other.png"/>
+                            <Viewbox Width="20"
+                                     Height="20">
+                                <Image Source="/WinCry;component/Resources/Icons/icon_other.png" />
                             </Viewbox>
-                            <TextBlock Margin="10, -2, 0, 0" Text="Прочее"/>
+                            <TextBlock Margin="10, -2, 0, 0"
+                                       Text="Прочее" />
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <Button Content="Применить" Command="{Binding ApplyOther}" FontSize="14" Margin="103,8,10,0" Height="25" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Button Content="Применить"
+                                Command="{Binding ApplyOther}"
+                                FontSize="14"
+                                Margin="103,8,10,0"
+                                Height="25"
+                                VerticalAlignment="Top"
+                                Grid.Column="1" />
 
-                        <Label Template="{StaticResource ApplicationTabHeader}" Content="Прочие настройки" Grid.ColumnSpan="2" Margin="10,10,129,0" VerticalAlignment="Top"/>
-                        <CheckBox Content="Ускорить запуск Windows" IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.IncreaseBootSpeed}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="auto" Margin="30,42,0,0" Grid.ColumnSpan="2">
-
-                            <CheckBox.ToolTip>
-                                <TextBlock Text="Выключает анимацию загрузки и вывод изображений на экран при старте Windows. Убирает экран выбора ОС (если их больше двух)." 
-                                           TextWrapping="Wrap"/>
-                            </CheckBox.ToolTip>
-                        </CheckBox>
-                        <CheckBox Content="Убрать иконку стрелки с ярлыков" IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.RemoveShortcutIcon}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="auto" Margin="30,68,0,0" Grid.ColumnSpan="2">
-
-                            <CheckBox.ToolTip>
-                                <TextBlock Text="Отключает отображение характеризующей стрелки с иконок ярлыков." 
-                                           TextWrapping="Wrap"/>
-                            </CheckBox.ToolTip>
-                        </CheckBox>
-                        <CheckBox Content="Перенести папку временных файлов" IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.SetTempVariable}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="auto" Margin="30,94,0,0" Grid.ColumnSpan="2">
-
-                            <CheckBox.ToolTip>
-                                <TextBlock Text="Переносит системные и пользовательские папки временных файлов в корневой раздел Windows." 
-                                           TextWrapping="Wrap"/>
-                            </CheckBox.ToolTip>
-                        </CheckBox>
-
-                        <CheckBox Content="Убрать иконку уведомлений с панели задач" IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.RemoveNotificationIcon}" IsEnabled="{Binding IsNotificationIconTweakEnabled}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="auto" Margin="30,120,0,0" Grid.ColumnSpan="2">
+                        <Label Template="{StaticResource ApplicationTabHeader}"
+                               Content="Прочие настройки"
+                               Grid.ColumnSpan="2"
+                               Margin="10,10,129,0"
+                               VerticalAlignment="Top" />
+                        <CheckBox Content="Ускорить запуск Windows"
+                                  IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.IncreaseBootSpeed}"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  Height="21"
+                                  Width="auto"
+                                  Margin="30,42,0,0"
+                                  Grid.ColumnSpan="2">
 
                             <CheckBox.ToolTip>
-                                <TextBlock Text="Убирает отображение значка уведомлений с панели задач." 
-                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="Выключает анимацию загрузки и вывод изображений на экран при старте Windows. Убирает экран выбора ОС (если их больше двух)."
+                                           TextWrapping="Wrap" />
                             </CheckBox.ToolTip>
                         </CheckBox>
-                        <CheckBox Content="Включить поддержку старых игр" IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.EnableDirectPlay}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="auto" Margin="30,146,0,0" Grid.ColumnSpan="2">
+                        <CheckBox Content="Убрать иконку стрелки с ярлыков"
+                                  IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.RemoveShortcutIcon}"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  Height="21"
+                                  Width="auto"
+                                  Margin="30,68,0,0"
+                                  Grid.ColumnSpan="2">
 
                             <CheckBox.ToolTip>
-                                <TextBlock Text="Включает компонент Windows под названием DirectPlay, позволяющий запускать старые приложения." 
-                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="Отключает отображение характеризующей стрелки с иконок ярлыков."
+                                           TextWrapping="Wrap" />
                             </CheckBox.ToolTip>
                         </CheckBox>
-
-                        <CheckBox Content="Удалить папки на главной странице проводника" IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.RemoveFoldersFromThisPC}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="auto" Margin="30,172,0,0" Grid.ColumnSpan="2">
+                        <CheckBox Content="Перенести папку временных файлов"
+                                  IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.SetTempVariable}"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  Height="21"
+                                  Width="auto"
+                                  Margin="30,94,0,0"
+                                  Grid.ColumnSpan="2">
 
                             <CheckBox.ToolTip>
-                                <TextBlock Text="Удаляет из проводника папки: Рабочий стол, Документы, Загрузки, Видео, Изображения, Музыка, Объемные объекты." 
-                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="Переносит системные и пользовательские папки временных файлов в корневой раздел Windows."
+                                           TextWrapping="Wrap" />
                             </CheckBox.ToolTip>
                         </CheckBox>
 
-                        <Label Template="{StaticResource ApplicationTabHeader}" Content="Утилиты" Grid.ColumnSpan="2" Margin="10,205,10,0" VerticalAlignment="Top"/>
-                        <Button models:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True" Margin="10,0,5,10" Height="56" VerticalAlignment="Bottom">
+                        <CheckBox Content="Убрать иконку уведомлений с панели задач"
+                                  IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.RemoveNotificationIcon}"
+                                  IsEnabled="{Binding IsNotificationIconTweakEnabled}"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  Height="21"
+                                  Width="auto"
+                                  Margin="30,120,0,0"
+                                  Grid.ColumnSpan="2">
+
+                            <CheckBox.ToolTip>
+                                <TextBlock Text="Убирает отображение значка уведомлений с панели задач."
+                                           TextWrapping="Wrap" />
+                            </CheckBox.ToolTip>
+                        </CheckBox>
+                        <CheckBox Content="Включить поддержку старых игр"
+                                  IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.EnableDirectPlay}"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  Height="21"
+                                  Width="auto"
+                                  Margin="30,146,0,0"
+                                  Grid.ColumnSpan="2">
+
+                            <CheckBox.ToolTip>
+                                <TextBlock Text="Включает компонент Windows под названием DirectPlay, позволяющий запускать старые приложения."
+                                           TextWrapping="Wrap" />
+                            </CheckBox.ToolTip>
+                        </CheckBox>
+
+                        <CheckBox Content="Удалить папки на главной странице проводника"
+                                  IsChecked="{Binding SettingsVM.CurrentSettingsPreset.Settings.RemoveFoldersFromThisPC}"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  Height="21"
+                                  Width="auto"
+                                  Margin="30,172,0,0"
+                                  Grid.ColumnSpan="2">
+
+                            <CheckBox.ToolTip>
+                                <TextBlock Text="Удаляет из проводника папки: Рабочий стол, Документы, Загрузки, Видео, Изображения, Музыка, Объемные объекты."
+                                           TextWrapping="Wrap" />
+                            </CheckBox.ToolTip>
+                        </CheckBox>
+
+                        <Label Template="{StaticResource ApplicationTabHeader}"
+                               Content="Утилиты"
+                               Grid.ColumnSpan="2"
+                               Margin="10,205,10,0"
+                               VerticalAlignment="Top" />
+                        <Button models:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
+                                Margin="10,0,5,10"
+                                Height="56"
+                                VerticalAlignment="Bottom">
                             <Button.ContextMenu>
                                 <ContextMenu FontSize="16">
-                                    <MenuItem Header="Установить" Command="{Binding InstallMSStore}"/>
-                                    <MenuItem Header="Удалить" Command="{Binding UninstallMSStore}"/>
+                                    <MenuItem Header="Установить"
+                                              Command="{Binding InstallMSStore}" />
+                                    <MenuItem Header="Удалить"
+                                              Command="{Binding UninstallMSStore}" />
                                 </ContextMenu>
                             </Button.ContextMenu>
-                            <TextBlock Text="Установить / удалить Microsoft Store" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="Установить / удалить Microsoft Store"
+                                       HorizontalAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       VerticalAlignment="Center" />
                         </Button>
-                        <Button Content="Активировать Windows" Command="{Binding ActivateWindows}" Margin="5,0,10,76" Height="56" VerticalAlignment="Bottom" Grid.Column="1"/>
-                        <Button Content="Установить MS VC++" Command="{Binding InstallVC}" Margin="10,0,5,76" Height="56" VerticalAlignment="Bottom"/>
-                        <Button models:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True" Margin="5,0,10,10" Height="56" VerticalAlignment="Bottom" Grid.Column="1">
-                            <TextBlock Text="Запустить программу с макс. привелегиями" TextWrapping="Wrap" TextAlignment="Center"/>
+                        <Button Content="Активировать Windows"
+                                Command="{Binding ActivateWindows}"
+                                Margin="5,0,10,76"
+                                Height="56"
+                                VerticalAlignment="Bottom"
+                                Grid.Column="1" />
+                        <Button Content="Установить MS VC++"
+                                Command="{Binding InstallVC}"
+                                Margin="10,0,5,76"
+                                Height="56"
+                                VerticalAlignment="Bottom" />
+                        <Button models:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
+                                Margin="5,0,10,10"
+                                Height="56"
+                                VerticalAlignment="Bottom"
+                                Grid.Column="1">
+                            <TextBlock Text="Запустить программу с макс. привелегиями"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center" />
                             <Button.ContextMenu>
                                 <ContextMenu FontSize="16">
-                                    <MenuItem Header="Выбрать вручную" Command="{Binding RunAsTI}"/>
-                                    <MenuItem Header="CMD" Command="{Binding RunCMDAsTI}"/>
-                                    <MenuItem Header="Regedit" Command="{Binding RunRegeditAsTI}"/>
+                                    <MenuItem Header="Выбрать вручную"
+                                              Command="{Binding RunAsTI}" />
+                                    <MenuItem Header="CMD"
+                                              Command="{Binding RunCMDAsTI}" />
+                                    <MenuItem Header="Regedit"
+                                              Command="{Binding RunRegeditAsTI}" />
                                 </ContextMenu>
                             </Button.ContextMenu>
                         </Button>
                     </Grid>
                 </TabItem>
-                <TabItem Foreground="White" FontSize="16">
+                <TabItem Foreground="White"
+                         FontSize="16">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Viewbox Width="20" Height="20">
-                                <Image Source="/WinCry;component/Resources/Icons/icon_settings.png"/>
+                            <Viewbox Width="20"
+                                     Height="20">
+                                <Image Source="/WinCry;component/Resources/Icons/icon_settings.png" />
                             </Viewbox>
-                            <TextBlock Margin="10, -2, 0, 0" Text="Настройки"/>
+                            <TextBlock Margin="10, -2, 0, 0"
+                                       Text="Настройки" />
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <Label Template="{StaticResource ApplicationTabHeader}" Content="Пресеты" Grid.ColumnSpan="2" Margin="10,10,10,0" VerticalAlignment="Top"/>
+                        <Label Template="{StaticResource ApplicationTabHeader}"
+                               Content="Пресеты"
+                               Grid.ColumnSpan="2"
+                               Margin="10,10,10,0"
+                               VerticalAlignment="Top" />
 
-                        <Button models:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True" Content="Сохранить пресет" TextBlock.TextAlignment="Center" Margin="10,42,10,0" VerticalAlignment="Top" Height="60" Grid.ColumnSpan="2">
+                        <Button models:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
+                                Content="Сохранить пресет"
+                                TextBlock.TextAlignment="Center"
+                                Margin="10,42,10,0"
+                                VerticalAlignment="Top"
+                                Height="60"
+                                Grid.ColumnSpan="2">
                             <Button.ContextMenu>
                                 <ContextMenu FontSize="16">
-                                    <MenuItem Header="Всего" Command="{Binding SettingsVM.SavePreset}"/>
-                                    <MenuItem Header="Твиков" Command="{Binding SettingsVM.TweaksVM.SavePreset}"/>
-                                    <MenuItem Header="Служб" Command="{Binding SettingsVM.ServicesVM.SavePreset}"/>
+                                    <MenuItem Header="Всего"
+                                              Command="{Binding SettingsVM.SavePreset}" />
+                                    <MenuItem Header="Твиков"
+                                              Command="{Binding SettingsVM.TweaksVM.SavePreset}" />
+                                    <MenuItem Header="Служб"
+                                              Command="{Binding SettingsVM.ServicesVM.SavePreset}" />
                                 </ContextMenu>
                             </Button.ContextMenu>
                         </Button>
 
-                        <Button Content="Открыть папку&#10;с пресетами" TextBlock.TextAlignment="Center" Command="{Binding OpenPresetsFolder}" Margin="5,112,10,0" VerticalAlignment="Top" Height="60" Grid.Column="1"/>
-                        <Button Content="Обновить списки&#10;с пресетами" TextBlock.TextAlignment="Center" Command="{Binding UpdateLists}" Margin="10,112,5,0" VerticalAlignment="Top" Height="60"/>
+                        <Button Content="Открыть папку&#10;с пресетами"
+                                TextBlock.TextAlignment="Center"
+                                Command="{Binding OpenPresetsFolder}"
+                                Margin="5,112,10,0"
+                                VerticalAlignment="Top"
+                                Height="60"
+                                Grid.Column="1" />
+                        <Button Content="Обновить списки&#10;с пресетами"
+                                TextBlock.TextAlignment="Center"
+                                Command="{Binding UpdateLists}"
+                                Margin="10,112,5,0"
+                                VerticalAlignment="Top"
+                                Height="60" />
 
-                        <Label Template="{StaticResource ApplicationTabHeader}" Content="Откат" Grid.ColumnSpan="2" Margin="10,205,10,0" VerticalAlignment="Top"/>
-                        <Button TextBlock.TextAlignment="Center" Command="{Binding Reset}" Margin="10,0,10,72" Height="60" VerticalAlignment="Bottom" Grid.ColumnSpan="2">
-                            <TextBlock Text="Откатить все выделенные настройки" TextWrapping="Wrap" TextAlignment="Center"/>
+                        <Label Template="{StaticResource ApplicationTabHeader}"
+                               Content="Откат"
+                               Grid.ColumnSpan="2"
+                               Margin="10,205,10,0"
+                               VerticalAlignment="Top" />
+                        <Button TextBlock.TextAlignment="Center"
+                                Command="{Binding Reset}"
+                                Margin="10,0,10,72"
+                                Height="60"
+                                VerticalAlignment="Bottom"
+                                Grid.ColumnSpan="2">
+                            <TextBlock Text="Откатить все выделенные настройки"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center" />
                         </Button>
                     </Grid>
                 </TabItem>
-                <TabItem Foreground="White" FontSize="16">
+                <TabItem Foreground="White"
+                         FontSize="16">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Viewbox Width="20" Height="20">
-                                <Image Source="/WinCry;component/Resources/Icons/icon_about.png"/>
+                            <Viewbox Width="20"
+                                     Height="20">
+                                <Image Source="/WinCry;component/Resources/Icons/icon_about.png" />
                             </Viewbox>
-                            <TextBlock Margin="10, -2, 0, 0" Text="О программе"/>
+                            <TextBlock Margin="10, -2, 0, 0"
+                                       Text="О программе" />
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
-                        <TextBlock VerticalAlignment="Top" Height="20" Padding="0" Margin="10,7,0,0" FontSize="14" Foreground="White" HorizontalAlignment="Left" Width="auto">
-                            <Run Text="Версия:"/>
-                            <Run Text="{Binding ApplicationVersion}" Foreground="#FFFF0068"/>
+                        <TextBlock VerticalAlignment="Top"
+                                   Height="20"
+                                   Padding="0"
+                                   Margin="10,7,0,0"
+                                   FontSize="14"
+                                   Foreground="White"
+                                   HorizontalAlignment="Left"
+                                   Width="auto">
+                            <Run Text="Версия:" />
+                            <Run Text="{Binding ApplicationVersion}"
+                                 Foreground="#FFFF0068" />
                         </TextBlock>
 
-                        <Rectangle Fill="Gray" Margin="30,35,30,0" Height=".1" VerticalAlignment="Top"/>
+                        <Rectangle Fill="Gray"
+                                   Margin="30,35,30,0"
+                                   Height=".1"
+                                   VerticalAlignment="Top" />
 
-                        <TextBlock Margin="10,43,10,153" TextWrapping="Wrap" Padding="10, 0, 0, 10">
-                            <Run Text="     "/>Бонжур, <Run Text="{Binding Username}" Foreground="#FFFF0068"/>! 
-                            <Run Text="&#10;&#10;     "/>Наше приложение позволит тебе максимально быстро и эффективно оптимизировать Windows. 
+                        <TextBlock Margin="10,43,10,153"
+                                   TextWrapping="Wrap"
+                                   Padding="10, 0, 0, 10">
+                            <Run Text="     " />Бонжур, <Run Text="{Binding Username}"
+                                                             Foreground="#FFFF0068" />! 
+                            <Run Text="&#10;&#10;     " />Наше приложение позволит тебе максимально быстро и эффективно оптимизировать Windows. 
                             Для оказания поддержки просим только подписаться на наш YouTube канал.
-                            <Run Text="&#10;&#10;     "/>Это <Run Text="важно" Foreground="#FFFF0068"/>!
+                            <Run Text="&#10;&#10;     " />Это <Run Text="важно"
+                                                                   Foreground="#FFFF0068" />!
 
                         </TextBlock>
 
-                        <Label Template="{StaticResource ApplicationTabHeader}" Content="Полезные ссылки" Margin="10,265,10,0" VerticalAlignment="Top"/>
+                        <Label Template="{StaticResource ApplicationTabHeader}"
+                               Content="Полезные ссылки"
+                               Margin="10,265,10,0"
+                               VerticalAlignment="Top" />
 
-                        <StackPanel Cursor="Hand" Orientation="Horizontal" Margin="10,291,0,0" HorizontalAlignment="Left" Width="auto" Height="32" VerticalAlignment="Top">
-                            <Viewbox Width="20" Height="20" Margin="0, 2">
-                                <Image Source="/WinCry;component/Resources/Icons/icon_vk.png"/>
+                        <StackPanel Cursor="Hand"
+                                    Orientation="Horizontal"
+                                    Margin="10,291,0,0"
+                                    HorizontalAlignment="Left"
+                                    Width="auto"
+                                    Height="32"
+                                    VerticalAlignment="Top">
+                            <Viewbox Width="20"
+                                     Height="20"
+                                     Margin="0, 2">
+                                <Image Source="/WinCry;component/Resources/Icons/icon_vk.png" />
                             </Viewbox>
 
-                            <TextBlock Foreground="White" FontSize="14" Margin="5,0" Text="Обсуждение WinCry" 
-                               VerticalAlignment="Center" 
-                               FontFamily="/WinCry;component/Resources/Fonts/#Segoe UI Variable Static Display Semilight"/>
+                            <TextBlock Foreground="White"
+                                       FontSize="14"
+                                       Margin="5,0"
+                                       Text="Обсуждение WinCry"
+                                       VerticalAlignment="Center"
+                                       FontFamily="/WinCry;component/Resources/Fonts/#Segoe UI Variable Static Display Semilight" />
 
                             <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseDown" >
+                                <i:EventTrigger EventName="MouseDown">
                                     <i:InvokeCommandAction Command="{Binding GotoCommunityDiscussion}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </StackPanel>
 
-                        <StackPanel Cursor="Hand" Orientation="Horizontal" Margin="10,323,0,0" HorizontalAlignment="Left" Width="auto" Height="32" VerticalAlignment="Top">
-                            <Viewbox Width="20" Height="20" Margin="0, 2">
-                                <Image Source="/WinCry;component/Resources/Icons/icon_donate.png"/>
+                        <StackPanel Cursor="Hand"
+                                    Orientation="Horizontal"
+                                    Margin="10,323,0,0"
+                                    HorizontalAlignment="Left"
+                                    Width="auto"
+                                    Height="32"
+                                    VerticalAlignment="Top">
+                            <Viewbox Width="20"
+                                     Height="20"
+                                     Margin="0, 2">
+                                <Image Source="/WinCry;component/Resources/Icons/icon_donate.png" />
                             </Viewbox>
 
-                            <TextBlock Foreground="White" FontSize="14" Margin="5,0" Text="Пожертвования" 
-                               VerticalAlignment="Center" 
-                               FontFamily="/WinCry;component/Resources/Fonts/#Segoe UI Variable Static Display Semilight"/>
+                            <TextBlock Foreground="White"
+                                       FontSize="14"
+                                       Margin="5,0"
+                                       Text="Пожертвования"
+                                       VerticalAlignment="Center"
+                                       FontFamily="/WinCry;component/Resources/Fonts/#Segoe UI Variable Static Display Semilight" />
 
                             <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseDown" >
+                                <i:EventTrigger EventName="MouseDown">
                                     <i:InvokeCommandAction Command="{Binding GotoDonation}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </StackPanel>
 
-                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/WinCry;component/Resources/Icons/tpd_signature.png" Margin="304,171,10,114"/>
+                        <StackPanel Cursor="Hand"
+                                    Orientation="Horizontal"
+                                    Margin="0,291,10,0"
+                                    HorizontalAlignment="Right"
+                                    Width="auto"
+                                    Height="32"
+                                    VerticalAlignment="Top">
+
+                            <Viewbox Width="20"
+                                     Height="20"
+                                     Margin="0, 2">
+
+                                <Image Source="/WinCry;component/Resources/Icons/icon_github.png" />
+                            </Viewbox>
+
+                            <TextBlock Foreground="White"
+                                       FontSize="14"
+                                       Margin="5,0"
+                                       Text="GitHub"
+                                       VerticalAlignment="Center"
+                                       FontFamily="/WinCry;component/Resources/Fonts/#Segoe UI Variable Static Display Semilight" />
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <i:InvokeCommandAction Command="{Binding GotoGitHub}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </StackPanel>
+
+                        <Image RenderOptions.BitmapScalingMode="HighQuality"
+                               Source="/WinCry;component/Resources/Icons/tpd_signature.png"
+                               Margin="304,171,10,114" />
                     </Grid>
                 </TabItem>
-                <TabItem Foreground="White" FontSize="16">
+                <TabItem Foreground="White"
+                         FontSize="16">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Viewbox Width="20" Height="20">
-                                <Image Source="/WinCry;component/Resources/Icons/icon_exit.png"/>
+                            <Viewbox Width="20"
+                                     Height="20">
+                                <Image Source="/WinCry;component/Resources/Icons/icon_exit.png" />
                             </Viewbox>
-                            <TextBlock Margin="10, -2, 0, 0" Text="Выход"/>
+                            <TextBlock Margin="10, -2, 0, 0"
+                                       Text="Выход" />
                         </StackPanel>
                     </TabItem.Header>
                 </TabItem>

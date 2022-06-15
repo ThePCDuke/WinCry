@@ -365,6 +365,7 @@
     <Resource Include="Resources\Icons\icon_vk.png" />
     <Resource Include="Resources\Icons\tpd_signature.png" />
     <Resource Include="Resources\Icons\icon_donate.png" />
+    <Resource Include="Resources\Icons\icon_github.png" />
     <Content Include="Resources\Memory\PСSLC.Core.dll" />
     <Content Include="Resources\Memory\PСSLC_Service.exe" />
     <Resource Include="Resources\Services\KMS38DependingServices.xml" />
