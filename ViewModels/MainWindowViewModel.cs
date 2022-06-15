@@ -686,6 +686,19 @@ namespace WinCry.ViewModels
             }
         }
 
+        private RelayCommand _gotoGitHub;
+        public RelayCommand GotoGitHub
+        {
+            get
+            {
+                return _gotoGitHub ??
+                   (_gotoGitHub = new RelayCommand(obj =>
+                   {
+                       MainModel.GotoGitHub();
+                   }));
+            }
+        }
+
         #endregion
 
         #region Unhandled Exceptions

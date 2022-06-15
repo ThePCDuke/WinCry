@@ -6957,7 +6957,7 @@
         "Category": "Производительность",
         "Name": "Фрагментация виртуальной памяти",
         "Key": "HeapDeCommitFreeBlockThreshold",
-        "Description": "Задает уменьшенную фрагментацию виртуальной памяти, позволяя увеличивать пропускную способность.",
+        "Description": "Задает уменьшенную фрагментацию виртуальной памяти, позволяя увеличить пропускную способность.",
         "CategoryDescription": "",
         "KeyLocation": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager",
         "ValueType": 4,

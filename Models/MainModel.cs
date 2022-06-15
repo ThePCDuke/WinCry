@@ -47,6 +47,14 @@ namespace WinCry.Models
         }
 
         /// <summary>
+        /// Opens GitHub link with default browser
+        /// </summary>
+        public static void GotoGitHub()
+        {
+            Process.Start(StringConsts.URLGitHub);
+        }
+
+        /// <summary>
         /// Creates "Presets" folder at application's location
         /// </summary>
         public static void CreatePresetsFolder()
@@ -304,7 +312,6 @@ namespace WinCry.Models
                         break;
                     }
             }
-
         }
 
         private static void ImportNVIDIAProfile(TaskViewModel taskViewModel, byte[] file)
@@ -710,7 +717,7 @@ namespace WinCry.Models
         /// <returns></returns>
         public static Task InstallAutoTempCleaner(TaskViewModel taskViewModel, bool install)
         {
-            string _filePath = $@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\TempCleaner.exe";
+            string filePath = $@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\TempCleaner.exe";
             return new Task(() =>
             {
                 try
@@ -724,7 +731,7 @@ namespace WinCry.Models
                         taskViewModel.ShortMessage = DialogConsts.TempTweakExtracting;
                         taskViewModel.CreateMessage($"{DialogConsts.TempTweakExtracting} ");
 
-                        if (!File.Exists(_filePath))
+                        if (!File.Exists(filePath))
                         {
                             Helpers.ExtractEmbedFile(Properties.Resources.TempCleaner, "TempCleaner.exe", $@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows");
                             taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
@@ -810,9 +817,9 @@ namespace WinCry.Models
                         taskViewModel.ShortMessage = DialogConsts.TempTweakRemoving;
                         taskViewModel.CreateMessage($"{DialogConsts.TempTweakRemoving} ");
 
-                        if (File.Exists(_filePath))
+                        if (File.Exists(filePath))
                         {
-                            taskViewModel.CreateMessage(RunAsProcess.CMD($@"del /s ""{_filePath}""", true), false, false);
+                            taskViewModel.CreateMessage(RunAsProcess.CMD($@"del /s ""{filePath}""", true), false, false);
                         }
                         else
                         {
@@ -847,34 +854,53 @@ namespace WinCry.Models
                     taskViewModel.Name = DialogConsts.TempVariableTweak;
                     taskViewModel.CreateMessage(DialogConsts.ApplyingStarted, false);
 
+                    Helpers.RunByCMD($@"setx temp ""C:\Temp""");
+                    Helpers.RunByCMD($@"setx /m temp ""C:\Temp""");
+                    Helpers.RunByCMD($@"setx tmp ""C:\Temp""");
+                    Helpers.RunByCMD($@"setx /m tmp ""C:\Temp""");
+
+                    string tempMachine = Environment.GetEnvironmentVariable("temp", EnvironmentVariableTarget.Machine);
+                    string tempUser = Environment.GetEnvironmentVariable("temp", EnvironmentVariableTarget.User);
+                    string tmpMachine = Environment.GetEnvironmentVariable("tmp", EnvironmentVariableTarget.Machine);
+                    string tmpUser = Environment.GetEnvironmentVariable("tmp", EnvironmentVariableTarget.User);
+
+                    taskViewModel.ShortMessage = DialogConsts.TempVariableTweakApplying;
+                    taskViewModel.CreateMessage($"{DialogConsts.TempVariableTweakApplying} ");
+
                     if (install)
                     {
-                        taskViewModel.ShortMessage = DialogConsts.TempVariableTweakApplying;
-                        taskViewModel.CreateMessage($"{DialogConsts.TempVariableTweakApplying} ");
-
                         Helpers.RunByCMD($@"setx temp ""{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\Temp""");
                         Helpers.RunByCMD($@"setx /m temp ""{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\Temp""");
                         Helpers.RunByCMD($@"setx tmp ""{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\Temp""");
                         Helpers.RunByCMD($@"setx /m tmp ""{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\Temp""");
-
-                        taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
-                        taskViewModel.Progress = 100;
                     }
                     else
                     {
                         string _localAppdataPath = Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%");
 
-                        taskViewModel.ShortMessage = DialogConsts.TempVariableTweakApplying;
-                        taskViewModel.CreateMessage($"{DialogConsts.TempVariableTweakApplying} ");
-
                         Helpers.RunByCMD($@"setx temp ""{_localAppdataPath}\Temp""");
                         Helpers.RunByCMD($@"setx /m temp {Path.GetPathRoot(Environment.SystemDirectory)}\Windows\Temp");
                         Helpers.RunByCMD($@"setx tmp ""{_localAppdataPath}\Temp""");
                         Helpers.RunByCMD($@"setx /m tmp {Path.GetPathRoot(Environment.SystemDirectory)}\Windows\Temp");
-
-                        taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
-                        taskViewModel.Progress = 100;
                     }
+
+                    taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
+                    taskViewModel.Progress = 50;
+
+                    taskViewModel.ShortMessage = DialogConsts.TempVariableTweakRemovingUnused;
+                    taskViewModel.CreateMessage($"{DialogConsts.TempVariableTweakRemovingUnused} ");
+
+                    if (tempMachine != Environment.GetEnvironmentVariable("temp", EnvironmentVariableTarget.Machine))
+                        RunAsProcess.CMD($@"rmdir /s /q ""{tempMachine}""", true);
+
+                    if (tempUser != Environment.GetEnvironmentVariable("temp", EnvironmentVariableTarget.User))
+                        RunAsProcess.CMD($@"rmdir /s /q ""{tempUser}""", true);
+
+                    if (tmpMachine != Environment.GetEnvironmentVariable("tmp", EnvironmentVariableTarget.Machine))
+                        RunAsProcess.CMD($@"rmdir /s /q ""{tempMachine}""", true);
+
+                    if (tmpUser != Environment.GetEnvironmentVariable("tmp", EnvironmentVariableTarget.User))
+                        RunAsProcess.CMD($@"rmdir /s /q ""{tmpUser}""", true);
                 }
                 catch (Exception ex)
                 {

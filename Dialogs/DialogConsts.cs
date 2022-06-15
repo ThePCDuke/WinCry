@@ -43,6 +43,7 @@
 
         public const string TempVariableTweak = "Перенести папку временных файлов";
         public const string TempVariableTweakApplying = "Изменение переменных папок временных файлов...";
+        public const string TempVariableTweakRemovingUnused = "Удаление неиспользуемых файлов...";
 
         public const string RemoveNotificationIconTweak = "Убрать иконку уведомлений с панели задач";
 

@@ -7,6 +7,7 @@ namespace WinCry.Models
         public const string URLDonation = @"https://www.donationalerts.com/r/thepeaceduke";
         public const string URLCommunity = @"https://vk.com/thepeaceduke";
         public const string URLCommunityDiscussion = @"https://vk.com/topic-206972023_48260256";
+        public const string URLGitHub = @"https://github.com/ThePCDuke/WinCry";
         public const string URLVC = @"https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/EkhxSJWgkcvovg/WinCry/VC.zip";
         public const string URLMSStore = @"https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/EkhxSJWgkcvovg/WinCry/AIOWindowsStore.zip";
 

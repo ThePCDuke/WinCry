@@ -181,7 +181,13 @@ namespace WinCry.Models
         /// </summary>
         public static bool IsNVIDIAGPUInstalled
         {
-            get { return FindValueInDisplayConfiguration("NVIDIA"); }
+            get 
+            { 
+                if (!Environment.Is64BitOperatingSystem)
+                    return false;
+
+                return FindValueInDisplayConfiguration("NVIDIA"); 
+            }
         }
     }
 }

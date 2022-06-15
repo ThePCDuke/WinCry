@@ -213,23 +213,17 @@ namespace WinCry.Memory
             }
         }
 
-        private RelayCommand _stopService;
-        public RelayCommand StopService
+        private RelayCommand _resetData;
+        public RelayCommand ResetData
         {
             get
             {
-                return _stopService ??
-                   (_stopService = new RelayCommand(obj =>
+                return _resetData ??
+                   (_resetData = new RelayCommand(obj =>
                    {
-                       ProgressWindowViewModel _vm = new ProgressWindowViewModel();
-
-                       var _taskVM = new TaskViewModel();
-
-
-                       // Starting all tasks
-                       _vm.StartTasks();
-
-                       _dialogService.ShowDialog(_vm);
+                       CachedRAMGreaterThan = 1024;
+                       FreeRAMLessThan = 512;
+                       ServiceThreadSleepSeconds = 300;
                    }));
             }
         }
