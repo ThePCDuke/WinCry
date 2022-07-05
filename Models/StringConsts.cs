@@ -4,7 +4,7 @@ namespace WinCry.Models
     class StringConsts
     {
         public const string URLChannel = @"https://www.youtube.com/c/ThePeaceDuke";
-        public const string URLDonation = @"https://www.donationalerts.com/r/thepeaceduke";
+        public const string URLDonation = @"https://www.donationalerts.com/r/pc_d";
         public const string URLCommunity = @"https://vk.com/thepeaceduke";
         public const string URLCommunityDiscussion = @"https://vk.com/topic-206972023_48260256";
         public const string URLGitHub = @"https://github.com/ThePCDuke/WinCry";
