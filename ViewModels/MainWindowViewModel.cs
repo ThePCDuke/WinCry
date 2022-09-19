@@ -164,6 +164,7 @@ namespace WinCry.ViewModels
                        if (SettingsVM.TweaksVM.Option != TweaksOption.Nothing && SettingsVM.TweaksVM.Tweaks.Where(t => t.IsChecked).Count() != 0) { var _taskVM = new TaskViewModel(); _vm.AddTask(TweaksModel.Apply(SettingsVM.TweaksVM.Tweaks, SettingsVM.TweaksVM.Option, _taskVM), _taskVM); }
                        // Services
                        if (SettingsVM.ServicesVM.Option == ServicesOption.Delete) { ServicesModel.CheckServicesForRemovability(SettingsVM.ServicesVM.Services, _dialogService); }
+                       if (SettingsVM.ServicesVM.Option == ServicesOption.Disable) { ServicesModel.CheckServicesForDisability(SettingsVM.ServicesVM.Services, _dialogService); }
                        if (SettingsVM.ServicesVM.Option != ServicesOption.Nothing && SettingsVM.ServicesVM.Services.Where(s => s.IsChecked).Count() != 0) { var _taskVM = new TaskViewModel(); _vm.AddTask(ServicesModel.ApplyTask(SettingsVM.ServicesVM.Services, SettingsVM.ServicesVM.Option, _taskVM), _taskVM); }
                        // Memory
                        if (!MemoryModel.IsServiceInstalled) { var _taskVM = new TaskViewModel(); _vm.AddTask(MemoryModel.InstallService(_taskVM, SettingsVM.MemoryVM.CachedRAMGreaterThan, SettingsVM.MemoryVM.FreeRAMLessThan, SettingsVM.MemoryVM.ServiceThreadSleepSeconds * 1000), _taskVM, SettingsVM.MemoryVM.UpdateStatus); }

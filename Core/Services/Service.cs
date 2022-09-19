@@ -14,7 +14,7 @@ namespace WinCry.Services
             Regedit
         }
 
-        public enum ServiceRemovingCondition
+        public enum ServiceApplyingCondition
         {
             No,
             WithCaution,
@@ -123,7 +123,7 @@ namespace WinCry.Services
         public bool IsVisible { get; set; }
 
         [JsonIgnore]
-        public bool CanDisable { get; set; }
+        public ServiceApplyingCondition CanDisable { get; set; }
 
         [JsonIgnore]
         public bool CanEnable { get; set; }
@@ -135,7 +135,7 @@ namespace WinCry.Services
         public bool CanBackup { get; set; }
 
         [JsonIgnore]
-        public ServiceRemovingCondition CanRemove { get; set; }
+        public ServiceApplyingCondition CanRemove { get; set; }
 
         public string RequiredGPU { get; set; }
 
