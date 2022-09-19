@@ -223,7 +223,7 @@ namespace WinCry.Services
             {
                 case ServicesOption.Disable:
                     {
-                        if (service.CanDisable)
+                        if (service.CanDisable != Service.ServiceApplyingCondition.No)
                         {
                             string disable = Disable(service);
                             Stop(service);
@@ -251,7 +251,7 @@ namespace WinCry.Services
                     }
                 case ServicesOption.Delete:
                     {
-                        if (service.CanRemove == Service.ServiceRemovingCondition.No)
+                        if (service.CanRemove == Service.ServiceApplyingCondition.No)
                         {
                             string disable = Disable(service);
                             Stop(service);
@@ -520,16 +520,16 @@ namespace WinCry.Services
                 }
             }
 
-            foreach (string version in service.Requirements.CanDisableOn)
+            foreach (ServiceWinCondition version in service.Requirements.CanDisableOn)
             {
-                if (IsVersionRelevant(requiredVersion, version) == null)
+                if (IsVersionRelevant(requiredVersion, version.Version) == null)
                 {
-                    service.CanDisable = true;
+                    service.CanDisable = version.Condition;
                     break;
                 }
-                else if (IsVersionRelevant(requiredVersion, version) == true)
+                else if (IsVersionRelevant(requiredVersion, version.Version) == true)
                 {
-                    service.CanDisable = true;
+                    service.CanDisable = version.Condition;
                 }
             }
 
@@ -743,11 +743,37 @@ namespace WinCry.Services
             {
                 if (_service.IsChecked)
                 {
-                    if (_service.CanRemove == Service.ServiceRemovingCondition.WithCaution)
+                    if (_service.CanRemove == Service.ServiceApplyingCondition.WithCaution)
                     {
                         bool _result = DialogHelper.ShowDialog(dialogService,
                             $@"{DialogConsts.DialogNonRemovableServiceCaption} ""{_service.FullName}""",
                             $@"{DialogConsts.DialogNonRemovableServiceMessage}{Environment.NewLine}{Environment.NewLine}Описание службы: {_service.Description}");
+
+                        if (!_result)
+                        {
+                            _service.IsChecked = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks collection for nondisabable services and asks if user insists to disable them
+        /// </summary>
+        /// <param name="servicesCollection">Service collection to search in</param>
+        /// <param name="dialogService">Dialog service for prompt dialog</param>
+        public static void CheckServicesForDisability(ObservableCollection<Service> servicesCollection, IDialogService dialogService = null)
+        {
+            foreach (Service _service in servicesCollection)
+            {
+                if (_service.IsChecked)
+                {
+                    if (_service.CanDisable == Service.ServiceApplyingCondition.WithCaution)
+                    {
+                        bool _result = DialogHelper.ShowDialog(dialogService,
+                            $@"{DialogConsts.DialogNonDisabableServiceCaption} ""{_service.FullName}""",
+                            $@"{DialogConsts.DialogNonDisabableServiceMessage}{Environment.NewLine}{Environment.NewLine}Описание службы: {_service.Description}");
 
                         if (!_result)
                         {

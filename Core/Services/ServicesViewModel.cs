@@ -121,6 +121,11 @@ namespace WinCry.Services
                            ServicesModel.CheckServicesForRemovability(Services, _dialogService);
                        }
 
+                       if (Option == ServicesOption.Disable)
+                       {
+                           ServicesModel.CheckServicesForDisability(Services, _dialogService);
+                       }
+
                        if (Services.Where(s => s.IsChecked).Count() == 0)
                            return;
 

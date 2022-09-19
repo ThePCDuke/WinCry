@@ -123,6 +123,10 @@
         public const string DialogNonRemovableServiceMessage = "Данная служба помечена как нерекомендованная к удалению." +
             "\nВы действительно хотите её удалить?";
 
+        public const string DialogNonDisabableServiceCaption = "Отключение службы";
+        public const string DialogNonDisabableServiceMessage = "Данная служба помечена как нерекомендованная к отключению." +
+            "\nВы действительно хотите её отключить?";
+
         public const string ServiceStartingError = "Ошибка запуска службы";
         public const string TrustedInstallerStartingError = "Похоже, что у Вас есть проблемы со службами, " +
             "необходимыми для функционала программы WinCry. Желаете ли Вы их восстановить и перезагрузить ПК? В ином случае осуществится выход из программы.";
