@@ -583,11 +583,11 @@ namespace WinCry.Models
                     taskViewModel.CreateMessage($"{DialogConsts.ApplyingScripts} ");
                     if (option == 0)
                     {
-                        RunAsProcess.CMD($@"{zipPath}\KMS38.cmd /a /k", true);
+                        Helpers.RunByCMD($@"{zipPath}\KMS38.cmd /a /k");
                     }
                     else if (option == 1)
                     {
-                        RunAsProcess.CMD($@"{zipPath}\HWID.cmd /a /k", true);
+                        Helpers.RunByCMD($@"{zipPath}\HWID.cmd /a /k");
                     }
                     if (Directory.Exists(zipPath))
                     {
@@ -1369,7 +1369,7 @@ namespace WinCry.Models
 
                     taskViewModel.ShortMessage = DialogConsts.InstallMSStoreInstallingReqs;
                     taskViewModel.CreateMessage($"{DialogConsts.InstallMSStoreInstallingReqs} ");
-                    RunAsProcess.CMD($@"{_zipExtractionDirectory}Preinstall.cmd", true, true, "WinCry");
+                    Helpers.RunByCMD($@"{_zipExtractionDirectory}Preinstall.cmd");
                     taskViewModel.CreateMessage(DialogConsts.Done, false, false);
                     taskViewModel.Progress += 25;
 
@@ -1379,7 +1379,7 @@ namespace WinCry.Models
                             {
                                 taskViewModel.ShortMessage = DialogConsts.InstallMSStoreInstalling;
                                 taskViewModel.CreateMessage($"{DialogConsts.InstallMSStoreInstalling} ");
-                                RunAsProcess.CMD($@"{_zipExtractionDirectory}Store.cmd", true, true, "WinCry");
+                                Helpers.RunByCMD($@"{_zipExtractionDirectory}Store.cmd");
                                 taskViewModel.CreateMessage(DialogConsts.Done, false, false);
                                 taskViewModel.Progress += 25;
 
@@ -1395,7 +1395,7 @@ namespace WinCry.Models
                             {
                                 taskViewModel.ShortMessage = DialogConsts.InstallMSStoreInstallingInstaller;
                                 taskViewModel.CreateMessage($"{DialogConsts.InstallMSStoreInstallingInstaller} ");
-                                RunAsProcess.CMD($@"{_zipExtractionDirectory}DesktopAppInstaller.cmd", true, true, "WinCry");
+                                Helpers.RunByCMD($@"{_zipExtractionDirectory}DesktopAppInstaller.cmd");
                                 taskViewModel.CreateMessage(DialogConsts.Done, false, false);
                                 taskViewModel.Progress += 12;
 

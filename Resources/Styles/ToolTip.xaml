@@ -6,7 +6,7 @@
         <Setter Property="Background" Value="#FF323232"/>
         <Setter Property="BorderBrush" Value="Gray"/>
         <Setter Property="MaxWidth" Value="500" />
-        <Setter Property="ToolTipService.ShowDuration" Value="20000"/>
+        <Setter Property="ToolTipService.ShowDuration" Value="35000"/>
         <Setter Property="ToolTipService.InitialShowDelay" Value="300"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">

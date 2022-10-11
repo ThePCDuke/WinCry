@@ -208,7 +208,14 @@ namespace WinCry.Services
         {
             foreach (Service _service in servicesCollection)
             {
-                Update(_service);
+                try
+                {
+                    Update(_service);
+                }
+                catch
+                {
+                    continue;
+                }
             }
         }
 
