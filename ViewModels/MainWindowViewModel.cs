@@ -430,7 +430,7 @@ namespace WinCry.ViewModels
                 return _runAsTI ??
                    (_runAsTI = new RelayCommand(obj =>
                    {
-                       Microsoft.Win32.OpenFileDialog _dialog = new Microsoft.Win32.OpenFileDialog
+                       OpenFileDialog _dialog = new OpenFileDialog
                        {
                            Filter = "Executable (*.exe;*.bat;*.reg)|*.exe;*.bat;*.reg;|All Files|*.*"
                        };
