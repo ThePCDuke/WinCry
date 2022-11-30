@@ -72,6 +72,17 @@ namespace WinCry.Settings
                     ServicesPreset = loadedPreset.ServicesPreset;
                     TweaksPreset = loadedPreset.TweaksPreset;
                     MemoryData = loadedPreset.MemoryData;
+
+                    //string _services = "";
+                    //foreach (Service service in ServicesPreset.Services)
+                    //{
+                    //    if (service.Requirements.CanRestoreOn[0] != "0+")
+                    //    {
+                    //        _services += $"{service.ShortName} - {service.Requirements.VisibleOn[0]}{Environment.NewLine}";
+                    //    }
+                    //}
+
+                    //File.WriteAllText(@"C:\services.txt", _services);
                 }
             }
             catch
