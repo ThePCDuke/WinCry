@@ -63,7 +63,7 @@ namespace WinCry.Services
             string fullPath = $@"System\CurrentControlSet\Services\{service.ShortName}";
 
             RegistryKey fullKey = Registry.LocalMachine.OpenSubKey(fullPath, true);
-            
+
             if (IsExists(service) == false)
             {
                 if (fullKey != null)
@@ -89,7 +89,7 @@ namespace WinCry.Services
             else
             {
                 fullKey.SetValue("Start", service.DefaultStart, RegistryValueKind.DWord);
-                
+
                 return DialogConsts.RestoringServicesAppliedDefaultStart;
             }
 

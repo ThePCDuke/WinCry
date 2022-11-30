@@ -83,7 +83,7 @@ namespace WinCry.Models
                     taskViewModel.CreateMessage($"{DialogConsts.TimerTweakInstallingDependecy} ");
 
                     Helpers.ExtractEmbedFile(Properties.Resources.vcredist2010_x86, "vcredist2010_x86.exe");
-                    RunAsProcess.CMD($"start /wait {Path.GetTempPath()}vcredist2010_x86.exe /q /norestart", true, true);
+                    Helpers.RunByCMD($"start /wait {Path.GetTempPath()}vcredist2010_x86.exe /q /norestart");
 
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                     taskViewModel.Progress += 33;
@@ -125,7 +125,8 @@ namespace WinCry.Models
                         taskViewModel.ShortMessage = DialogConsts.TimerTweakInstalling;
                         taskViewModel.CreateMessage($"{DialogConsts.TimerTweakInstalling} ");
 
-                        taskViewModel.CreateMessage(RunAsProcess.CMD($@"{Path.GetPathRoot(Environment.SystemDirectory)}Windows\SetTimerResolutionService -install", true), false, false);
+                        Helpers.RunByCMD($@"{Path.GetPathRoot(Environment.SystemDirectory)}Windows\SetTimerResolutionService -install");
+                        taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
 
                         taskViewModel.Progress += 17;
 
@@ -133,9 +134,10 @@ namespace WinCry.Models
                         taskViewModel.ShortMessage = DialogConsts.TimerTweakReset;
                         taskViewModel.CreateMessage($"{DialogConsts.TimerTweakReset} ");
 
-                        taskViewModel.CreateMessage(RunAsProcess.CMD(@"bcdedit /deletevalue useplatformclock", true), true, false);
-                        taskViewModel.CreateMessage(RunAsProcess.CMD(@"bcdedit /deletevalue tscsyncpolicy", true), true, false);
-                        taskViewModel.CreateMessage(RunAsProcess.CMD(@"bcdedit /set disabledynamictick yes", true), true, false);
+                        Helpers.RunByCMD(@"bcdedit /deletevalue useplatformclock");
+                        Helpers.RunByCMD(@"bcdedit /deletevalue tscsyncpolicy");
+                        Helpers.RunByCMD(@"bcdedit /set disabledynamictick yes");
+                        taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
 
                         taskViewModel.Progress += 17;
                     }
@@ -144,14 +146,15 @@ namespace WinCry.Models
                         taskViewModel.ShortMessage = DialogConsts.TimerTweakUninstalling;
                         taskViewModel.CreateMessage($"{DialogConsts.TimerTweakUninstalling} ");
 
-                        taskViewModel.CreateMessage(RunAsProcess.CMD($@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\SetTimerResolutionService -uninstall", true), false, false);
+                        Helpers.RunByCMD($@"{Path.GetPathRoot(Environment.SystemDirectory)}\Windows\SetTimerResolutionService -uninstall");
 
                         if (File.Exists(_filePath))
                         {
-                            taskViewModel.CreateMessage(RunAsProcess.CMD($"taskkill /im SetTimerResolutionService.exe /f", true));
-                            taskViewModel.CreateMessage(RunAsProcess.CMD($@"del /s {Path.GetPathRoot(Environment.SystemDirectory)}\Windows\SetTimerResolutionService.exe", true));
+                            Helpers.RunByCMD($"taskkill /im SetTimerResolutionService.exe /f");
+                            Helpers.RunByCMD($@"del /s {Path.GetPathRoot(Environment.SystemDirectory)}\Windows\SetTimerResolutionService.exe");
                         }
 
+                        taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                         taskViewModel.Progress += 34;
                     }
                 }
@@ -203,7 +206,8 @@ namespace WinCry.Models
                         taskViewModel.ShortMessage = DialogConsts.SchemeTweakImporting;
                         taskViewModel.CreateMessage($"{DialogConsts.SchemeTweakImporting} ");
 
-                        taskViewModel.CreateMessage(RunAsProcess.CMD($"powercfg -import \"{_filePath}\" 77777777-7777-7777-7777-777777777777", true), false, false);
+                        Helpers.RunByCMD($"powercfg -import \"{_filePath}\" 77777777-7777-7777-7777-777777777777");
+                        taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
 
                         taskViewModel.Progress += 33;
 
@@ -211,7 +215,8 @@ namespace WinCry.Models
                         taskViewModel.ShortMessage = DialogConsts.SchemeTweakApplying;
                         taskViewModel.CreateMessage($"{DialogConsts.SchemeTweakApplying} ");
 
-                        taskViewModel.CreateMessage(RunAsProcess.CMD("powercfg -setactive 77777777-7777-7777-7777-777777777777", true), false, false);
+                        Helpers.RunByCMD("powercfg -setactive 77777777-7777-7777-7777-777777777777");
+                        taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
 
                         taskViewModel.Progress += 34;
                     }
@@ -221,7 +226,8 @@ namespace WinCry.Models
                         taskViewModel.ShortMessage = DialogConsts.SchemeTweakApplyingDefault;
                         taskViewModel.CreateMessage($"{DialogConsts.SchemeTweakApplyingDefault} ");
 
-                        taskViewModel.CreateMessage(RunAsProcess.CMD("powercfg -setactive \"8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c\"", true), false, false);
+                        Helpers.RunByCMD("powercfg -setactive \"8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c\"");
+                        taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
 
                         taskViewModel.Progress += 33;
 
@@ -229,7 +235,8 @@ namespace WinCry.Models
                         taskViewModel.ShortMessage = DialogConsts.SchemeTweakRemovingFromList;
                         taskViewModel.CreateMessage($"{DialogConsts.SchemeTweakRemovingFromList} ");
 
-                        taskViewModel.CreateMessage(RunAsProcess.CMD("powercfg -d 77777777-7777-7777-7777-777777777777", true), false, false);
+                        Helpers.RunByCMD("powercfg -d 77777777-7777-7777-7777-777777777777");
+                        taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
 
                         taskViewModel.Progress += 33;
 
@@ -239,7 +246,8 @@ namespace WinCry.Models
 
                         if (File.Exists(_filePath))
                         {
-                            taskViewModel.CreateMessage(RunAsProcess.CMD($@"del /s ""{_filePath}""", true));
+                            Helpers.RunByCMD($@"del /s ""{_filePath}""");
+                            taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                         }
                         else
                         {
@@ -445,7 +453,7 @@ namespace WinCry.Models
                         {
                             string _line = _stream.ReadLine();
                             taskViewModel.CreateMessage($"{_line} ");
-                            taskViewModel.CreateMessage(RunAsProcess.CMD(_line, true), true, false);
+                            Helpers.RunByCMD(_line);
                         }
                     }
 
@@ -536,7 +544,8 @@ namespace WinCry.Models
 
                         if (File.Exists(_filePath))
                         {
-                            taskViewModel.CreateMessage(RunAsProcess.CMD($@"del /s ""{_filePath}""", true), false, false);
+                            Helpers.RunByCMD($@"del /s ""{_filePath}""");
+                            taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                         }
                         else
                         {
@@ -693,7 +702,6 @@ namespace WinCry.Models
                     taskViewModel.ShortMessage = DialogConsts.InstallMSVCInstalling;
                     taskViewModel.CreateMessage($"{DialogConsts.InstallMSVCInstalling} ");
 
-                    //RunAsProcess.CMD($@"{_zipExtractionDirectory}install_all.bat", true, true);
                     Helpers.RunByCMD($@"{_zipExtractionDirectory}install_all.bat");
 
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
@@ -819,7 +827,9 @@ namespace WinCry.Models
 
                         if (File.Exists(filePath))
                         {
-                            taskViewModel.CreateMessage(RunAsProcess.CMD($@"del /s ""{filePath}""", true), false, false);
+                            Helpers.RunByCMD($@"del /s ""{filePath}""");
+                            taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
+
                         }
                         else
                         {
@@ -891,16 +901,16 @@ namespace WinCry.Models
                     taskViewModel.CreateMessage($"{DialogConsts.TempVariableTweakRemovingUnused} ");
 
                     if (tempMachine != Environment.GetEnvironmentVariable("temp", EnvironmentVariableTarget.Machine))
-                        RunAsProcess.CMD($@"rmdir /s /q ""{tempMachine}""", true);
+                        Helpers.RunByCMD($@"rmdir /s /q ""{tempMachine}""");
 
                     if (tempUser != Environment.GetEnvironmentVariable("temp", EnvironmentVariableTarget.User))
-                        RunAsProcess.CMD($@"rmdir /s /q ""{tempUser}""", true);
+                        Helpers.RunByCMD($@"rmdir /s /q ""{tempUser}""");
 
                     if (tmpMachine != Environment.GetEnvironmentVariable("tmp", EnvironmentVariableTarget.Machine))
-                        RunAsProcess.CMD($@"rmdir /s /q ""{tempMachine}""", true);
+                        Helpers.RunByCMD($@"rmdir /s /q ""{tempMachine}""");
 
                     if (tmpUser != Environment.GetEnvironmentVariable("tmp", EnvironmentVariableTarget.User))
-                        RunAsProcess.CMD($@"rmdir /s /q ""{tmpUser}""", true);
+                        Helpers.RunByCMD($@"rmdir /s /q ""{tmpUser}""");
                 }
                 catch (Exception ex)
                 {
@@ -1161,8 +1171,7 @@ namespace WinCry.Models
                     taskViewModel.ShortMessage = DialogConsts.ApplyingScripts;
                     taskViewModel.CreateMessage($"{DialogConsts.ApplyingScripts} ");
 
-                    //RunAsProcess.CMD($@"powershell {_script}", true);
-                    RunAsProcess.ExecutePowershellCommand(_script, true);
+                    Helpers.ExecutePowershellCommand(_script, true);
 
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                 }
@@ -1192,8 +1201,8 @@ namespace WinCry.Models
 
                     taskViewModel.ShortMessage = DialogConsts.UninstallMSStoreRemovingPackages;
                     taskViewModel.CreateMessage($"{DialogConsts.UninstallMSStoreRemovingPackages} ");
-                    RunAsProcess.ExecutePowershellCommand("Get-AppxPackage *windowsstore*|Remove-AppxPackage", true);
-                    RunAsProcess.ExecutePowershellCommand("Get-AppxPackage *DesktopAppInstaller*|Remove-AppxPackage", true);
+                    Helpers.ExecutePowershellCommand("Get-AppxPackage *windowsstore*|Remove-AppxPackage", true);
+                    Helpers.ExecutePowershellCommand("Get-AppxPackage *DesktopAppInstaller*|Remove-AppxPackage", true);
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
 
                     taskViewModel.Progress += 100;
@@ -1300,7 +1309,7 @@ namespace WinCry.Models
         public static async Task CheckActivationServices(IDialogService dialogService, byte option)
         {
             byte[] resource = Properties.Resources.KMS38DependingServices;
-            
+
             if (option == 1)
             {
                 resource = Properties.Resources.HWIDDependingServices;
@@ -1385,7 +1394,7 @@ namespace WinCry.Models
 
                                 taskViewModel.ShortMessage = DialogConsts.InstallMSStoreInstallingScripts;
                                 taskViewModel.CreateMessage($"{DialogConsts.InstallMSStoreInstallingScripts} ");
-                                RunAsProcess.ExecutePowershellCommand(@"Add-AppxPackage -register ((Get-ChildItem ($Env:Programfiles + '\WindowsApps') -filter '*WindowsStore*_x*' -Directory | % { $_.fullname } | Select-Object -First 1) + '\Appxmanifest.xml') –DisableDevelopmentMode", true);
+                                Helpers.ExecutePowershellCommand(@"Add-AppxPackage -register ((Get-ChildItem ($Env:Programfiles + '\WindowsApps') -filter '*WindowsStore*_x*' -Directory | % { $_.fullname } | Select-Object -First 1) + '\Appxmanifest.xml') –DisableDevelopmentMode", true);
                                 taskViewModel.CreateMessage(DialogConsts.Done, false, false);
                                 taskViewModel.Progress += 25;
 
@@ -1401,8 +1410,8 @@ namespace WinCry.Models
 
                                 taskViewModel.ShortMessage = DialogConsts.InstallMSStoreInstallingScripts;
                                 taskViewModel.CreateMessage($"{DialogConsts.InstallMSStoreInstallingScripts} ");
-                                RunAsProcess.ExecutePowershellCommand(@"Add-AppxPackage -register ((Get-ChildItem ($Env:Programfiles + '\WindowsApps') -filter '*DesktopAppInstaller*_x*' -Directory | % { $_.fullname } | Select-Object -First 1) + '\Appxmanifest.xml') –DisableDevelopmentMode", true);
-                                RunAsProcess.ExecutePowershellCommand(@"Add-AppxPackage -register ((Get-ChildItem ($Env:Programfiles + '\WindowsApps') -filter '*WindowsStore*_x*' -Directory | % { $_.fullname } | Select-Object -First 1) + '\Appxmanifest.xml') –DisableDevelopmentMode", true);
+                                Helpers.ExecutePowershellCommand(@"Add-AppxPackage -register ((Get-ChildItem ($Env:Programfiles + '\WindowsApps') -filter '*DesktopAppInstaller*_x*' -Directory | % { $_.fullname } | Select-Object -First 1) + '\Appxmanifest.xml') –DisableDevelopmentMode", true);
+                                Helpers.ExecutePowershellCommand(@"Add-AppxPackage -register ((Get-ChildItem ($Env:Programfiles + '\WindowsApps') -filter '*WindowsStore*_x*' -Directory | % { $_.fullname } | Select-Object -First 1) + '\Appxmanifest.xml') –DisableDevelopmentMode", true);
                                 taskViewModel.CreateMessage(DialogConsts.Done, false, false);
                                 taskViewModel.Progress += 12;
 
