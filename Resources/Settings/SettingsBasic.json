@@ -1339,10 +1339,6 @@
           "CanDeleteOn": [
             {
               "Version": "0+",
-              "Condition": 2
-            },
-            {
-              "Version": "14393",
               "Condition": 0
             }
           ],
