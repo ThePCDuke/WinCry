@@ -44,6 +44,25 @@ namespace WinCry.Models
                 process.WaitForExit();
         }
 
+        public static void ExecutePowershellCommand(string command, bool hidden = false, bool waitForExit = true)
+        {
+            ProcessStartInfo info = new ProcessStartInfo
+            {
+                FileName = "powershell.exe",
+                UseShellExecute = false,
+                CreateNoWindow = hidden,
+                RedirectStandardOutput = true,
+                Arguments = command
+            };
+
+            Process process = Process.Start(info);
+
+            if (waitForExit)
+            {
+                process.WaitForExit();
+            }
+        }
+
         /// <summary>
         /// Gets windows version from registry entry
         /// </summary>
@@ -181,12 +200,12 @@ namespace WinCry.Models
         /// </summary>
         public static bool IsNVIDIAGPUInstalled
         {
-            get 
-            { 
+            get
+            {
                 if (!Environment.Is64BitOperatingSystem)
                     return false;
 
-                return FindValueInDisplayConfiguration("NVIDIA"); 
+                return FindValueInDisplayConfiguration("NVIDIA");
             }
         }
     }

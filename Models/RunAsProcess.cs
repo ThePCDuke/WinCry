@@ -199,25 +199,6 @@ namespace WinCry.Models
             }
         }
 
-        public static void ExecutePowershellCommand(string command, bool hidden = false, bool waitForExit = true)
-        {
-            ProcessStartInfo info = new ProcessStartInfo
-            {
-                FileName = "powershell.exe",
-                UseShellExecute = false,
-                CreateNoWindow = hidden,
-                RedirectStandardOutput = true,
-                Arguments = command
-            };
-
-            Process process = Process.Start(info);
-
-            if (waitForExit)
-            {
-                process.WaitForExit();
-            }
-        }
-
         /// <summary>
         /// Starts up CMD instance as child of given process
         /// </summary>

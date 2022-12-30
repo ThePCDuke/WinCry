@@ -1318,7 +1318,7 @@
       {
         "FullName": "Workstation",
         "ShortName": "LanmanWorkstation",
-        "Description": "Позволяет находить компьютеры локальной сети, видеть и расшаривать папки. Также является брокером при использовании программы архивации данных.",
+        "Description": "Позволяет находить компьютеры в локальной сети, видеть и расшаривать папки. Также отвечает за доступ некоторых приложений мониторинга к температуре комплектующих. Является брокером при использовании программы архивации данных.",
         "Category": "Основные",
         "IsChecked": true,
         "RequiredGPU": null,
@@ -4493,28 +4493,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -4529,28 +4529,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -4565,28 +4565,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -4601,28 +4601,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -4637,28 +4637,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -4673,28 +4673,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -4709,28 +4709,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 2
@@ -4745,28 +4745,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -4781,28 +4781,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -4817,28 +4817,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -4853,28 +4853,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -4889,28 +4889,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -4925,28 +4925,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -4961,28 +4961,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -4997,28 +4997,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -5033,28 +5033,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -5069,28 +5069,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -5105,28 +5105,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -5141,28 +5141,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 4
@@ -5177,28 +5177,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -5213,28 +5213,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -5249,28 +5249,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -5285,28 +5285,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -5321,28 +5321,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -5357,28 +5357,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -5393,28 +5393,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -6149,28 +6149,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -6653,28 +6653,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -6689,28 +6689,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -6725,28 +6725,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -6761,28 +6761,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3
@@ -6797,28 +6797,28 @@
         "RemovingMethod": 0,
         "Requirements": {
           "VisibleOn": [
-            "18363"
+            "18363+"
           ],
           "CanDisableOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanEnableOn": [
-            "18363"
+            "18363+"
           ],
           "CanDeleteOn": [
             {
-              "Version": "18363",
+              "Version": "18363+",
               "Condition": 2
             }
           ],
           "CanRestoreOn": [
-            "18363"
+            "18363+"
           ],
           "CanBackupOn": [
-            "18363"
+            "18363+"
           ]
         },
         "DefaultStart": 3

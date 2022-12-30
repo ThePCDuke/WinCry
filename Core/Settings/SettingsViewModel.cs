@@ -62,7 +62,7 @@ namespace WinCry.Settings
             get { return _selectedSettingsPreset; }
             set
             {
-                if (value == null) 
+                if (value == null)
                     return;
 
                 if (value.Name == StringConsts.ExpertPreset)
