@@ -4592,42 +4592,6 @@
         "DefaultStart": 3
       },
       {
-        "FullName": "Пользовательская служба буфера обмена",
-        "ShortName": "cbdhsvc",
-        "Description": "Позволяет использовать расширенный буфер обмена для таких приложений, как Ножницы",
-        "Category": "Основные",
-        "IsChecked": true,
-        "RequiredGPU": null,
-        "RemovingMethod": 0,
-        "Requirements": {
-          "VisibleOn": [
-            "18363+"
-          ],
-          "CanDisableOn": [
-            {
-              "Version": "18363+",
-              "Condition": 2
-            }
-          ],
-          "CanEnableOn": [
-            "18363+"
-          ],
-          "CanDeleteOn": [
-            {
-              "Version": "18363+",
-              "Condition": 2
-            }
-          ],
-          "CanRestoreOn": [
-            "18363+"
-          ],
-          "CanBackupOn": [
-            "18363+"
-          ]
-        },
-        "DefaultStart": 3
-      },
-      {
         "FullName": "Xbox Accessory Management Service",
         "ShortName": "XboxGipSvc",
         "Description": "Управляет подключенными аксессуарами Xbox.",
@@ -5242,7 +5206,7 @@
       {
         "FullName": "Служба диспетчера подключений служб Wi-Fi Direct",
         "ShortName": "WFDSConMgrSvc",
-        "Description": "Позволяет \"общаться\" двум устройствам по Wi-Fi без настроек локальной сети и роутера. Чаще всего применяется для подключения беспроводного монитора к компьютеру.",
+        "Description": "Позволяет \"общаться\" двум устройствам по Wi-Fi без настроек локальной сети и роутера. Чаще всего применяется для подключения беспроводного монитора к компьютеру. В Windows 11 может вызвать проблемы с регулировкой звука на внешних звуковых картах.",
         "Category": "Основные",
         "IsChecked": true,
         "RequiredGPU": null,
@@ -6790,9 +6754,9 @@
       {
         "FullName": "Web Account Manager",
         "ShortName": "TokenBroker",
-        "Description": "Необходима для Магазина Windows.",
+        "Description": "Необходима для Магазина Windows. В Windows 11 отвечает за некоторые всплывающие окна.",
         "Category": "Опциональные",
-        "IsChecked": true,
+        "IsChecked": false,
         "RequiredGPU": null,
         "RemovingMethod": 0,
         "Requirements": {
@@ -7506,6 +7470,42 @@
           ]
         },
         "DefaultStart": 2
+      },
+      {
+        "FullName": "Пользовательская служба буфера обмена",
+        "ShortName": "cbdhsvc",
+        "Description": "Позволяет использовать расширенный буфер обмена для таких приложений, как Ножницы",
+        "Category": "Опциональные",
+        "IsChecked": true,
+        "RequiredGPU": null,
+        "RemovingMethod": 0,
+        "Requirements": {
+          "VisibleOn": [
+            "18363+"
+          ],
+          "CanDisableOn": [
+            {
+              "Version": "18363+",
+              "Condition": 2
+            }
+          ],
+          "CanEnableOn": [
+            "18363+"
+          ],
+          "CanDeleteOn": [
+            {
+              "Version": "18363+",
+              "Condition": 2
+            }
+          ],
+          "CanRestoreOn": [
+            "18363+"
+          ],
+          "CanBackupOn": [
+            "18363+"
+          ]
+        },
+        "DefaultStart": 3
       },
       {
         "FullName": "Connected Devices Platform User Service",
