@@ -1246,7 +1246,7 @@
       {
         "FullName": "Microsoft Software Shadow Copy Provider",
         "ShortName": "swprv",
-        "Description": "Создание точек восстановления системы и управление ими.",
+        "Description": "Создает точки восстановления системы и управляет ими.",
         "Category": "Основные",
         "IsChecked": true,
         "RequiredGPU": null,
@@ -1390,7 +1390,7 @@
       {
         "FullName": "Windows Camera Frame Server",
         "ShortName": "FrameServer",
-        "Description": "Позволяет использовать веб-камеру компьютера не напрямую, а через запрос службы.",
+        "Description": "Отвечает за работу веб-камеры.",
         "Category": "Основные",
         "IsChecked": true,
         "RequiredGPU": null,
@@ -5674,7 +5674,7 @@
       {
         "FullName": "Теневое копирование тома",
         "ShortName": "VSS",
-        "Description": "С ее помощью работает История файлов, Программа архивации и прочие из разряда восстановления данных.",
+        "Description": "С её помощью работает История файлов, Программа архивации и точка восстановления системы.",
         "Category": "Основные",
         "IsChecked": true,
         "RequiredGPU": null,
