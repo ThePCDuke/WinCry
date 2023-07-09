@@ -1,5 +1,5 @@
 {
-  "Name": "WinCry - Экспертный",
+  "Name": "WinCry - Опасный",
   "Settings": {
     "RemoveShortcutIcon": true,
     "DoTimerTweak": true,
@@ -16,7 +16,7 @@
     "PagefileOption": 4
   },
   "ServicesPreset": {
-    "Name": "WinCry - Экспертный",
+    "Name": "WinCry - Опасный",
     "Option": 3,
     "Services": [
       {
@@ -7582,7 +7582,7 @@
     ]
   },
   "TweaksPreset": {
-    "Name": "WinCry - Экспертный",
+    "Name": "WinCry - Опасный",
     "Option": 1,
     "Tweaks": [
       {

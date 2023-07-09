@@ -1,5 +1,5 @@
 {
-  "Name": "WinCry - Базовый",
+  "Name": "WinCry - Производительный",
   "Settings": {
     "RemoveShortcutIcon": true,
     "DoTimerTweak": true,
@@ -16,7 +16,7 @@
     "PagefileOption": 4
   },
   "ServicesPreset": {
-    "Name": "WinCry - Базовый",
+    "Name": "WinCry - Производительный",
     "Option": 1,
     "Services": [
       {
@@ -7546,7 +7546,7 @@
     ]
   },
   "TweaksPreset": {
-    "Name": "WinCry - Базовый",
+    "Name": "WinCry - Производительный",
     "Option": 1,
     "Tweaks": [
       {

@@ -128,7 +128,18 @@ namespace WinCry.Tweaks
             string _registryValueString = _registryValue.ToString();
 
             if (tweak.ValueType == RegistryValueKind.DWord)
-                _registryValueString = Convert.ToString(int.Parse(_registryValueString), 16);
+            {
+                try
+                {
+                    _registryValueString = Convert.ToString(int.Parse(_registryValueString), 16);
+                }
+                catch
+                {
+                    tweak.IsApplied = false;
+                    tweak.CurrentValue = null;
+                    return;
+                }
+            }
 
             tweak.CurrentValue = _registryValueString;
 

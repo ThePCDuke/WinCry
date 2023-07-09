@@ -651,7 +651,7 @@
                         <ComboBox SelectedIndex="{Binding SettingsVM.ServicesVM.Option, Converter={StaticResource IntToServicesOptionConverter}}"
                                   FontSize="12"
                                   VerticalAlignment="Top"
-                                  Margin="171,5,128,0"
+                                  Margin="214,5,128,0"
                                   RenderTransformOrigin="0.958,0.4"
                                   Height="25">
                             <ComboBoxItem Content="Не трогать" />
@@ -667,7 +667,7 @@
                                   DisplayMemberPath="Name"
                                   FontSize="12"
                                   VerticalAlignment="Top"
-                                  Margin="10,5,287,0"
+                                  Margin="10,5,245,0"
                                   Height="25" />
 
                         <Button Content="Применить"

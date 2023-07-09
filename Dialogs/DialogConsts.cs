@@ -109,15 +109,15 @@
 
         public const string MessageDialogErrorLoadingServicesPresetCaption = "Ошибка загрузки пресета служб";
         public const string MessageDialogErrorLoadingServicesPresetMessage = "Произошла ошибка при загрузке пресета служб. Проверьте правильность структуры файла и его содержимое. " +
-            "Был загружен базовый пресет.\nОшибка: ";
+            "Был загружен производительный пресет.\nОшибка: ";
 
         public const string MessageDialogErrorLoadingTweaksPresetCaption = "Ошибка загрузки пресета твиков";
         public const string MessageDialogErrorLoadingTweaksPresetMessage = "Произошла ошибка при загрузке пресета твиков. Проверьте правильность структуры файла и его содержимое. " +
-            "Был загружен базовый пресет.\nОшибка: ";
+            "Был загружен производительный пресет.\nОшибка: ";
 
         public const string MessageDialogErrorLoadingSettingsPresetCaption = "Ошибка загрузки пресета настроек";
         public const string MessageDialogErrorLoadingSettingsPresetMessage = "Произошла ошибка при загрузке пресета настроек. Проверьте правильность структуры файла и его содержимое. " +
-            "Был загружен базовый пресет.\nОшибка: ";
+            "Был загружен производительный пресет.\nОшибка: ";
 
         public const string DialogNonRemovableServiceCaption = "Удаление службы";
         public const string DialogNonRemovableServiceMessage = "Данная служба помечена как нерекомендованная к удалению." +

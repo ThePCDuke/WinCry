@@ -16,7 +16,7 @@ namespace WinCry.Models
 
         public const string All = "Все";
 
-        public const string ExpertPreset = "WinCry - Экспертный";
+        public const string ExpertPreset = "WinCry - Опасный";
 
         public const string SettingsPresetsFolder = @"Presets\Settings\";
         public const string ServicesPresetsFolder = @"Presets\Services\";
