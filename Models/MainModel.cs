@@ -83,7 +83,7 @@ namespace WinCry.Models
                     taskViewModel.CreateMessage($"{DialogConsts.TimerTweakInstallingDependecy} ");
 
                     Helpers.ExtractEmbedFile(Properties.Resources.vcredist2010_x86, "vcredist2010_x86.exe");
-                    Helpers.RunByCMD($"start /wait {Path.GetTempPath()}vcredist2010_x86.exe /q /norestart");
+                    Helpers.RunByCMD($@"start /wait """" ""{Path.GetTempPath()}vcredist2010_x86.exe"" /q /norestart");
 
                     taskViewModel.CreateMessage(DialogConsts.Successful, false, false);
                     taskViewModel.Progress += 33;
