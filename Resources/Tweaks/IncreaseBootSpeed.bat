@@ -2,8 +2,7 @@
 bcdedit /set tpmbootentropy ForceDisable
 bcdedit /timeout 0
 bcdedit /set bootux disabled
-bcdedit /set bootmenupolicy standard
 bcdedit /set quietboot yes
 bcdedit /set {globalsettings} custom:16000067 true
-bcdedit /set {globalsettings} custom:16000069 true
 bcdedit /set {globalsettings} custom:16000068 true
+bcdedit /set {globalsettings} custom:16000069 true
