@@ -6000,7 +6000,7 @@
         "ShortName": "NgcSvc",
         "Description": "Обеспечивает надёжное хранение зашифрованных данных биометрии. Требуется для авторизации в Магазине Windows, работы PIN-кода. Требуется для входа в систему при помощи отпечатка пальца или сканирования по сетчатке глаза (Windows Hello).",
         "Category": "Опциональные",
-        "IsChecked": true,
+        "IsChecked": false,
         "RequiredGPU": null,
         "RemovingMethod": 1,
         "Requirements": {
@@ -7116,7 +7116,7 @@
         "ShortName": "NgcCtnrSvc",
         "Description": "Необходима для идентификации устройств, которые могут подтверждать вашу авторизацию, отпечаток пальца или смарт-карту. Требуется для авторизации в Магазине Windows, работы PIN-кода, для входа в систему при помощи отпечатка пальца или сканирования по сетчатке глаза (Windows Hello).",
         "Category": "Опциональные",
-        "IsChecked": true,
+        "IsChecked": false,
         "RequiredGPU": null,
         "RemovingMethod": 1,
         "Requirements": {
