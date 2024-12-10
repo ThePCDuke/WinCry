@@ -1,0 +1,114 @@
+﻿<Window x:Class="WinCry.Dialogs.Views.SavePresetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="{Binding Caption}"
+        Height="135"
+        Width="350" 
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        FontFamily="/WinCry;component/Resources/Fonts/#Segoe UI Variable Static Display">
+
+    <Window.InputBindings>
+        <KeyBinding Key="Return"
+                    Command="{Binding OK}" />
+        <KeyBinding Key="Esc"
+                    Command="{Binding Cancel}" />
+    </Window.InputBindings>
+
+    <Border>
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="10" ShadowDepth="2"/>
+        </Border.Effect>
+
+        <Border Margin="9" 
+                BorderThickness=".5" 
+                BorderBrush="White" 
+                CornerRadius="6">
+
+            <Border.Background>
+                <SolidColorBrush Color="#FF1B1B1B" Opacity=".6"/>
+            </Border.Background>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <TextBlock Height="auto" 
+                               Grid.Row="0" 
+                               Foreground="White" 
+                               Margin="10,7,0,5" 
+                               FontSize="14" 
+                               TextWrapping="Wrap" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Left" 
+                               Width="auto"
+                               Text="{Binding Caption}" />
+
+                </Grid>
+
+                <Rectangle Fill="White" 
+                           Grid.Row="1" 
+                           Height=".1" 
+                           VerticalAlignment="Top"/>
+
+                <TextBox x:Name="FileNameText" 
+                         Grid.Row="1" 
+                         Foreground="White" 
+                         Margin="10,5,10,5"  
+                         FontSize="16" 
+                         TextWrapping="Wrap" 
+                         TextAlignment="Left" 
+                         Text="{Binding FileName}"/>
+
+                <TextBlock IsHitTestVisible="False" 
+                           Grid.Row="1" 
+                           Padding="6, 2, 0, 0" 
+                           FontSize="16" 
+                           Margin="10,5,10,5" 
+                           Foreground="DarkGray"
+                           Text="Введите название файла для пресета">
+
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=FileNameText}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <Button Content="Сохранить" 
+                        Grid.Row="2" 
+                        FontSize="16"  
+                        Command="{Binding OK}" 
+                        Margin="0,5,130,10" 
+                        HorizontalAlignment="Right" 
+                        Width="108"/>
+
+                <Button Content="Отмена" 
+                        Grid.Row="2" 
+                        FontSize="16" 
+                        IsCancel="True" 
+                        Command="{Binding Cancel}" 
+                        Margin="0,5,10,10" 
+                        HorizontalAlignment="Right" 
+                        Width="108"/>
+            </Grid>
+        </Border>
+
+    </Border>
+</Window>

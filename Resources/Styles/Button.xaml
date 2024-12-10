@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Background="#07000000" 
+                                BorderBrush="Gray"
+                                CornerRadius="4" 
+                                BorderThickness=".1">
+
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="2" ShadowDepth="2" RenderingBias="Quality"/>
+                            </Border.Effect>
+                        </Border>
+
+                        <Border Style="{DynamicResource AnimatedBorder}" 
+                                BorderBrush="Gray" 
+                                CornerRadius="4" 
+                                BorderThickness=".1">
+
+                            <ContentPresenter Margin="2"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              RecognizesAccessKey="True"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" 
+           BasedOn="{StaticResource ButtonStyle}"/>
+
+</ResourceDictionary>

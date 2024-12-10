@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31727.386
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinCry", "WinCry.csproj", "{B5CB62CA-1122-4803-9357-75E8A5EFD374}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5CB62CA-1122-4803-9357-75E8A5EFD374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5CB62CA-1122-4803-9357-75E8A5EFD374}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5CB62CA-1122-4803-9357-75E8A5EFD374}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5CB62CA-1122-4803-9357-75E8A5EFD374}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {959AF694-A880-4ADA-93FE-904AA3ED0F5F}
+	EndGlobalSection
+EndGlobal
