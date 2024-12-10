@@ -6,18 +6,17 @@ using WinCry.Tweaks;
 
 namespace WinCry.Models
 {
-    class PresetController
+    internal class PresetController
     {
         /// <summary>
-        /// Gets list of saved user settings presets 
+        /// Gets list of saved user settings presets
         /// </summary>
         /// <returns></returns>
         public static ObservableCollection<SettingsPreset> LoadSettingsPresetsList()
         {
             ObservableCollection<SettingsPreset> presets = new ObservableCollection<SettingsPreset>()
             {
-                new SettingsPreset(Properties.Resources.SettingsBasic),
-                new SettingsPreset(Properties.Resources.SettingsMax)
+                new SettingsPreset(Properties.Resources.SettingsBasic)
             };
 
             if (!Directory.Exists(StringConsts.SettingsPresetsFolder))
@@ -37,7 +36,7 @@ namespace WinCry.Models
         }
 
         /// <summary>
-        /// Gets list of saved user services presets 
+        /// Gets list of saved user services presets
         /// </summary>
         /// <returns></returns>
         public static ObservableCollection<ServicesPreset> LoadServicesPresetsList()
@@ -66,7 +65,7 @@ namespace WinCry.Models
         }
 
         /// <summary>
-        /// Gets list of saved user tweaks presets 
+        /// Gets list of saved user tweaks presets
         /// </summary>
         /// <returns></returns>
         public static ObservableCollection<TweaksPreset> LoadTweaksPresetsList()

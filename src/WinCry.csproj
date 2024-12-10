@@ -332,7 +332,6 @@
     </None>
     <None Include="Resources\Services\Winmgmt.reg" />
     <None Include="Resources\Settings\SettingsBasic.json" />
-    <None Include="Resources\Settings\SettingsMax.json" />
     <Resource Include="Resources\Fonts\Segoe-UI-Variable-Static-Display.ttf" />
     <None Include="Resources\GPU\nvidiaConfigured.pr" />
     <None Include="Resources\GPU\nvidiaDefault.pr" />

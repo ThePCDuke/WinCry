@@ -213,16 +213,6 @@ namespace WinCry.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] SettingsMax {
-            get {
-                object obj = ResourceManager.GetObject("SettingsMax", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         internal static byte[] TempCleaner {
             get {
                 object obj = ResourceManager.GetObject("TempCleaner", resourceCulture);
