@@ -4520,42 +4520,6 @@
         "DefaultStart": 3
       },
       {
-        "FullName": "Display Policy Service",
-        "ShortName": "DispBrokerDesktopSvc",
-        "Description": "Поддерживает работу мониторов подключённых удалённо.",
-        "Category": "Основные",
-        "IsChecked": true,
-        "RequiredGPU": null,
-        "RemovingMethod": 0,
-        "Requirements": {
-          "VisibleOn": [
-            "19041+"
-          ],
-          "CanDisableOn": [
-            {
-              "Version": "19041+",
-              "Condition": 2
-            }
-          ],
-          "CanEnableOn": [
-            "19041+"
-          ],
-          "CanDeleteOn": [
-            {
-              "Version": "19041+",
-              "Condition": 2
-            }
-          ],
-          "CanRestoreOn": [
-            "19041+"
-          ],
-          "CanBackupOn": [
-            "19041+"
-          ]
-        },
-        "DefaultStart": 2
-      },
-      {
         "FullName": "Служба \"Обновление Microsoft Edge\" (edgeupdate)",
         "ShortName": "edgeupdate",
         "Description": "Обеспечивает актуальность программного обеспечения Edge.",
